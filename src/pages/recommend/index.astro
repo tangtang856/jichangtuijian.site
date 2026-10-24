@@ -10,42 +10,54 @@ const categories = [
     title: '高性价比 / 低预算机场',
     slug: 'budget',
     icon: '💰',
-    description: '月付 10 - 20 元平价首选，大流量配额与低每 GB 单价，适合学生党与轻度科学上网。',
+    color: 'emerald',
+    badge: '¥10 - 20/月起',
+    description: '月付 10 - 20 元平价首选，大流量配额与超低每 GB 单价，适合学生党与轻度科学上网日常使用。',
     link: '/recommend/budget/'
   },
   {
     title: '高端 IPLC / IEPL 专线',
     slug: 'premium',
     icon: '🚀',
-    description: '全内网专线不过公网墙，晚高峰 0 丢包超低延迟，跨境远程办公与跨国会议首选。',
+    color: 'blue',
+    badge: '全专线 0 丢包',
+    description: '全内网专线不过公网审查，晚高峰 0 丢包超低延迟，跨境远程办公、海外视频会议与极客首选。',
     link: '/recommend/premium/'
   },
   {
     title: '新手入门友好型',
     slug: 'beginner',
     icon: '🌱',
-    description: '零门槛傻瓜一键导入，跨平台专属客户端与保姆级图文教程，小白省心上手。',
+    color: 'teal',
+    badge: '一键导入无门槛',
+    description: '提供一键导入订阅功能，配套清晰的图文新手教程，跨平台客户端轻松上手，告别繁琐配置。',
     link: '/recommend/beginner/'
   },
   {
-    title: '稳定性与抗封锁优先',
+    title: '高稳定性与抗封锁优先',
     slug: 'stable',
     icon: '⚓',
-    description: '多入口 BGP 智能容灾与高防冗余，历经敏感期洗礼，坚挺在线拒绝频繁失联。',
+    color: 'amber',
+    badge: '多入口 BGP 容灾',
+    description: '多入口 BGP 智能容灾与高防冗余，历经多次敏感期网络考验，服务坚挺在线，告别频繁失联。',
     link: '/recommend/stable/'
   },
   {
     title: 'AI 专属 / 原生住宅 IP',
     slug: 'ai',
     icon: '🤖',
-    description: '原生干净落地 IP，完美解锁 ChatGPT 4o、Claude 3.5 Sonnet 与 Gemini，告别风控拦截。',
+    color: 'purple',
+    badge: '双 ISP 纯净原生',
+    description: '原生干净落地 IP，完美解锁 ChatGPT 4o、Claude 3.5 Sonnet 与 Gemini，告别风控拦截与频繁人机验证。',
     link: '/recommend/ai/'
   },
   {
     title: '4K 流媒体极速解锁',
     slug: 'streaming',
-    icon: '📺',
-    description: '专线大带宽秒开 4K/8K 视频，原生跨区解锁 Netflix 奈飞、Disney+ 及 YouTube Premium。',
+    icon: '🎬',
+    color: 'rose',
+    badge: '4K/8K 极速秒开',
+    description: '专线大带宽秒开 4K/8K 视频，原生跨区解锁 Netflix 奈飞非自制剧、Disney+ 及 YouTube Premium。',
     link: '/recommend/streaming/'
   }
 ];
@@ -62,67 +74,156 @@ const breadcrumbs = [
   canonical="https://jichangtuijian.site/recommend/"
   breadcrumbs={breadcrumbs}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="max-w-3xl mb-10">
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">全场景翻墙梯子推荐与网络节点选购指南</h1>
-      <p class="text-base text-slate-600 mt-3 leading-relaxed">
-        不同用户的网络使用需求千差万别。有人需要便宜海量流量刷视频，有人需要严苛的晚高峰低延迟办公，有人则专门为了访问 ChatGPT 和流媒体。我们按核心使用场景将机场节点细分分类，帮助你快速找到最契合的解决方案。
-      </p>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Hero Banner with Tech Styling -->
+    <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-8 sm:p-10 text-white border border-slate-800 shadow-xl mb-12 relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-cyan-300 border border-blue-500/30 text-xs font-mono font-semibold">
+          <span>🎯 SCENARIO MATRICES</span>
+          <span>•</span>
+          <span>拒绝千篇一律的卡片盲目推荐</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          全场景机场与梯子节点推荐中心
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          科学上网没有万能的所谓「第一名」。学生党追求百G平价流量，涉外办公追求晚高峰零抖动专线，AI研发人员要求原生双ISP纯净IP。我们按 <strong>6 大核心实际应用场景</strong>深度解构，助你精准避坑。
+        </p>
+      </div>
     </div>
 
-    <!-- Category Cards Grid -->
+    <!-- 6 Scenario Cards with Differentiated Colors & Accents -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
       {categories.map((cat) => (
         <a
           href={cat.link}
-          class="bg-white p-6 rounded-xl border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all group flex flex-col justify-between"
+          class="rounded-2xl bg-white p-6 border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all group flex flex-col justify-between"
         >
-          <div>
-            <div class="text-3xl mb-3">{cat.icon}</div>
-            <h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
-              {cat.title}
-            </h2>
-            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-              {cat.description}
-            </p>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl shadow-2xs group-hover:scale-105 transition-transform">
+                {cat.icon}
+              </span>
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 group-hover:bg-blue-50 group-hover:text-blue-700 transition-colors">
+                {cat.badge}
+              </span>
+            </div>
+            
+            <div>
+              <h2 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                {cat.title}
+              </h2>
+              <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                {cat.description}
+              </p>
+            </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-brand-600">
-            <span>浏览专题与节点列表</span>
-            <span>→</span>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600">
+            <span>进入该场景专属推荐专栏</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
           </div>
         </a>
       ))}
     </div>
 
-    <!-- All Verified Airports Full Overview Table -->
-    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8">
-      <h2 class="text-xl font-bold text-slate-900 mb-2">已收录与核实机场全览</h2>
-      <p class="text-xs text-slate-500 mb-6">点击任意品牌查看详细参数档案与独立评测报告</p>
+    <!-- Scenario Decision Matrix Table (场景决策指南表) -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-sm mb-16">
+      <div class="border-b border-slate-200 pb-4 mb-6">
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <span>⚖️</span>
+          <span>不同需求人群精准选购对照表</span>
+        </h2>
+        <p class="text-xs text-slate-500 mt-1">根据你的主力设备、预算区间与网络需求快速匹配方案</p>
+      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-50 text-slate-600 text-xs font-semibold uppercase border-b border-slate-200">
+              <th class="py-3 px-4">用户需求类型</th>
+              <th class="py-3 px-4">建议月预算</th>
+              <th class="py-3 px-4">首选核心线路</th>
+              <th class="py-3 px-4">核心关注点</th>
+              <th class="py-3 px-4">专栏通道</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs">
+            <tr class="hover:bg-slate-50/50">
+              <td class="py-3.5 px-4 font-bold text-slate-900">学生党 / 轻度上网</td>
+              <td class="py-3.5 px-4 font-mono text-emerald-600 font-semibold">¥10 - 15/月</td>
+              <td class="py-3.5 px-4">BGP 优质中继</td>
+              <td class="py-3.5 px-4 text-slate-500">大流量配额、低单价、月付无压力</td>
+              <td class="py-3.5 px-4"><a href="/recommend/budget/" class="text-blue-600 font-semibold hover:underline">便宜专区 →</a></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="py-3.5 px-4 font-bold text-slate-900">涉外企业 / 远程办公</td>
+              <td class="py-3.5 px-4 font-mono text-blue-600 font-semibold">¥30 - 60/月</td>
+              <td class="py-3.5 px-4">IPLC / IEPL 专线</td>
+              <td class="py-3.5 px-4 text-slate-500">晚高峰 0 丢包、超低延迟、跨国会议流畅</td>
+              <td class="py-3.5 px-4"><a href="/recommend/premium/" class="text-blue-600 font-semibold hover:underline">专线专区 →</a></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="py-3.5 px-4 font-bold text-slate-900">AI 大模型 / ChatGPT</td>
+              <td class="py-3.5 px-4 font-mono text-purple-600 font-semibold">¥20 - 40/月</td>
+              <td class="py-3.5 px-4">双 ISP 原生纯净节点</td>
+              <td class="py-3.5 px-4 text-slate-500">IP 欺诈度低、不弹验证码、防封号</td>
+              <td class="py-3.5 px-4"><a href="/recommend/ai/" class="text-purple-600 font-semibold hover:underline">AI 专区 →</a></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50">
+              <td class="py-3.5 px-4 font-bold text-slate-900">家庭大屏 / 4K 流媒体</td>
+              <td class="py-3.5 px-4 font-mono text-rose-600 font-semibold">¥20 - 35/月</td>
+              <td class="py-3.5 px-4">大带宽中转 / 专线</td>
+              <td class="py-3.5 px-4 text-slate-500">Netflix/Disney+ 全区解锁、高吞吐秒开</td>
+              <td class="py-3.5 px-4"><a href="/recommend/streaming/" class="text-rose-600 font-semibold hover:underline">流媒体专区 →</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Complete 27 Verified Airports Table (Clean geek layout) -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-slate-200 gap-2">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">已核验 27 款机场服务商全览</h2>
+          <p class="text-xs text-slate-500 mt-1">点击任意品牌即可查看该品牌的专属独立评测档案</p>
+        </div>
+        <a href="/compare/" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+          进入参数多维度对比 →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {airports.map((airport) => (
-          <div class="p-5 rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-white hover:border-brand-300 hover:shadow-xs transition-all">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">{airport.lineType}</span>
-              <span class="text-xs font-mono font-bold text-emerald-600">¥{airport.startingPrice} 起</span>
-            </div>
-            <h3 class="font-bold text-slate-900">
-              <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
-            </h3>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-2">{airport.tagline}</p>
-            <div class="mt-4 flex items-center justify-between text-xs">
-              <div class="flex gap-2.5">
-                <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">参数 →</a>
-                <a href={`/review/${airport.slug}/`} class="font-medium text-brand-600 hover:text-brand-700 underline">评测 →</a>
+          <div class="p-4 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-xs transition-all flex flex-col justify-between bg-slate-50/40">
+            <div>
+              <div class="flex items-center justify-between">
+                <a href={`/airport/${airport.slug}/`} class="font-bold text-slate-900 hover:text-blue-600 text-sm">
+                  {airport.name}
+                </a>
+                <span class="text-xs font-mono font-bold text-emerald-600">¥{airport.startingPrice} 起</span>
               </div>
+              <p class="text-[11px] text-slate-500 line-clamp-1 mt-1">{airport.tagline}</p>
+              <div class="text-[11px] text-slate-600 flex items-center justify-between pt-2 font-mono">
+                <span>{airport.lineType}</span>
+                <span class="text-slate-400">{airport.establishedYear}年创立</span>
+              </div>
+            </div>
+
+            <div class="pt-3 mt-3 border-t border-slate-200/60 flex items-center justify-between text-xs">
+              <a href={`/airport/${airport.slug}/`} class="text-slate-600 hover:text-blue-600 font-medium">
+                评测详情
+              </a>
               {airport.affiliateUrl && (
                 <a
                   href={airport.affiliateUrl}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  class="px-2 py-0.5 rounded bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-colors"
+                  class="text-blue-600 hover:text-blue-700 font-semibold"
                 >
-                  直达官网
+                  直达官网 →
                 </a>
               )}
             </div>
@@ -130,5 +231,6 @@ const breadcrumbs = [
         ))}
       </div>
     </div>
+
   </div>
 </BaseLayout>

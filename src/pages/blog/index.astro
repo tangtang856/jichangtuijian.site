@@ -13,6 +13,10 @@ const breadcrumbs = [
 const allPosts = await getCollection('blog');
 const sortedPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
 
+const featuredPost = sortedPosts[0];
+const secondaryPosts = sortedPosts.slice(1, 3);
+const remainingPosts = sortedPosts.slice(3);
+
 const categories = [
   '全部',
   '协议技术',
@@ -32,30 +36,92 @@ const categories = [
   canonical="https://jichangtuijian.site/blog/"
   breadcrumbs={breadcrumbs}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="max-w-3xl mb-8">
-      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Articles Archive ({sortedPosts.length} 篇)</span>
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">深度技术与选购科普文章中心</h1>
-      <p class="text-base text-slate-600 mt-3 leading-relaxed">
-        由评测实验室工程师撰写的系统化专栏。拒绝虚假营销与空洞总结，以严谨的技术视角剖析底层协议、线路拓扑、网络风控与隐私安全，全方位解答你的科学上网疑惑。
-      </p>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Hero Banner with Tech Journal Aesthetic -->
+    <div class="rounded-3xl bg-slate-950 p-8 sm:p-10 text-white border border-slate-800 shadow-xl mb-12 relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-cyan-300 border border-blue-500/30 text-xs font-mono font-semibold">
+          <span>📰 {sortedPosts.length} ARTICLES PUBLISHED</span>
+          <span>•</span>
+          <span>独立技术专栏</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          深度技术科普与科学上网文章中心
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          由评测实验室工程师撰写的系统化原创专栏。以严谨视角深度剖析抗 DPI 协议演进、跨境海缆拓扑、ChatGPT/Claude 纯净住宅 IP 选型与流媒体解锁底层机制。
+        </p>
+      </div>
     </div>
 
-    <!-- Category Tabs -->
-    <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-xs sm:text-sm font-medium" id="category-filters">
-      {categories.map((cat, idx) => (
-        <button
-          type="button"
-          data-cat={cat}
-          class={`px-3.5 py-1.5 rounded-lg border transition-all ${
-            idx === 0
-              ? 'bg-brand-600 text-white border-brand-600 shadow-xs active-cat'
-              : 'bg-white text-slate-700 border-slate-200 hover:border-brand-300 hover:bg-slate-50'
-          }`}
-        >
-          {cat} {cat === '全部' ? `(${sortedPosts.length})` : ''}
-        </button>
-      ))}
+    <!-- Editorial Featured Story Banner -->
+    {featuredPost && (
+      <div class="mb-12 rounded-3xl bg-white border border-slate-200 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all group">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-8 space-y-3">
+            <div class="flex items-center gap-2 text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-600 text-white font-bold font-mono">
+                🔥 FEATURED ARTICLE
+              </span>
+              <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold">
+                {featuredPost.data.category}
+              </span>
+              <span class="text-slate-400 font-mono">{featuredPost.data.publishDate}</span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-blue-600 transition-colors leading-tight">
+              <a href={`/blog/${featuredPost.slug}/`}>
+                {featuredPost.data.title}
+              </a>
+            </h2>
+
+            <p class="text-sm text-slate-600 leading-relaxed line-clamp-3">
+              {featuredPost.data.description}
+            </p>
+
+            <div class="pt-2 flex items-center gap-4 text-xs font-semibold text-blue-600">
+              <a href={`/blog/${featuredPost.slug}/`} class="inline-flex items-center gap-1 hover:text-blue-700">
+                <span>阅读完整技术长文</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 bg-slate-50 rounded-2xl p-5 border border-slate-100 text-xs space-y-3">
+            <span class="text-slate-400 font-mono uppercase block text-[11px] font-bold">TOPICS COVERED</span>
+            <div class="flex flex-wrap gap-1.5">
+              {featuredPost.data.tags.map((tag) => (
+                <span class="px-2 py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-mono text-[11px]">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+            <div class="pt-2 text-slate-500 text-[11px]">
+              收录于 <strong>{featuredPost.data.category}</strong> 核心专题
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Category Tabs Filter -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-200">
+      <div class="flex flex-wrap gap-2 text-xs font-semibold" id="category-filters">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            data-cat={cat}
+            class={`px-3.5 py-1.5 rounded-lg border transition-all ${
+              idx === 0
+                ? 'bg-blue-600 text-white border-blue-600 shadow-2xs active-cat'
+                : 'bg-white text-slate-700 border-slate-200 hover:border-blue-400 hover:bg-slate-50'
+            }`}
+          >
+            {cat} {cat === '全部' ? `(${sortedPosts.length})` : ''}
+          </button>
+        ))}
+      </div>
     </div>
 
     <!-- Articles Grid -->
@@ -63,57 +129,60 @@ const categories = [
       {sortedPosts.map((post) => (
         <article
           data-category={post.data.category}
-          class="article-card bg-white rounded-xl border border-slate-200 p-6 hover:border-brand-500 hover:shadow-md transition-all flex flex-col justify-between group"
+          class="article-card bg-white rounded-2xl border border-slate-200 p-6 hover:border-blue-400 hover:shadow-md transition-all flex flex-col justify-between group"
         >
-          <div>
-            <div class="flex items-center justify-between text-[11px] text-slate-500 mb-2.5">
-              <span class="px-2 py-0.5 rounded bg-blue-50 text-brand-700 font-semibold border border-blue-100">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-[11px] text-slate-500">
+              <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold border border-blue-100">
                 {post.data.category}
               </span>
-              <time class="font-mono">{post.data.publishDate}</time>
+              <time class="font-mono text-slate-400">{post.data.publishDate}</time>
             </div>
 
-            <h2 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-2">
+            <h3 class="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
               <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-            </h2>
+            </h3>
 
-            <p class="text-xs text-slate-500 mt-2 line-clamp-3 leading-relaxed">
+            <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed">
               {post.data.description}
             </p>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <div class="flex flex-wrap gap-1">
               {post.data.tags.slice(0, 2).map(tag => (
-                <span class="text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded text-[10px]">#{tag}</span>
+                <span class="text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded text-[10px] font-mono">#{tag}</span>
               ))}
             </div>
-            <a href={`/blog/${post.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-0.5">
+            <a href={`/blog/${post.slug}/`} class="font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
               阅读全文 →
             </a>
           </div>
         </article>
       ))}
     </div>
+
   </div>
 </BaseLayout>
 
 <script>
-  const filterButtons = document.querySelectorAll('#category-filters button');
+  const buttons = document.querySelectorAll('#category-filters button');
   const cards = document.querySelectorAll('.article-card');
 
-  filterButtons.forEach(btn => {
+  buttons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const selected = btn.getAttribute('data-cat');
-
-      filterButtons.forEach(b => {
-        b.className = 'px-3.5 py-1.5 rounded-lg border transition-all bg-white text-slate-700 border-slate-200 hover:border-brand-300 hover:bg-slate-50';
+      buttons.forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-2xs', 'active-cat');
+        b.classList.add('bg-white', 'text-slate-700', 'border-slate-200');
       });
-      btn.className = 'px-3.5 py-1.5 rounded-lg border transition-all bg-brand-600 text-white border-brand-600 shadow-xs active-cat';
 
+      btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-2xs', 'active-cat');
+      btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200');
+
+      const cat = btn.getAttribute('data-cat');
       cards.forEach(card => {
         const cardCat = card.getAttribute('data-category');
-        if (selected === '全部' || cardCat === selected) {
+        if (cat === '全部' || cardCat === cat) {
           (card as HTMLElement).style.display = 'flex';
         } else {
           (card as HTMLElement).style.display = 'none';

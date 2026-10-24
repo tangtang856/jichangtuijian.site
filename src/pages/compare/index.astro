@@ -10,7 +10,6 @@ const breadcrumbs = [
   { name: '机场对比工具' }
 ];
 
-// 预先准备用于前端脚本的 JSON 数据
 const airportsJson = JSON.stringify(airports);
 ---
 
@@ -20,33 +19,44 @@ const airportsJson = JSON.stringify(airports);
   canonical="https://jichangtuijian.site/compare/"
   breadcrumbs={breadcrumbs}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="max-w-3xl mb-8">
-      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Comparison Tool</span>
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">机场多维度横向参数对比工具</h1>
-      <p class="text-base text-slate-600 mt-3 leading-relaxed">
-        选购机场不必靠猜。点击下方选择 2 至 4 家机场加入对比池，系统将自动从统一数据库读取官方套餐、每 GB 流量折算成本、解锁支持与链路类型进行横向并列排查。
-      </p>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Top Hero Banner with Geek Dashboard Theme -->
+    <div class="rounded-3xl bg-slate-950 p-8 sm:p-10 text-white border border-slate-800 shadow-xl mb-10 relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-semibold">
+          <span>⚖️ MATRIX COMPARATOR</span>
+          <span>•</span>
+          <span>自由多维度实时横评</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          机场多维度横向参数比对工具
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          选购机场不必靠猜。点击下方选择 2 至 4 家机场加入对比池，系统将自动从统一数据库读取官方套餐、每 GB 流量折算成本、解锁支持与链路类型进行横向并列排查。
+        </p>
+      </div>
     </div>
 
     <!-- Candidate Selector Box -->
-    <div class="bg-white rounded-xl border border-slate-200 p-6 mb-8 shadow-xs">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-        <label class="text-sm font-bold text-slate-900">
-          选择要比对的机场品牌（支持 2 ~ 4 家）：
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 mb-8 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+        <label class="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <span>🎯</span>
+          <span>选择要比对的机场品牌（点击切换，支持 2 ~ 4 家并列）：</span>
         </label>
-        <span id="compare-count" class="text-xs text-brand-600 font-medium">已选择 2 家</span>
+        <span id="compare-count" class="text-xs text-blue-600 font-mono font-semibold bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">已选择 2 家</span>
       </div>
 
-      <div class="flex flex-wrap gap-2.5" id="selector-tags">
+      <div class="flex flex-wrap gap-2" id="selector-tags">
         {airports.map((airport, index) => (
           <button
             type="button"
             data-id={airport.id}
             class={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
               index < 2
-                ? 'bg-brand-600 text-white border-brand-600 shadow-xs is-active'
-                : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-brand-400 hover:bg-white'
+                ? 'bg-blue-600 text-white border-blue-600 shadow-2xs is-active font-semibold'
+                : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-400 hover:bg-white'
             }`}
           >
             {airport.name}
@@ -56,16 +66,16 @@ const airportsJson = JSON.stringify(airports);
     </div>
 
     <!-- Dynamic Comparison Table Container -->
-    <div id="compare-table-wrapper" class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
+    <div id="compare-table-wrapper" class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
       <div class="overflow-x-auto">
         <table class="w-full text-left text-xs border-collapse" id="compare-table">
-          <!-- Dynamically populated or SSR fallback -->
+          <!-- Dynamically populated -->
         </table>
       </div>
     </div>
 
     <!-- Empty State Warning (hidden by default) -->
-    <div id="empty-state" class="hidden bg-white rounded-xl border border-dashed border-slate-300 p-12 text-center my-6">
+    <div id="empty-state" class="hidden bg-white rounded-2xl border border-dashed border-slate-300 p-12 text-center my-6">
       <div class="text-3xl mb-2">⚖️</div>
       <h2 class="text-base font-bold text-slate-800">对比池目前为空</h2>
       <p class="text-xs text-slate-500 mt-1">请在上方至少点击勾选 2 家机场进行参数并列对比。</p>
@@ -75,7 +85,7 @@ const airportsJson = JSON.stringify(airports);
 
 <script define:vars={{ airportsData: airports }}>
   const allAirports = airportsData;
-  let selectedIds = ['muguang', 'breezenet']; // Default 2 airports
+  let selectedIds = ['muguang', 'breezenet'];
 
   const wrapper = document.getElementById('compare-table-wrapper');
   const emptyState = document.getElementById('empty-state');
@@ -100,7 +110,7 @@ const airportsJson = JSON.stringify(airports);
     const rows = [
       {
         label: '机场名称与标签',
-        render: a => '<div class="font-bold text-slate-900 text-sm"><a href="/airport/' + a.slug + '/" class="text-brand-600 hover:underline">' + a.name + '</a></div><div class="text-[11px] text-slate-500">' + (a.badge || '') + '</div>'
+        render: a => '<div class="font-bold text-slate-900 text-sm"><a href="/airport/' + a.slug + '/" class="text-blue-600 hover:underline">' + a.name + '</a></div><div class="text-[11px] text-slate-500 font-mono">' + (a.badge || '') + '</div>'
       },
       {
         label: '线路物理类型',
@@ -127,7 +137,7 @@ const airportsJson = JSON.stringify(airports);
       },
       {
         label: '入口线路',
-        render: a => `<span class="text-slate-600">${a.entryBgp}</span>`
+        render: a => `<span class="text-slate-600 font-mono">${a.entryBgp}</span>`
       },
       {
         label: '覆盖地区数量',
@@ -159,18 +169,18 @@ const airportsJson = JSON.stringify(airports);
       },
       {
         label: '操作与评测',
-        render: a => '<div class="flex gap-2"><a href="/review/' + a.slug + '/" class="px-2.5 py-1 rounded bg-brand-50 text-brand-700 font-semibold border border-brand-200 hover:bg-brand-100">评测报告</a><a href="/airport/' + a.slug + '/" class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-medium hover:bg-slate-200">参数档案</a></div>'
+        render: a => '<div class="flex gap-2"><a href="/review/' + a.slug + '/" class="px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 font-semibold border border-blue-200 hover:bg-blue-100">评测报告</a><a href="/airport/' + a.slug + '/" class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-medium hover:bg-slate-200">参数档案</a></div>'
       }
     ];
 
-    let html = `<thead><tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold">
-      <th class="py-3 px-4 w-36">比较维度</th>`;
+    let html = `<thead><tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold font-mono">
+      <th class="py-3.5 px-4 w-36">比较维度</th>`;
     
     selectedAirports.forEach(a => {
-      html += `<th class="py-3 px-4 min-w-[220px]">
+      html += `<th class="py-3.5 px-4 min-w-[220px]">
         <div class="flex items-center justify-between">
           <span class="font-bold text-slate-900">${a.name}</span>
-          <button data-remove="${a.id}" class="text-slate-400 hover:text-rose-600 text-xs px-1">✕</button>
+          <button data-remove="${a.id}" class="text-slate-400 hover:text-rose-600 text-xs px-1 font-mono">✕</button>
         </div>
       </th>`;
     });
@@ -178,9 +188,9 @@ const airportsJson = JSON.stringify(airports);
 
     rows.forEach(r => {
       html += `<tr class="hover:bg-slate-50/60 transition-colors">
-        <td class="py-3 px-4 font-bold text-slate-700 bg-slate-50/30 w-36">${r.label}</td>`;
+        <td class="py-3.5 px-4 font-bold text-slate-700 bg-slate-50/40 w-36">${r.label}</td>`;
       selectedAirports.forEach(a => {
-        html += `<td class="py-3 px-4 align-top">${r.render(a)}</td>`;
+        html += `<td class="py-3.5 px-4 align-top">${r.render(a)}</td>`;
       });
       html += `</tr>`;
     });
@@ -188,7 +198,6 @@ const airportsJson = JSON.stringify(airports);
     html += `</tbody>`;
     table.innerHTML = html;
 
-    // Attach remove handlers
     table.querySelectorAll('button[data-remove]').forEach(btn => {
       btn.addEventListener('click', () => {
         const idToRemove = btn.getAttribute('data-remove');
@@ -203,9 +212,9 @@ const airportsJson = JSON.stringify(airports);
     selectorTags.querySelectorAll('button[data-id]').forEach(btn => {
       const id = btn.getAttribute('data-id');
       if (selectedIds.includes(id)) {
-        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border bg-brand-600 text-white border-brand-600 shadow-xs is-active';
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold border bg-blue-600 text-white border-blue-600 shadow-2xs is-active';
       } else {
-        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200 hover:border-brand-400 hover:bg-white';
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-400 hover:bg-white';
       }
     });
   }
@@ -227,7 +236,6 @@ const airportsJson = JSON.stringify(airports);
     });
   });
 
-  // Check URL query parameters (e.g. ?a=tag-internet)
   const urlParams = new URLSearchParams(window.location.search);
   const paramAirport = urlParams.get('a');
   if (paramAirport && allAirports.some(a => a.id === paramAirport)) {

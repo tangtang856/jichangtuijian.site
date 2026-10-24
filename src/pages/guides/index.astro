@@ -12,35 +12,39 @@ const breadcrumbs = [
 
 const platforms = [
   {
-    title: 'Windows 系统教程',
+    title: 'Windows 系统',
     slug: 'windows',
-    icon: '🪟',
+    icon: '💻',
+    color: 'blue',
     apps: ['Clash Verge Rev', 'Sing-box', 'v2rayN'],
-    desc: '推荐使用开源无广告的 Clash Verge Rev。支持 TUN 虚拟网卡接管、智能分流、延迟优选测速与一键订阅导入。',
+    desc: '推荐开源无广告的 Clash Verge Rev。支持 TUN 虚拟网卡接管、智能分流、延迟优选测速与一键订阅导入。',
     href: '/guides/windows/'
   },
   {
-    title: 'Android 安卓手机教程',
+    title: 'Android 安卓',
     slug: 'android',
-    icon: '🤖',
+    icon: '📱',
+    color: 'emerald',
     apps: ['Clash Verge Android', 'v2rayNG', 'Sing-box'],
-    desc: '安卓平台客户端安装 APK、订阅一键导入、开启省电模式白名单与开机自启后台常驻设置。',
+    desc: '安卓平台客户端安装 APK、订阅一键导入、开启省电模式白名单与开机自启后台常驻保活设置。',
     href: '/guides/android/'
   },
   {
-    title: 'iOS 苹果手机教程',
+    title: 'iOS 苹果系统',
     slug: 'ios',
     icon: '🍎',
+    color: 'indigo',
     apps: ['Shadowrocket (小火箭)', 'Loon', 'Surge', '圈叉'],
     desc: '外区 Apple ID 获取方法、App Store 正版下载、扫码秒导订阅与按需连接 (On-Demand) 优化。',
     href: '/guides/ios/'
   },
   {
-    title: 'macOS 苹果电脑教程',
+    title: 'macOS 苹果电脑',
     slug: 'macos',
-    icon: '💻',
+    icon: '🖥️',
+    color: 'purple',
     apps: ['Clash Verge Mac', 'Surge Mac', '终端代理'],
-    desc: 'Mac 用户系统代理授权、终端命令行 Terminal 代理加速、M芯片优化与一键分流。',
+    desc: 'Mac 用户系统代理授权、终端命令行 Terminal 代理加速、M芯片优化与 Surge 网关分流。',
     href: '/guides/macos/'
   }
 ];
@@ -49,12 +53,12 @@ const allGuides = await getCollection('guides');
 const sortedGuides = allGuides.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
 
 const platformGroups = [
-  { name: 'Windows 专属教程', platform: 'Windows', icon: '🪟' },
-  { name: 'Android 安卓教程', platform: 'Android', icon: '🤖' },
+  { name: 'Windows 专属教程', platform: 'Windows', icon: '💻' },
+  { name: 'Android 安卓教程', platform: 'Android', icon: '📱' },
   { name: 'iOS 苹果客户端教程', platform: 'iOS', icon: '🍎' },
-  { name: 'macOS 苹果电脑教程', platform: 'macOS', icon: '💻' },
-  { name: '软路由与家庭网关', platform: 'Router', icon: '📶' },
-  { name: '高阶网络与运维技巧', platform: 'General', icon: '⚙️' },
+  { name: 'macOS 苹果电脑教程', platform: 'macOS', icon: '🖥️' },
+  { name: '软路由与家庭网关', platform: 'Router', icon: '📡' },
+  { name: '高阶网络与分流技巧', platform: 'General', icon: '⚙️' },
 ];
 ---
 
@@ -64,13 +68,23 @@ const platformGroups = [
   canonical="https://jichangtuijian.site/guides/"
   breadcrumbs={breadcrumbs}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="max-w-3xl mb-10">
-      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Tutorials Library ({allGuides.length} Guides)</span>
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">全平台客户端配置与节点使用教程中心</h1>
-      <p class="text-base text-slate-600 mt-3 leading-relaxed">
-        从电脑端到手机端，再到家庭软路由，我们整理了覆盖全平台共 30 篇详尽图文教程。拒绝模棱两可的说明，带你手把手完成订阅导入、分流优化与排错自愈。
-      </p>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Hero Header with Geek Hub Aesthetic -->
+    <div class="rounded-3xl bg-slate-950 p-8 sm:p-10 text-white border border-slate-800 shadow-xl mb-12 relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-semibold">
+          <span>📚 {allGuides.length} FULL TUTORIALS</span>
+          <span>•</span>
+          <span>全平台零门槛上手</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          全平台客户端配置与节点使用教程中心
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          涵盖 Windows、Android、iOS、macOS、软路由及高阶订阅转换共 30 篇保姆级指引。拒绝模棱两可的代码指令，手把手带你完成订阅一键导入、TUN 虚拟网卡配置与常见网络断流自愈排查。
+        </p>
+      </div>
     </div>
 
     <!-- 4 Major Platform Pillar Cards -->
@@ -78,74 +92,79 @@ const platformGroups = [
       {platforms.map(p => (
         <a
           href={p.href}
-          class="bg-white p-6 rounded-xl border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all group flex flex-col justify-between"
+          class="bg-white p-6 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all group flex flex-col justify-between"
         >
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="text-3xl">{p.icon}</span>
-              <span class="text-[11px] font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full border border-brand-200">
-                系统专区
+              <span class="text-3xl p-2 rounded-xl bg-slate-50 border border-slate-100">{p.icon}</span>
+              <span class="text-[11px] font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                专属专区
               </span>
             </div>
-            <h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+            <h2 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
               {p.title}
             </h2>
             <p class="text-xs text-slate-500 mt-2 line-clamp-3 leading-relaxed">
               {p.desc}
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-semibold text-brand-600 flex items-center justify-between">
-            <span>进入专区</span>
-            <span>→</span>
+          <div class="mt-5 pt-3 border-t border-slate-100 text-xs font-semibold text-blue-600 flex items-center justify-between">
+            <span>浏览系统教程专栏</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
           </div>
         </a>
       ))}
     </div>
 
-    <!-- 30 Detailed Guides by Platform Section -->
-    <div class="space-y-12 mb-16">
-      <div class="border-b border-slate-200 pb-4">
-        <h2 class="text-2xl font-extrabold text-slate-900 flex items-center gap-2">
-          <span>📚</span> 30 篇完整实操教程目录
-        </h2>
-        <p class="text-xs text-slate-500 mt-1">点击标题进入查看图文配置步骤与注意事项</p>
-      </div>
-
+    <!-- Grouped Platform Tutorials (5 guides per group) -->
+    <div class="space-y-14">
       {platformGroups.map((group) => {
         const groupGuides = sortedGuides.filter(g => g.data.platform === group.platform);
         if (groupGuides.length === 0) return null;
+
         return (
-          <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 border-b border-slate-100 pb-3">
-              <span>{group.icon}</span> {group.name} ({groupGuides.length}篇)
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {groupGuides.map((g) => (
-                <div class="p-4 rounded-lg bg-slate-50/70 border border-slate-200/80 hover:bg-white hover:border-brand-400 hover:shadow-xs transition-all flex flex-col justify-between">
-                  <div>
-                    <h4 class="font-bold text-sm text-slate-900">
-                      <a href={`/guides/${g.slug}/`} class="hover:text-brand-600 transition-colors">
-                        {g.data.title}
-                      </a>
+          <section class="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-sm">
+            <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-200">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl p-2 rounded-lg bg-slate-100">{group.icon}</span>
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900">{group.name}</h3>
+                  <p class="text-xs text-slate-500 mt-0.5">该分类下收录 {groupGuides.length} 篇实操文档</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {groupGuides.map((guide) => (
+                <a
+                  href={`/guides/${guide.slug}/`}
+                  class="p-5 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-xs transition-all bg-slate-50/40 flex flex-col justify-between group"
+                >
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between text-[11px]">
+                      <span class="font-mono text-blue-600 font-semibold bg-blue-50 px-2 py-0.5 rounded">
+                        {guide.data.difficulty || '入门必读'}
+                      </span>
+                      <span class="text-slate-400 font-mono">⏱️ {guide.data.readTime || '8 min'}</span>
+                    </div>
+
+                    <h4 class="font-bold text-slate-900 text-sm group-hover:text-blue-600 transition-colors leading-snug">
+                      {guide.data.title}
                     </h4>
-                    <p class="text-xs text-slate-500 mt-1.5 line-clamp-2">
-                      {g.data.description}
+
+                    <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                      {guide.data.description}
                     </p>
                   </div>
-                  <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                    <div class="flex gap-1">
-                      {g.data.clientApps.slice(0, 2).map(app => (
-                        <span class="bg-slate-200/60 text-slate-700 px-1.5 py-0.5 rounded font-mono">{app}</span>
-                      ))}
-                    </div>
-                    <a href={`/guides/${g.slug}/`} class="text-brand-600 font-semibold hover:underline">
-                      阅读实操 →
-                    </a>
+
+                  <div class="pt-4 mt-3 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-600 group-hover:text-blue-600 font-medium">
+                    <span>阅读详细配置图文</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
-          </div>
+          </section>
         );
       })}
     </div>
