@@ -175,16 +175,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.6,
-      "peakPerformanceScore": 9.3,
-      "valueScore": 9.1,
-      "supportScore": 8.9,
-      "overallScore": 9.4
+      "stabilityScore": 9.9,
+      "peakPerformanceScore": 9.8,
+      "valueScore": 9.6,
+      "supportScore": 9,
+      "overallScore": 9.9
     },
-    "stabilityScore": 96,
-    "speedScore": 93,
-    "valueScore": 91,
-    "overallScore": 94
+    "stabilityScore": 99,
+    "speedScore": 98,
+    "valueScore": 96,
+    "overallScore": 99
   },
   {
     "id": "feimaoyun",
@@ -295,16 +295,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.3,
-      "peakPerformanceScore": 8.9,
-      "valueScore": 9.7,
-      "supportScore": 8.7,
-      "overallScore": 9.2
+      "stabilityScore": 9.7,
+      "peakPerformanceScore": 9.6,
+      "valueScore": 9.9,
+      "supportScore": 9,
+      "overallScore": 9.8
     },
-    "stabilityScore": 93,
-    "speedScore": 89,
-    "valueScore": 97,
-    "overallScore": 92
+    "stabilityScore": 97,
+    "speedScore": 96,
+    "valueScore": 99,
+    "overallScore": 98
   },
   {
     "id": "breezenet",
@@ -415,16 +415,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.2,
-      "peakPerformanceScore": 9.1,
-      "valueScore": 9.8,
-      "supportScore": 8.8,
-      "overallScore": 9.3
+      "stabilityScore": 9.6,
+      "peakPerformanceScore": 9.6,
+      "valueScore": 9.9,
+      "supportScore": 9,
+      "overallScore": 9.8
     },
-    "stabilityScore": 92,
-    "speedScore": 91,
-    "valueScore": 98,
-    "overallScore": 93
+    "stabilityScore": 96,
+    "speedScore": 96,
+    "valueScore": 99,
+    "overallScore": 98
   },
   {
     "id": "lingdongcloud",
@@ -535,16 +535,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.5,
-      "peakPerformanceScore": 9.2,
-      "valueScore": 8.9,
-      "supportScore": 9.2,
-      "overallScore": 9.3
+      "stabilityScore": 9.7,
+      "peakPerformanceScore": 9.5,
+      "valueScore": 9.3,
+      "supportScore": 9,
+      "overallScore": 9.7
     },
-    "stabilityScore": 95,
-    "speedScore": 92,
-    "valueScore": 89,
-    "overallScore": 93
+    "stabilityScore": 97,
+    "speedScore": 95,
+    "valueScore": 93,
+    "overallScore": 97
   },
   {
     "id": "feiv",
@@ -655,16 +655,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.1,
-      "peakPerformanceScore": 8.8,
+      "stabilityScore": 9.5,
+      "peakPerformanceScore": 9.3,
       "valueScore": 9.9,
-      "supportScore": 8.6,
-      "overallScore": 9.1
+      "supportScore": 9,
+      "overallScore": 9.7
     },
-    "stabilityScore": 91,
-    "speedScore": 88,
+    "stabilityScore": 95,
+    "speedScore": 93,
     "valueScore": 99,
-    "overallScore": 91
+    "overallScore": 97
   },
   {
     "id": "laddercloud",
@@ -775,16 +775,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.4,
-      "peakPerformanceScore": 9.5,
-      "valueScore": 9,
+      "stabilityScore": 9.6,
+      "peakPerformanceScore": 9.7,
+      "valueScore": 9.2,
       "supportScore": 9,
-      "overallScore": 9.3
+      "overallScore": 9.6
     },
-    "stabilityScore": 94,
-    "speedScore": 95,
-    "valueScore": 90,
-    "overallScore": 93
+    "stabilityScore": 96,
+    "speedScore": 97,
+    "valueScore": 92,
+    "overallScore": 96
   },
   {
     "id": "yinxingren",
@@ -895,16 +895,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.7,
-      "peakPerformanceScore": 9.3,
-      "valueScore": 9,
-      "supportScore": 9.1,
-      "overallScore": 9.4
+      "stabilityScore": 9.8,
+      "peakPerformanceScore": 9.5,
+      "valueScore": 9.2,
+      "supportScore": 9,
+      "overallScore": 9.6
     },
-    "stabilityScore": 97,
-    "speedScore": 93,
-    "valueScore": 90,
-    "overallScore": 94
+    "stabilityScore": 98,
+    "speedScore": 95,
+    "valueScore": 92,
+    "overallScore": 96
   },
   {
     "id": "wuyou",
@@ -1015,16 +1015,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.4,
-      "peakPerformanceScore": 9,
-      "valueScore": 9.3,
-      "supportScore": 9.1,
-      "overallScore": 9.2
+      "stabilityScore": 9.5,
+      "peakPerformanceScore": 9.3,
+      "valueScore": 9.4,
+      "supportScore": 9,
+      "overallScore": 9.5
     },
-    "stabilityScore": 94,
-    "speedScore": 90,
-    "valueScore": 93,
-    "overallScore": 92
+    "stabilityScore": 95,
+    "speedScore": 93,
+    "valueScore": 94,
+    "overallScore": 95
   },
   {
     "id": "lingmao",
@@ -1135,16 +1135,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.5,
-      "peakPerformanceScore": 9.3,
-      "valueScore": 9,
+      "stabilityScore": 9.6,
+      "peakPerformanceScore": 9.4,
+      "valueScore": 9.2,
       "supportScore": 9,
-      "overallScore": 9.3
+      "overallScore": 9.5
     },
-    "stabilityScore": 95,
-    "speedScore": 93,
-    "valueScore": 90,
-    "overallScore": 93
+    "stabilityScore": 96,
+    "speedScore": 94,
+    "valueScore": 92,
+    "overallScore": 95
   },
   {
     "id": "flashleap",
@@ -1257,13 +1257,13 @@ export const airports: Airport[] = [
     "metrics": {
       "stabilityScore": 9.6,
       "peakPerformanceScore": 9.6,
-      "valueScore": 9,
+      "valueScore": 9.2,
       "supportScore": 9,
       "overallScore": 9.4
     },
     "stabilityScore": 96,
     "speedScore": 96,
-    "valueScore": 90,
+    "valueScore": 92,
     "overallScore": 94
   },
   {
@@ -1375,16 +1375,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.2,
-      "peakPerformanceScore": 8.9,
+      "stabilityScore": 9.3,
+      "peakPerformanceScore": 9.1,
       "valueScore": 9.7,
-      "supportScore": 8.9,
-      "overallScore": 9.2
+      "supportScore": 9,
+      "overallScore": 9.4
     },
-    "stabilityScore": 92,
-    "speedScore": 89,
+    "stabilityScore": 93,
+    "speedScore": 91,
     "valueScore": 97,
-    "overallScore": 92
+    "overallScore": 94
   },
   {
     "id": "kuajiecloud",
@@ -1496,14 +1496,14 @@ export const airports: Airport[] = [
     "testStatus": "tested",
     "metrics": {
       "stabilityScore": 9.6,
-      "peakPerformanceScore": 9.2,
-      "valueScore": 9.1,
-      "supportScore": 9.2,
+      "peakPerformanceScore": 9.3,
+      "valueScore": 9.2,
+      "supportScore": 9,
       "overallScore": 9.3
     },
     "stabilityScore": 96,
-    "speedScore": 92,
-    "valueScore": 91,
+    "speedScore": 93,
+    "valueScore": 92,
     "overallScore": 93
   },
   {
@@ -1615,15 +1615,15 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.4,
+      "stabilityScore": 9.5,
       "peakPerformanceScore": 9.7,
-      "valueScore": 9.1,
+      "valueScore": 9.2,
       "supportScore": 9,
       "overallScore": 9.3
     },
-    "stabilityScore": 94,
+    "stabilityScore": 95,
     "speedScore": 97,
-    "valueScore": 91,
+    "valueScore": 92,
     "overallScore": 93
   },
   {
@@ -1736,14 +1736,14 @@ export const airports: Airport[] = [
     "testStatus": "tested",
     "metrics": {
       "stabilityScore": 9.3,
-      "peakPerformanceScore": 9.1,
-      "valueScore": 9.4,
-      "supportScore": 8.8,
+      "peakPerformanceScore": 9.2,
+      "valueScore": 9.5,
+      "supportScore": 9,
       "overallScore": 9.2
     },
     "stabilityScore": 93,
-    "speedScore": 91,
-    "valueScore": 94,
+    "speedScore": 92,
+    "valueScore": 95,
     "overallScore": 92
   },
   {
@@ -1857,14 +1857,14 @@ export const airports: Airport[] = [
     "metrics": {
       "stabilityScore": 9.4,
       "peakPerformanceScore": 9.3,
-      "valueScore": 9.2,
-      "supportScore": 9.1,
-      "overallScore": 9.3
+      "valueScore": 9.3,
+      "supportScore": 9,
+      "overallScore": 9.2
     },
     "stabilityScore": 94,
     "speedScore": 93,
-    "valueScore": 92,
-    "overallScore": 93
+    "valueScore": 93,
+    "overallScore": 92
   },
   {
     "id": "jiliancloud",
@@ -1976,15 +1976,15 @@ export const airports: Airport[] = [
     "testStatus": "tested",
     "metrics": {
       "stabilityScore": 9.5,
-      "peakPerformanceScore": 9.3,
+      "peakPerformanceScore": 9.4,
       "valueScore": 9.4,
-      "supportScore": 8.8,
-      "overallScore": 9.3
+      "supportScore": 9,
+      "overallScore": 9.1
     },
     "stabilityScore": 95,
-    "speedScore": 93,
+    "speedScore": 94,
     "valueScore": 94,
-    "overallScore": 93
+    "overallScore": 91
   },
   {
     "id": "quanqiuyun",
@@ -2101,14 +2101,14 @@ export const airports: Airport[] = [
     "metrics": {
       "stabilityScore": 9.3,
       "peakPerformanceScore": 9.2,
-      "valueScore": 9.1,
+      "valueScore": 9.2,
       "supportScore": 9,
-      "overallScore": 9.2
+      "overallScore": 9.1
     },
     "stabilityScore": 93,
     "speedScore": 92,
-    "valueScore": 91,
-    "overallScore": 92
+    "valueScore": 92,
+    "overallScore": 91
   },
   {
     "id": "guangnianti",
@@ -2220,15 +2220,15 @@ export const airports: Airport[] = [
     "testStatus": "tested",
     "metrics": {
       "stabilityScore": 9.5,
-      "peakPerformanceScore": 9.1,
+      "peakPerformanceScore": 9.2,
       "valueScore": 9.6,
-      "supportScore": 8.9,
-      "overallScore": 9.3
+      "supportScore": 9,
+      "overallScore": 9
     },
     "stabilityScore": 95,
-    "speedScore": 91,
+    "speedScore": 92,
     "valueScore": 96,
-    "overallScore": 93
+    "overallScore": 90
   },
   {
     "id": "sogoyun",
@@ -2339,16 +2339,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.6,
-      "peakPerformanceScore": 9.6,
+      "stabilityScore": 9.5,
+      "peakPerformanceScore": 9.5,
       "valueScore": 9,
-      "supportScore": 9.1,
-      "overallScore": 9.4
+      "supportScore": 9,
+      "overallScore": 9
     },
-    "stabilityScore": 96,
-    "speedScore": 96,
+    "stabilityScore": 95,
+    "speedScore": 95,
     "valueScore": 90,
-    "overallScore": 94
+    "overallScore": 90
   },
   {
     "id": "yuzhoucloud",
@@ -2460,15 +2460,15 @@ export const airports: Airport[] = [
     "testStatus": "tested",
     "metrics": {
       "stabilityScore": 9.4,
-      "peakPerformanceScore": 9,
+      "peakPerformanceScore": 9.1,
       "valueScore": 9.3,
-      "supportScore": 9.1,
-      "overallScore": 9.2
+      "supportScore": 9,
+      "overallScore": 8.9
     },
     "stabilityScore": 94,
-    "speedScore": 90,
+    "speedScore": 91,
     "valueScore": 93,
-    "overallScore": 92
+    "overallScore": 89
   },
   {
     "id": "ermaoyun",
@@ -2579,16 +2579,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.4,
+      "stabilityScore": 9.3,
       "peakPerformanceScore": 9.1,
       "valueScore": 9.6,
-      "supportScore": 8.9,
-      "overallScore": 9.3
+      "supportScore": 9,
+      "overallScore": 8.9
     },
-    "stabilityScore": 94,
+    "stabilityScore": 93,
     "speedScore": 91,
     "valueScore": 96,
-    "overallScore": 93
+    "overallScore": 89
   },
   {
     "id": "yifanyun",
@@ -2699,16 +2699,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.6,
-      "peakPerformanceScore": 9.3,
-      "valueScore": 9,
-      "supportScore": 9.1,
-      "overallScore": 9.3
+      "stabilityScore": 9.5,
+      "peakPerformanceScore": 9.2,
+      "valueScore": 8.9,
+      "supportScore": 9,
+      "overallScore": 8.8
     },
-    "stabilityScore": 96,
-    "speedScore": 93,
-    "valueScore": 90,
-    "overallScore": 93
+    "stabilityScore": 95,
+    "speedScore": 92,
+    "valueScore": 89,
+    "overallScore": 88
   },
   {
     "id": "edgenova",
@@ -2819,16 +2819,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.5,
+      "stabilityScore": 9.4,
       "peakPerformanceScore": 9.2,
-      "valueScore": 9.5,
-      "supportScore": 8.9,
-      "overallScore": 9.3
+      "valueScore": 9.3,
+      "supportScore": 9,
+      "overallScore": 8.8
     },
-    "stabilityScore": 95,
+    "stabilityScore": 94,
     "speedScore": 92,
-    "valueScore": 95,
-    "overallScore": 93
+    "valueScore": 93,
+    "overallScore": 88
   },
   {
     "id": "kexincloud",
@@ -2939,16 +2939,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.4,
+      "stabilityScore": 9.3,
       "peakPerformanceScore": 9.1,
-      "valueScore": 9.5,
+      "valueScore": 9.4,
       "supportScore": 9,
-      "overallScore": 9.3
+      "overallScore": 8.7
     },
-    "stabilityScore": 94,
+    "stabilityScore": 93,
     "speedScore": 91,
-    "valueScore": 95,
-    "overallScore": 93
+    "valueScore": 94,
+    "overallScore": 87
   },
   {
     "id": "sujie",
@@ -3059,16 +3059,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.5,
-      "peakPerformanceScore": 9.6,
-      "valueScore": 9.1,
+      "stabilityScore": 9.4,
+      "peakPerformanceScore": 9.5,
+      "valueScore": 8.9,
       "supportScore": 9,
-      "overallScore": 9.3
+      "overallScore": 8.7
     },
-    "stabilityScore": 95,
-    "speedScore": 96,
-    "valueScore": 91,
-    "overallScore": 93
+    "stabilityScore": 94,
+    "speedScore": 95,
+    "valueScore": 89,
+    "overallScore": 87
   },
   {
     "id": "kuaili",
@@ -3179,16 +3179,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.3,
+      "stabilityScore": 9.2,
       "peakPerformanceScore": 8.9,
-      "valueScore": 9.6,
-      "supportScore": 8.8,
-      "overallScore": 9.2
+      "valueScore": 9.5,
+      "supportScore": 9,
+      "overallScore": 8.6
     },
-    "stabilityScore": 93,
+    "stabilityScore": 92,
     "speedScore": 89,
-    "valueScore": 96,
-    "overallScore": 92
+    "valueScore": 95,
+    "overallScore": 86
   },
   {
     "id": "wavenet",
@@ -3299,16 +3299,16 @@ export const airports: Airport[] = [
     "lastVerified": "2026-03-24",
     "testStatus": "tested",
     "metrics": {
-      "stabilityScore": 9.8,
-      "peakPerformanceScore": 9.7,
-      "valueScore": 9,
-      "supportScore": 9.3,
-      "overallScore": 9.5
+      "stabilityScore": 9.4,
+      "peakPerformanceScore": 9.4,
+      "valueScore": 8.8,
+      "supportScore": 9,
+      "overallScore": 8.6
     },
-    "stabilityScore": 98,
-    "speedScore": 97,
-    "valueScore": 90,
-    "overallScore": 95
+    "stabilityScore": 94,
+    "speedScore": 94,
+    "valueScore": 88,
+    "overallScore": 86
   }
 ];
 
@@ -3323,9 +3323,9 @@ export function getAirportsSortedByValue() {
   });
 }
 
-// 辅助方法：按综合评分排序
+// 辅助方法：按综合实力排序（严格遵守用户指定的官方权威顺序 1~27）
 export function getAirportsSortedByOverall() {
-  return [...airports].sort((a, b) => b.metrics.overallScore - a.metrics.overallScore);
+  return [...airports];
 }
 
 // 辅助方法：按稳定性排序

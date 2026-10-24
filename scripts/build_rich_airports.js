@@ -2383,8 +2383,9 @@ export function getAirportsSortedByValue() {
 }
 
 // 辅助方法：按综合评分排序
+// 辅助方法：按综合实力排序（严格遵守用户指定的官方权威顺序 1~27）
 export function getAirportsSortedByOverall() {
-  return [...airports].sort((a, b) => b.metrics.overallScore - a.metrics.overallScore);
+  return [...airports];
 }
 
 // 辅助方法：按稳定性排序
