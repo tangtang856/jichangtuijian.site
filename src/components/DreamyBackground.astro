@@ -1,0 +1,297 @@
+---
+// DreamyBackground.astro
+// 柔和梦幻的渐变背景系统：以粉紫色、淡蓝色和淡黄色为主色调，自然流畅的色彩过渡，轻盈通透的半透明波浪质感与细腻平滑的炫彩光泽
+---
+
+<div class="fixed inset-0 pointer-events-none -z-50 overflow-hidden select-none" aria-hidden="true">
+  <!-- Layer 1: Ambient Healing Gradient Base (粉紫、淡蓝、淡黄天然融合流体底色) -->
+  <div class="absolute inset-0 dreamy-gradient-canvas"></div>
+
+  <!-- Layer 2: Soft Diffuse Lighting Orbs (柔和光影，高光区域明亮而不刺眼) -->
+  <div class="absolute -top-32 -left-32 w-[650px] h-[650px] rounded-full bg-gradient-to-br from-yellow-200/45 via-amber-100/35 to-transparent blur-[120px] transform-gpu animate-dreamy-float-slow"></div>
+  <div class="absolute -top-20 -right-24 w-[700px] h-[700px] rounded-full bg-gradient-to-bl from-pink-300/40 via-purple-200/35 to-transparent blur-[130px] transform-gpu animate-dreamy-float-reverse"></div>
+  <div class="absolute top-1/3 left-1/4 w-[850px] h-[850px] rounded-full bg-gradient-to-tr from-sky-200/45 via-blue-100/40 to-indigo-100/30 blur-[150px] transform-gpu animate-dreamy-float-slow"></div>
+  <div class="absolute -bottom-24 -left-20 w-[680px] h-[680px] rounded-full bg-gradient-to-tr from-purple-200/40 via-pink-200/35 to-rose-100/30 blur-[130px] transform-gpu animate-dreamy-float-reverse"></div>
+  <div class="absolute -bottom-36 -right-32 w-[750px] h-[750px] rounded-full bg-gradient-to-tl from-yellow-200/40 via-amber-100/35 to-sky-100/25 blur-[140px] transform-gpu animate-dreamy-float-slow"></div>
+
+  <!-- Layer 3: Delicate Undulating Waves with Iridescent Sheen (细腻平滑的波浪状纹路与炫彩光泽效果) -->
+  <svg
+    class="absolute inset-0 w-full h-full opacity-80"
+    viewBox="0 0 1920 1080"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <!-- Multi-stop Iridescent Spectrum Gradient 1 -->
+      <linearGradient id="iridescent-sheen-1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f472b6" stop-opacity="0.85" />
+        <stop offset="18%" stop-color="#c084fc" stop-opacity="0.85" />
+        <stop offset="38%" stop-color="#818cf8" stop-opacity="0.8" />
+        <stop offset="56%" stop-color="#38bdf8" stop-opacity="0.85" />
+        <stop offset="76%" stop-color="#fde047" stop-opacity="0.9" />
+        <stop offset="88%" stop-color="#fb923c" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#f472b6" stop-opacity="0.85" />
+      </linearGradient>
+
+      <!-- Multi-stop Iridescent Spectrum Gradient 2 -->
+      <linearGradient id="iridescent-sheen-2" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#fef08a" stop-opacity="0.9" />
+        <stop offset="22%" stop-color="#f472b6" stop-opacity="0.85" />
+        <stop offset="48%" stop-color="#a855f7" stop-opacity="0.8" />
+        <stop offset="70%" stop-color="#60a5fa" stop-opacity="0.85" />
+        <stop offset="90%" stop-color="#38bdf8" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#fef08a" stop-opacity="0.9" />
+      </linearGradient>
+
+      <!-- Multi-stop Iridescent Spectrum Gradient 3 (Delicate Periwinkle to Rose Gold) -->
+      <linearGradient id="iridescent-sheen-3" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.75" />
+        <stop offset="25%" stop-color="#818cf8" stop-opacity="0.8" />
+        <stop offset="50%" stop-color="#f472b6" stop-opacity="0.85" />
+        <stop offset="75%" stop-color="#fde047" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#a7f3d0" stop-opacity="0.75" />
+      </linearGradient>
+
+      <!-- Translucent Wave Ribbon Fills (轻盈通透的半透明水波丝带) -->
+      <linearGradient id="ribbon-grad-upper" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fce7f3" stop-opacity="0.35" />
+        <stop offset="35%" stop-color="#ede9fe" stop-opacity="0.28" />
+        <stop offset="70%" stop-color="#e0f2fe" stop-opacity="0.32" />
+        <stop offset="100%" stop-color="#fef9c3" stop-opacity="0.30" />
+      </linearGradient>
+
+      <linearGradient id="ribbon-grad-mid" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#e0f2fe" stop-opacity="0.38" />
+        <stop offset="40%" stop-color="#fae8ff" stop-opacity="0.32" />
+        <stop offset="75%" stop-color="#fef08a" stop-opacity="0.28" />
+        <stop offset="100%" stop-color="#dbeafe" stop-opacity="0.35" />
+      </linearGradient>
+
+      <linearGradient id="ribbon-grad-lower" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fdf2f8" stop-opacity="0.3" />
+        <stop offset="30%" stop-color="#f5d0fe" stop-opacity="0.25" />
+        <stop offset="70%" stop-color="#bae6fd" stop-opacity="0.28" />
+        <stop offset="100%" stop-color="#fef9c3" stop-opacity="0.3" />
+      </linearGradient>
+
+      <!-- Luminous Specular Highlight Gradient (柔和高光，明亮不刺眼) -->
+      <linearGradient id="specular-highlight-1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="25%" stop-color="#fef08a" stop-opacity="0.45" />
+        <stop offset="45%" stop-color="#ffffff" stop-opacity="0.95" />
+        <stop offset="60%" stop-color="#e0f2fe" stop-opacity="0.85" />
+        <stop offset="80%" stop-color="#f5d0fe" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+      </linearGradient>
+
+      <linearGradient id="specular-highlight-2" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="30%" stop-color="#bae6fd" stop-opacity="0.6" />
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.92" />
+        <stop offset="70%" stop-color="#fde047" stop-opacity="0.65" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+      </linearGradient>
+
+      <!-- Soft Pearlescent Glow Filter -->
+      <filter id="soft-pearlescent-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+
+      <!-- Gentle Diffusion Filter -->
+      <filter id="gentle-specular-blur" x="-25%" y="-25%" width="150%" height="150%">
+        <feGaussianBlur stdDeviation="2.5" result="specularBlur" />
+        <feMerge>
+          <feMergeNode in="specularBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Translucent Wave Ribbon Band 1 (Upper Fluid Cascade) -->
+    <path
+      d="M -100 240 C 260 120, 560 380, 960 220 C 1360 60, 1660 340, 2040 180 L 2040 -50 L -100 -50 Z"
+      fill="url(#ribbon-grad-upper)"
+    />
+
+    <!-- Delicate Undulating Wave Ribbons (Mid Fluid Flow) -->
+    <path
+      d="M -100 520 C 320 380, 680 660, 1080 480 C 1480 300, 1720 580, 2040 440 L 2040 680 C 1720 820, 1480 540, 1080 720 C 680 900, 320 620, -100 760 Z"
+      fill="url(#ribbon-grad-mid)"
+    />
+
+    <!-- Lower Wave Ribbon (Bottom Soothing Tide) -->
+    <path
+      d="M -100 820 C 380 720, 780 940, 1180 800 C 1580 660, 1820 860, 2040 760 L 2040 1140 L -100 1140 Z"
+      fill="url(#ribbon-grad-lower)"
+    />
+
+    <!-- ==================== FINE WAVE CONTOURS WITH IRIDESCENT SHEEN ==================== -->
+    
+    <!-- Wave 1 Crest & Harmonic Rhythms -->
+    <path
+      d="M -100 240 C 260 120, 560 380, 960 220 C 1360 60, 1660 340, 2040 180"
+      fill="none"
+      stroke="url(#iridescent-sheen-1)"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      opacity="0.75"
+    />
+    <path
+      d="M -100 270 C 270 150, 570 410, 970 250 C 1370 90, 1670 370, 2040 210"
+      fill="none"
+      stroke="url(#iridescent-sheen-2)"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      opacity="0.5"
+    />
+    <path
+      d="M -100 300 C 280 180, 580 440, 980 280 C 1380 120, 1680 400, 2040 240"
+      fill="none"
+      stroke="url(#iridescent-sheen-3)"
+      stroke-width="0.8"
+      stroke-linecap="round"
+      opacity="0.35"
+      stroke-dasharray="8 6"
+    />
+
+    <!-- Wave 1 Luminous Specular Crest Highlight (明亮而不刺眼的高光) -->
+    <path
+      d="M 150 160 C 450 280, 720 340, 960 220 C 1180 120, 1420 220, 1720 290"
+      fill="none"
+      stroke="url(#specular-highlight-1)"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      filter="url(#gentle-specular-blur)"
+      opacity="0.85"
+      class="animate-sheen-pulse"
+    />
+
+    <!-- Wave 2 Crest & Multiphasic Iridescent Ribbons -->
+    <path
+      d="M -100 520 C 320 380, 680 660, 1080 480 C 1480 300, 1720 580, 2040 440"
+      fill="none"
+      stroke="url(#iridescent-sheen-2)"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      opacity="0.8"
+    />
+    <path
+      d="M -100 555 C 330 415, 690 695, 1090 515 C 1490 335, 1730 615, 2040 475"
+      fill="none"
+      stroke="url(#iridescent-sheen-1)"
+      stroke-width="1.4"
+      stroke-linecap="round"
+      opacity="0.55"
+    />
+    <path
+      d="M -100 590 C 340 450, 700 730, 1100 550 C 1500 370, 1740 650, 2040 510"
+      fill="none"
+      stroke="url(#iridescent-sheen-3)"
+      stroke-width="1"
+      stroke-linecap="round"
+      opacity="0.4"
+    />
+
+    <!-- Wave 2 Specular Sheen (Center Brilliant Beam) -->
+    <path
+      d="M 220 420 C 580 590, 880 580, 1080 480 C 1320 380, 1560 490, 1850 490"
+      fill="none"
+      stroke="url(#specular-highlight-2)"
+      stroke-width="2.8"
+      stroke-linecap="round"
+      filter="url(#soft-pearlescent-glow)"
+      opacity="0.9"
+      class="animate-sheen-pulse"
+    />
+
+    <!-- Wave 3 Crest & Bottom Flow -->
+    <path
+      d="M -100 820 C 380 720, 780 940, 1180 800 C 1580 660, 1820 860, 2040 760"
+      fill="none"
+      stroke="url(#iridescent-sheen-3)"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      opacity="0.75"
+    />
+    <path
+      d="M -100 855 C 390 755, 790 975, 1190 835 C 1590 695, 1830 895, 2040 795"
+      fill="none"
+      stroke="url(#iridescent-sheen-1)"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      opacity="0.45"
+    />
+
+    <!-- Wave 3 Specular Crest Highlight -->
+    <path
+      d="M 280 750 C 620 860, 980 910, 1180 800 C 1400 700, 1680 780, 1920 780"
+      fill="none"
+      stroke="url(#specular-highlight-1)"
+      stroke-width="2.4"
+      stroke-linecap="round"
+      filter="url(#gentle-specular-blur)"
+      opacity="0.8"
+    />
+  </svg>
+
+  <!-- Layer 4: Pearlescent Shimmer & Grain Veil (极致细腻的轻盈通透微质感) -->
+  <div class="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30 backdrop-blur-[0.5px]"></div>
+</div>
+
+<style>
+  /* Dreamy Multi-Stop Mesh Base Canvas */
+  .dreamy-gradient-canvas {
+    background: 
+      radial-gradient(ellipse 90% 60% at 15% -5%, rgba(254, 240, 138, 0.42) 0%, transparent 65%),
+      radial-gradient(ellipse 80% 65% at 88% 12%, rgba(244, 114, 182, 0.32) 0%, transparent 65%),
+      radial-gradient(ellipse 95% 75% at 8% 48%, rgba(186, 230, 253, 0.48) 0%, transparent 70%),
+      radial-gradient(ellipse 85% 65% at 92% 62%, rgba(216, 180, 254, 0.38) 0%, transparent 68%),
+      radial-gradient(ellipse 80% 60% at 28% 92%, rgba(254, 249, 195, 0.45) 0%, transparent 65%),
+      radial-gradient(ellipse 90% 70% at 80% 95%, rgba(191, 219, 254, 0.42) 0%, transparent 70%),
+      linear-gradient(135deg, #fdf4f8 0%, #f0f7ff 35%, #fefce8 68%, #f5f3ff 100%);
+    background-attachment: fixed;
+  }
+
+  @keyframes dreamy-float-slow {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(24px, -20px, 0) scale(1.03);
+    }
+  }
+
+  @keyframes dreamy-float-reverse {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(-22px, 18px, 0) scale(0.98);
+    }
+  }
+
+  @keyframes sheen-pulse {
+    0%, 100% {
+      opacity: 0.65;
+    }
+    50% {
+      opacity: 0.95;
+    }
+  }
+
+  .animate-dreamy-float-slow {
+    animation: dreamy-float-slow 28s ease-in-out infinite alternate;
+  }
+
+  .animate-dreamy-float-reverse {
+    animation: dreamy-float-reverse 32s ease-in-out infinite alternate;
+  }
+
+  .animate-sheen-pulse {
+    animation: sheen-pulse 8s ease-in-out infinite alternate;
+  }
+</style>

@@ -12,17 +12,15 @@
   html {
     scroll-behavior: smooth;
     color: #0f172a;
-    background-color: #f8fafc;
+    background-color: #faf5ff;
   }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    background-image: 
-      radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.03) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(6, 182, 212, 0.03) 0px, transparent 50%);
-    background-attachment: fixed;
+    background: transparent;
+    color: #1e293b;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -31,6 +29,47 @@
     line-height: 1.35;
     letter-spacing: -0.02em;
   }
+}
+
+/* ==================== DREAMY HEALING & FROSTED GLASS UTILITIES ==================== */
+/* 呈现出轻盈通透的半透明质感，温润柔和的高光与微晶磨砂滤镜 */
+.bg-white {
+  background-color: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.bg-slate-50 {
+  background-color: rgba(255, 255, 255, 0.62) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.bg-slate-100 {
+  background-color: rgba(241, 245, 249, 0.75) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px -4px rgba(216, 180, 254, 0.18), 0 4px 12px -2px rgba(186, 230, 253, 0.14);
+}
+
+/* 宁静唯美的治愈系阴影与交互光晕 */
+.shadow-sm, .shadow-xs, .shadow-2xs {
+  box-shadow: 0 6px 22px -3px rgba(220, 210, 245, 0.22), 0 2px 8px -1px rgba(186, 230, 253, 0.14) !important;
+}
+
+.shadow-md {
+  box-shadow: 0 12px 30px -4px rgba(216, 180, 254, 0.24), 0 4px 12px -2px rgba(147, 197, 253, 0.18) !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 18px 42px -6px rgba(244, 114, 182, 0.2), 0 8px 20px -3px rgba(147, 197, 253, 0.2) !important;
 }
 
 /* Geek Tech Elements & Glow Utilities */
