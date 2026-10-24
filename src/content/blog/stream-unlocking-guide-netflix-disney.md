@@ -53,6 +53,6 @@ Netflix 平台的剧集分为两类：
 - **YouTube 4K 60FPS HDR 门槛：** 突发带宽 ≥ 80 Mbps ~ 150 Mbps。
 - **晚高峰单线程测速：** 很多测速软件展示的多线程测速能跑几百兆，但在实际观看流媒体时，播放器多采用单线程或双线程拉流。因此，**晚高峰单线程带宽**才是决定拖动进度条是否转圈的唯一指标。
 
-专线机场（如 [FlyingBird 飞鸟云](/airport/flyingbird/) 与 [TAG Internet](/airport/tag-internet/)）通常具备充足的国际出口千兆带宽冗余，其单线程晚高峰实测普遍超过 120Mbps，能够实现真正的“4K 拖拽秒开”。
+专线机场（如 [暮光网络](/airport/muguang/) 与 [微风网络 Breezenet](/airport/breezenet/)）通常具备充足的国际出口千兆带宽冗余，其单线程晚高峰实测普遍超过 120Mbps，能够实现真正的“4K 拖拽秒开”。
 
 相关专区：[4K 流媒体极速解锁机场推荐专栏](/recommend/streaming/)

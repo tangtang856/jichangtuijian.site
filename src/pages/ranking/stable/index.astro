@@ -68,9 +68,19 @@ const breadcrumbs = [
                   {airport.metrics.peakPerformanceScore.toFixed(1)}
                 </td>
                 <td class="py-3.5 px-4 text-slate-600 text-[11px]">{airport.entryBgp}</td>
-                <td class="py-3.5 px-4 text-right">
+                <td class="py-3.5 px-4 text-right space-x-2">
+                  {airport.affiliateUrl && (
+                    <a
+                      href={airport.affiliateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      class="text-emerald-600 font-bold hover:underline"
+                    >
+                      官网
+                    </a>
+                  )}
                   <a href={`/review/${airport.slug}/`} class="text-brand-600 font-medium hover:underline">
-                    稳定实测 →
+                    实测 →
                   </a>
                 </td>
               </tr>

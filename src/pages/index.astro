@@ -214,12 +214,24 @@ const homeSchema = {
             >
               资料详情 →
             </a>
-            <a
-              href={`/review/${airport.slug}/`}
-              class="px-3 py-1.5 rounded-md bg-white border border-slate-300 font-semibold text-slate-800 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700 shadow-2xs transition-colors"
-            >
-              深度评测报告
-            </a>
+            <div class="flex gap-2">
+              <a
+                href={`/review/${airport.slug}/`}
+                class="px-2.5 py-1.5 rounded-md bg-white border border-slate-300 font-semibold text-slate-800 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700 shadow-2xs transition-colors"
+              >
+                评测
+              </a>
+              {airport.affiliateUrl && (
+                <a
+                  href={airport.affiliateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  class="px-2.5 py-1.5 rounded-md bg-emerald-600 text-white font-semibold hover:bg-emerald-700 shadow-2xs transition-colors"
+                >
+                  直达官网
+                </a>
+              )}
+            </div>
           </div>
         </div>
       ))}

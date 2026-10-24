@@ -73,6 +73,16 @@ const breadcrumbs = [
                 </td>
                 <td class="py-3 px-4 text-slate-600 max-w-xs truncate">{airport.suitableFor[0]}</td>
                 <td class="py-3 px-4 text-right space-x-2">
+                  {airport.affiliateUrl && (
+                    <a
+                      href={airport.affiliateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      class="text-emerald-600 font-bold hover:underline"
+                    >
+                      官网
+                    </a>
+                  )}
                   <a href={`/review/${airport.slug}/`} class="text-brand-600 font-semibold underline">评测</a>
                   <a href={`/airport/${airport.slug}/`} class="text-slate-600">详情</a>
                 </td>

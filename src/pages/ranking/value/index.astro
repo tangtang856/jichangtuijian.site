@@ -85,9 +85,19 @@ const breadcrumbs = [
                     ¥{costPerGb} <span class="text-[11px] font-normal text-slate-500">/GB</span>
                   </td>
                   <td class="py-3.5 px-4 text-slate-600">{airport.lineType}</td>
-                  <td class="py-3.5 px-4 text-right">
+                  <td class="py-3.5 px-4 text-right space-x-2">
+                    {airport.affiliateUrl && (
+                      <a
+                        href={airport.affiliateUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        class="text-emerald-600 font-bold hover:underline"
+                      >
+                        官网
+                      </a>
+                    )}
                     <a href={`/review/${airport.slug}/`} class="text-brand-600 font-medium hover:underline">
-                      查看评测 →
+                      评测 →
                     </a>
                   </td>
                 </tr>

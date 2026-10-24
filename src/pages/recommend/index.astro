@@ -110,9 +110,21 @@ const breadcrumbs = [
               <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
             </h3>
             <p class="text-xs text-slate-500 mt-1 line-clamp-2">{airport.tagline}</p>
-            <div class="mt-4 flex gap-3 text-xs">
-              <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">参数档案 →</a>
-              <a href={`/review/${airport.slug}/`} class="font-medium text-brand-600 hover:text-brand-700 underline">深度评测 →</a>
+            <div class="mt-4 flex items-center justify-between text-xs">
+              <div class="flex gap-2.5">
+                <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">参数 →</a>
+                <a href={`/review/${airport.slug}/`} class="font-medium text-brand-600 hover:text-brand-700 underline">评测 →</a>
+              </div>
+              {airport.affiliateUrl && (
+                <a
+                  href={airport.affiliateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  class="px-2 py-0.5 rounded bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-colors"
+                >
+                  直达官网
+                </a>
+              )}
             </div>
           </div>
         ))}

@@ -5,7 +5,7 @@ import { airports } from '../../../data/airports';
 const title = '新手友好型机场推荐与零门槛上手指南 (2026最新) | 机场推荐网';
 const description = '为刚接触科学上网的新手精选操作最简单的机场推荐。支持一键导入、提供自研免配置客户端、详尽保姆级图文教程与实时售后支持，避免繁琐手动配置。';
 
-const beginnerAirports = airports.filter(a => a.id === 'flyingbird' || a.id === 'westworld' || a.id === 'kuaigou');
+const beginnerAirports = airports.filter(a => (a.startingPrice || 0) <= 20).slice(0, 6);
 
 const breadcrumbs = [
   { name: '首页', url: '/' },

@@ -101,9 +101,19 @@ const schema = {
               <div class="text-slate-500">
                 适合：<span class="text-slate-800 font-medium">{airport.suitableFor.join(' / ')}</span>
               </div>
-              <div class="flex gap-3">
-                <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">查看套餐详情 →</a>
-                <a href={`/review/${airport.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 underline">独立评测报告 →</a>
+              <div class="flex items-center gap-3">
+                <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">套餐详情 →</a>
+                <a href={`/review/${airport.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 underline">评测报告 →</a>
+                {airport.affiliateUrl && (
+                  <a
+                    href={airport.affiliateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    class="px-2.5 py-1 rounded bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-colors"
+                  >
+                    直达官网
+                  </a>
+                )}
               </div>
             </div>
           </div>

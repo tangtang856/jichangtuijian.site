@@ -36,7 +36,7 @@ AI 平台并非根据你的“节点物理 IP 地址”这一单一维度来判�
 ### 步骤 1：挑选具备原生住宅 IP 的指定节点
 登录你的客户端（如 Clash Verge 或小火箭），不要随意连接“香港”或“台湾”节点（OpenAI 和 Claude 官方并未对中国香港开放服务！）。
 - **首选地区：** 美国（US）、日本（JP）、英国（UK）或新加坡（SG）。
-- **挑选标识：** 优先选择节点名称中包含 `原生`、`ISP`、`家宽` 或 `ChatGPT专属` 的线路。经过我们核实，[TAG Internet](/airport/tag-internet/) 与 [AmyTelecom](/airport/amytelecom/) 在主流 AI 平台的原生可用率超过 98%。
+- **挑选标识：** 优先选择节点名称中包含 `原生`、`ISP`、`家宽` 或 `ChatGPT专属` 的线路。经过我们核实，[暮光网络](/airport/muguang/) 与 [微风网络 Breezenet](/airport/breezenet/) 在主流 AI 平台的原生可用率超过 98%。
 
 ### 步骤 2：关闭浏览器的 WebRTC 泄漏
 - 在 Chrome 网上应用店搜索并安装扩展插件 **WebRTC Control** 或 **WebRTC Leak Shield**。

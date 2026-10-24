@@ -58,6 +58,6 @@ IEPL 是 IPLC 的现代以太网升级版本。两者在网络抗封锁与不过
 2. **进行晚高峰 Ping 延迟抖动测试：** 真正的 IPLC 专线在晚高峰 21:00 连续发送 200 个数据包，丢包率通常为 0%，且最高延迟与最低延迟波动不超过 3ms；若延迟剧烈上下跳动甚至丢包 10% 以上，必然为公网中转伪装。
 
 真实专线与中继品牌推荐：
-- 经过核实的真专线代表：[TAG Internet](/airport/tag-internet/)、[FlyingBird 飞鸟云](/airport/flyingbird/)、[AmyTelecom](/airport/amytelecom/)
-- 了解高性价比中继：[KuaiGou 快狗云](/airport/kuaigou/)
+- 经过核实的真专线代表：[暮光网络](/airport/muguang/)、[闪跃 FlashLeap](/airport/flashleap/)、[隐形人](/airport/yinxingren/)
+- 了解高性价比中继：[飞猫云](/airport/feimaoyun/)、[微风网络 Breezenet](/airport/breezenet/)
 - 查阅术语解析：[词条：IPLC 与 IEPL 专线网络](/glossary/iplc-iepl/)

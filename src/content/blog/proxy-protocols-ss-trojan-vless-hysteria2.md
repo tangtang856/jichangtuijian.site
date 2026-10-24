@@ -50,8 +50,8 @@ featured: true
 
 在实际使用机场时，请根据你的线路类型做出合理匹配：
 
-1. **如果你使用的是专线机场（如 [TAG Internet](/airport/tag-internet/) 或 [AmyTelecom](/airport/amytelecom/)）：** 直接选用其提供的 **Shadowsocks** 节点。专线本身具备物理隔离，无需伪装，SS 协议能给你带来最平滑的低延迟体验。
-2. **如果你使用的是公网中继机场（如 [KuaiGou 快狗云](/airport/kuaigou/)）：** 优先选择 **Trojan** 或 **VLESS** 节点，兼顾了高连通率与兼容性。
+1. **如果你使用的是专线机场（如 [暮光网络](/airport/muguang/) 或 [闪跃 FlashLeap](/airport/flashleap/)）：** 直接选用其提供的 **Shadowsocks** 或 **VLESS** 节点。专线本身具备物理隔离，无需过度伪装，能给你带来最平滑的低延迟体验。
+2. **如果你使用的是公网中继机场（如 [微风网络 Breezenet](/airport/breezenet/) 或 [飞猫云](/airport/feimaoyun/)）：** 优先选择 **Trojan** 或 **VLESS** 节点，兼顾了高连通率与兼容性。
 3. **如果你本地宽带为移动或广电等出口劣质网络：** 可以尝试 **Hysteria 2** 协议节点，感受抗丢包算法带来的提速效果。
 
 进一步阅读：
