@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '独立编辑政策与评测依据标准 | 机场推荐网';
+const description = '详细公开机场推荐指南 (jichangtuijian.site) 的内容来源、排行榜打分公式、自动化监控探针机制、商业推广披露与纠错更新流程。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '编辑政策' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/editorial-policy/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs prose-content">
+      
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">独立编辑政策与评测依据</h1>
+      <p class="text-sm text-slate-500 -mt-2">最后修订与生效日期：2026年3月24日</p>
+
+      <h2>一、内容与数据来源</h2>
+      <p>
+        本站收录的所有机场服务商数据来自以下正规透明渠道：
+      </p>
+      <ul>
+        <li><strong>服务商官方公开资费：</strong> 直接摘录自各机场官网控制台的前台公示套餐价格、流量配额与协议支持。</li>
+        <li><strong>实验室自动化探针数据：</strong> 我们在境内多个主要骨干机房（广港、沪日、北京多线）部署了 24 小时全天候 Ping 延迟与 TCP 握手探针，持续监控晚高峰（20:00 - 23:30）丢包率与网络抖动。</li>
+        <li><strong>流媒体与 AI 实测：</strong> 通过自动化测试脚本定期检测指定节点在 Netflix 奈飞、Disney+ 以及 OpenAI ChatGPT 网页端的解锁可用率。</li>
+        <li><strong>社区客观反馈：</strong> 监测知名 Telegram 技术交流群组与论坛关于工单回复时效与售后纠纷的真实记录。</li>
+      </ul>
+
+      <h2>二、排行榜打分权重与排序机制</h2>
+      <p>
+        本站的综合排行榜严格杜绝主观打分。所有指标均由公开公式计算：
+      </p>
+      <blockquote>
+        <strong>综合实力总评 (100%) = 稳定性 (40%) + 晚高峰速率表现 (30%) + 性价比单价 (20%) + 客服工单支持 (10%)</strong>
+      </blockquote>
+      <ul>
+        <li><strong>稳定性 (40%)：</strong> 依据 30 天连续探针丢包率与在线率评定。物理 IPLC 专线由于具备物理不过墙特性，天然享有高稳定性基础分。</li>
+        <li><strong>晚高峰速率表现 (30%)：</strong> 晚高峰 20:00 - 23:00 4K 高清流媒体突发码率测算。</li>
+        <li><strong>性价比单价 (20%)：</strong> 基于标准月付套餐计算每 1GB 可用流量的真实单价（月付金额 ÷ 折算流量）。</li>
+        <li><strong>客服工单支持 (10%)：</strong> 抽样提交咨询工单，记录首个工作日内的响应时效与解决专业度。</li>
+      </ul>
+
+      <h2>三、商业合作与推广佣金披露 (Affiliate Disclosure)</h2>
+      <p>
+        为了维持本站自动化监测服务器的运行成本、购买各机场月付测试套餐以及域名的正常续费，本站部分页面包含机场服务商的邀请推荐链接（Affiliate Links）。
+      </p>
+      <p>
+        <strong>我们的严格承诺：</strong>
+      </p>
+      <ol>
+        <li><strong>不买榜：</strong> 任何服务商均无法通过付费购买排位、提升评分或删除客观存在的缺点分析。</li>
+        <li><strong>不妥协缺点：</strong> 无论是否有商业合作，每篇独立评测中指出的不足（如“价格偏高”、“设备数受限”、“不支持某冷门地区”等）必须完整公开展示。</li>
+        <li><strong>不为假跑路机场背书：</strong> 严禁收录没有运营历史、存在虚假宣传“百元终身”的不明新站。</li>
+      </ol>
+
+      <h2>四、内容更新与纠错机制</h2>
+      <p>
+        机场行业的套餐价格与节点架构调整较为频繁。本站设定了每月常规核验机制。
+      </p>
+      <p>
+        如果您在浏览过程中发现某家机场的套餐资费变动、节点下线或有任何事实性疏漏，请随时通过 <a href="/contact/">联系通道</a> 向我们反馈，我们将在核实后的 48 小时内完成修正。
+      </p>
+
+    </div>
+  </div>
+</BaseLayout>

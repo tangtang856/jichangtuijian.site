@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '免责声明与合规提醒 | 机场推荐网';
+const description = '机场推荐指南 (jichangtuijian.site) 免责声明。明确技术科普目的、第三方服务免责、使用者合规自律要求与版权声明。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '免责声明' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/disclaimer/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs prose-content">
+      
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">免责声明与合规提醒</h1>
+      <p class="text-sm text-slate-500 -mt-2">生效日期：2026年3月24日</p>
+
+      <h2>一、技术交流与科普目的</h2>
+      <p>
+        本站（<code>jichangtuijian.site</code>）所发布的所有文章、评测、教程及词条百科，仅供计算机网络协议研究、跨境通信技术测试、科研学术交流以及外贸企业办公选型参考。本站不研发、不租售任何代理服务器，亦不持有任何翻墙节点的底层基础设施。
+      </p>
+
+      <h2>二、遵守属地法律法规</h2>
+      <p>
+        用户在查阅本站内容或配置网络客户端时，应自觉遵守所在国家和地区的法律法规与行业规范。
+      </p>
+      <ul>
+        <li>严禁利用任何网络代理技术从事危害国家安全、侵犯商业机密、非法侵入计算机系统、散布虚假信息或进行盗版侵权下载等违法违规行为。</li>
+        <li>使用者因违反法律法规或滥用网络技术所产生的一切民事、行政或刑事法律责任，均由使用者本人独立承担，与本站无关。</li>
+      </ul>
+
+      <h2>三、第三方服务商交易风险免责</h2>
+      <p>
+        本站介绍的所有第三方机场服务商属于独立法人或境外商业运营实体。
+      </p>
+      <ul>
+        <li>用户在第三方服务商官网注册、充值、选购套餐及进行数字货币/法币交易等一切民事行为，受该服务商自身服务条款（Terms of Service）与退款政策约束。</li>
+        <li>若第三方服务商因不可抗力、网络监管、黑客攻击或自身经营问题出现服务中断、降速或停止运营（跑路），本站虽力求通过真实客观评测降低用户风险，但不对任何第三方服务商的履行能力、财务信誉及用户经济损失提供担保或连带责任。</li>
+        <li>我们始终强烈建议用户：<strong>坚持月付，切勿轻信大额长周期套餐。</strong></li>
+      </ul>
+
+      <h2>四、版权与转载</h2>
+      <p>
+        除特别注明的公开官方引文外，本站所有原创文字、对比工具算法及排行榜模型版权归本站所有。欢迎合规技术转载，转载时请注明来源出处并附带本站正式域名链接。
+      </p>
+
+    </div>
+  </div>
+</BaseLayout>

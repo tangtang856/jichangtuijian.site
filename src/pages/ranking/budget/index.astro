@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAirportsSortedByBudget } from '../../../data/airports';
+
+const title = '平价便宜机场排行榜 - 10元以下月付与轻度翻墙精选 (2026最新) | 机场推荐网';
+const description = '2026平价便宜机场排行榜。精选月付8元、15元以内的低预算梯子节点，适合查阅学术资料、轻度社交与低成本备用翻墙需求。';
+
+const budgetAirports = getAirportsSortedByBudget();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场排行榜', url: '/ranking/' },
+  { name: '平价便宜榜' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/ranking/budget/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Low Budget Rankings</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">低预算平价机场排行榜（20元以内）</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        针对日常仅查阅 Google、收发邮件、浏览 Twitter 与轻度学术查文献的用户。无需为高昂的专线套餐买单，低门槛月付即可满足需求。
+      </p>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-sm">
+      <a href="/ranking/overall/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">综合实力榜</a>
+      <a href="/ranking/value/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">性价比榜 (按每GB单价)</a>
+      <a href="/ranking/budget/" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">平价便宜榜 (20元以内)</a>
+      <a href="/ranking/stable/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">高稳定性榜 (专线专区)</a>
+    </div>
+
+    <!-- Budget Table -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-12 shadow-xs">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold">
+              <th class="py-3 px-4">门槛排名</th>
+              <th class="py-3 px-4">品牌</th>
+              <th class="py-3 px-4">起步最低价格</th>
+              <th class="py-3 px-4">对应套餐流量</th>
+              <th class="py-3 px-4">线路类型</th>
+              <th class="py-3 px-4">适合场景</th>
+              <th class="py-3 px-4 text-right">详情</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {budgetAirports.map((airport, idx) => {
+              const minPlan = airport.plans[0];
+              return (
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="py-3.5 px-4 font-mono font-bold text-sm">#{idx + 1}</td>
+                  <td class="py-3.5 px-4 font-bold text-slate-900">
+                    <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono font-bold text-emerald-600 text-sm">
+                    ¥{airport.startingPrice} <span class="text-xs font-normal text-slate-500">元起</span>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono">{minPlan.trafficGB} GB</td>
+                  <td class="py-3.5 px-4 text-slate-600">{airport.lineType}</td>
+                  <td class="py-3.5 px-4 text-slate-600">{airport.suitableFor[0]}</td>
+                  <td class="py-3.5 px-4 text-right">
+                    <a href={`/airport/${airport.slug}/`} class="text-brand-600 font-medium hover:underline">
+                      查看配置 →
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = '安卓手机翻墙教程 - Clash/v2rayNG/Sing-box客户端配置 (2026最新) | 机场推荐网';
+const description = 'Android平台科学上网完整使用指引。详细讲解安卓手机如何下载Clash Verge Android、v2rayNG与Sing-box应用、导入订阅、设置分流规则及解决后台经常被系统杀进程的问题。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '教程中心', url: '/guides/' },
+  { name: 'Android 教程' }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Android平台翻墙软件配置与节点使用教程',
+  description: description,
+  datePublished: '2026-01-12',
+  dateModified: '2026-03-24'
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/guides/android/"
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Android Guide</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Android平台翻墙软件配置与节点使用教程</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        Android 生态开放，提供了丰富强大的开源代理应用。主流首选包括 <strong>Clash Verge Android</strong>（或 Flclash）、经典轻量的 <strong>v2rayNG</strong> 以及新兴的 <strong>Sing-box</strong>。
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      
+      <h2>方案一：使用 Clash Verge Android (推荐)</h2>
+      <ol>
+        <li><strong>下载客户端：</strong>从官方 GitHub 仓库下载最新的 <code>.apk</code> 安装包并在手机上完成安装（初次安装若提示“未知应用来源”，请点击“允许”）。</li>
+        <li><strong>添加配置：</strong>打开应用，点击 <strong>“配置（Configuration）”</strong> → 点击右上角 <strong>“+”</strong> 号。</li>
+        <li><strong>从 URL 导入：</strong>选择“URL”选项，输入配置名称（如机场名字），在 URL 一栏粘贴机场后台复制的 Clash 订阅链接，自动更新周期建议设置为 1440 分钟（24小时）。</li>
+        <li><strong>保存与选中：</strong>点击右上角保存图标，返回配置列表，勾选刚刚导入的配置文件。</li>
+        <li><strong>启动代理：</strong>返回主界面，点击中间的 <strong>“点击启动”</strong> 按钮。系统会弹出 VPN 权限请求对话框，点击“确定”。</li>
+      </ol>
+
+      <h2>方案二：使用 v2rayNG (极简备用方案)</h2>
+      <p>
+        如果你购买的机场支持 V2Ray / Trojan / Shadowsocks 通用订阅，v2rayNG 是一款极轻巧省电的工具：
+      </p>
+      <ol>
+        <li>安装并打开 v2rayNG，点击左上角侧边栏菜单，选择 <strong>“订阅分组设置”</strong>。</li>
+        <li>点击右上角“+”，填写分组备注，在“可选地址（URL）”中填入订阅链接后保存。</li>
+        <li>返回主页面，点击右上角三点菜单，选择 <strong>“更新订阅”</strong>，节点列表随即载入。</li>
+        <li>选择任意优质节点，点击右下角“V”字圆形连接按钮即可。</li>
+      </ol>
+
+      <h2>解决安卓后台经常断流或被杀的 2 个关键设置</h2>
+      <ul>
+        <li><strong>锁定应用卡片：</strong>在手机多任务后台界面中，长按或下拉客户端应用卡片，点击“小锁”图标锁定后台。</li>
+        <li><strong>电池优化白名单：</strong>进入系统设置 → 应用管理 → 权限设置 → 电池优化，找到你的代理应用，将其设置为 <strong>“无限制”</strong> 或 <strong>“不优化”</strong>，防止安卓电池管理系统休眠切断网络。</li>
+      </ul>
+
+      <h2>相关进阶阅读</h2>
+      <ul>
+        <li><a href="/recommend/budget/">适合安卓手机的高性价比月付机场精选</a></li>
+        <li><a href="/glossary/rule-based-routing/">百科：手机规则分流原理与国内直连设置</a></li>
+      </ul>
+
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '科学上网节点客户端配置指南 - Windows/Android/iOS/macOS (2026最新) | 机场推荐网';
+const description = '全平台科学上网客户端配置与VPN节点导入指南。涵盖Windows、Android、iOS（小火箭/Loon）与macOS主流代理客户端下载、订阅导入、TUN虚拟网卡及防DNS泄漏教程。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '教程中心' }
+];
+
+const platforms = [
+  {
+    title: 'Windows 系统客户端配置教程',
+    slug: 'windows',
+    icon: '🪟',
+    apps: ['Clash Verge Rev', 'Sing-box', 'v2rayN'],
+    desc: '推荐使用开源无广告的 Clash Verge Rev。支持 TUN 虚拟网卡接管、智能分流、延迟优选测速与一键订阅导入。',
+    href: '/guides/windows/'
+  },
+  {
+    title: 'Android 安卓手机客户端教程',
+    slug: 'android',
+    icon: '🤖',
+    apps: ['Clash Verge Android', 'v2rayNG', 'Sing-box'],
+    desc: '安卓平台客户端安装 APK、订阅一键导入、开启省电模式白名单与开机自启后台常驻设置。',
+    href: '/guides/android/'
+  },
+  {
+    title: 'iOS 苹果手机客户端配置教程',
+    slug: 'ios',
+    icon: '🍎',
+    apps: ['Shadowrocket (小火箭)', 'Loon', 'Surge'],
+    desc: '外区 Apple ID 获取方法、App Store 正版下载、扫码秒导订阅与按需连接 (On-Demand) 优化。',
+    href: '/guides/ios/'
+  },
+  {
+    title: 'macOS 苹果电脑配置教程',
+    slug: 'macos',
+    icon: '💻',
+    apps: ['Clash Verge Rev Mac', 'Surge Mac', 'Sing-box'],
+    desc: 'Mac 用户系统代理授权、终端命令行 Terminal 代理加速、M芯片优化与一键分流。',
+    href: '/guides/macos/'
+  }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/guides/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-10">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Tutorials Hub</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">全平台翻墙客户端与节点配置详细教程</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        无论你使用的是电脑、手机还是平板，只要拥有一套好用的开源客户端和合规的机场订阅链接，几分钟内即可完成配置。点击下方选择你的设备操作系统，查看详尽的图文步骤。
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {platforms.map(p => (
+        <a
+          href={p.href}
+          class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all group flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-4xl">{p.icon}</span>
+              <span class="text-xs font-semibold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full border border-brand-200">
+                保姆级指引
+              </span>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+              {p.title}
+            </h2>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              {p.desc}
+            </p>
+
+            <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-1.5">
+              <span class="text-slate-400 text-[11px] self-center mr-1">支持客户端：</span>
+              {p.apps.map(app => (
+                <span class="text-[11px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">
+                  {app}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-6 pt-3 flex items-center justify-between text-xs font-semibold text-brand-600">
+            <span>查看完整配置教程与下载</span>
+            <span>→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- General Best Practices for Proxy Clients -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      <h2>翻墙客户端使用的 3 个核心准则</h2>
+      <ul>
+        <li><strong>优先选择开源社区维护版本：</strong>避免下载来路不明的第三方修改版或破解版客户端，防止被植入恶意后门或挖矿木马。</li>
+        <li><strong>区分“规则模式（Rule）”与“全局模式（Global）”：</strong>日常使用请务必设置为“规则模式”，以便中国大陆网站直接连接，仅境外网站走代理流量，既能节省套餐配额，又不会降低访问国内网站的速度。</li>
+        <li><strong>定期更新订阅配置：</strong>机场服务商会不定期对节点服务器 IP 进行维护与轮换，每周在客户端中点击一次“更新订阅（Update Subscription）”能有效减少节点失效问题。</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

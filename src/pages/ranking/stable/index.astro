@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAirportsSortedByStability } from '../../../data/airports';
+
+const title = '2026最稳定机场排行榜 - 晚高峰抗封锁与SLA专线评测 | 机场推荐网';
+const description = '2026最稳定机场排行榜。评测全内网IPLC/IEPL物理专线与企业级BGP中转机场，24小时丢包率监测，筛选晚高峰不抖动的高SLA梯子节点。';
+
+const stableAirports = getAirportsSortedByStability();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场排行榜', url: '/ranking/' },
+  { name: '最稳定机场榜' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/ranking/stable/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">High SLA Leaderboard</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">最稳定机场排行榜（专线与企业级中继）</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        稳定性是企业办公、外贸沟通和跨国会议的核心生命线。本榜单严格依据 30 天自动化长效丢包率探针数据与晚高峰 20:00-23:00 网络连通率指标排序。
+      </p>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-sm">
+      <a href="/ranking/overall/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">综合实力榜</a>
+      <a href="/ranking/value/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">性价比榜 (按每GB单价)</a>
+      <a href="/ranking/budget/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">平价便宜榜 (20元以内)</a>
+      <a href="/ranking/stable/" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">高稳定性榜 (专线专区)</a>
+    </div>
+
+    <!-- Stable Table -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-12 shadow-xs">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold">
+              <th class="py-3 px-4">稳定性排名</th>
+              <th class="py-3 px-4">品牌</th>
+              <th class="py-3 px-4">线路物理架构</th>
+              <th class="py-3 px-4 text-center font-bold text-purple-800">稳定指数</th>
+              <th class="py-3 px-4 text-center">晚高峰抗拥堵</th>
+              <th class="py-3 px-4">入口特征</th>
+              <th class="py-3 px-4 text-right">评测</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {stableAirports.map((airport, idx) => (
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-mono font-bold text-sm">#{idx + 1}</td>
+                <td class="py-3.5 px-4 font-bold text-slate-900">
+                  <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+                  <div class="text-[11px] text-slate-500 font-normal">{airport.badge}</div>
+                </td>
+                <td class="py-3.5 px-4 font-medium text-slate-800">{airport.lineType}</td>
+                <td class="py-3.5 px-4 text-center font-mono font-bold text-purple-700 text-sm">
+                  {airport.metrics.stabilityScore.toFixed(1)}
+                </td>
+                <td class="py-3.5 px-4 text-center font-mono text-slate-700">
+                  {airport.metrics.peakPerformanceScore.toFixed(1)}
+                </td>
+                <td class="py-3.5 px-4 text-slate-600 text-[11px]">{airport.entryBgp}</td>
+                <td class="py-3.5 px-4 text-right">
+                  <a href={`/review/${airport.slug}/`} class="text-brand-600 font-medium hover:underline">
+                    稳定实测 →
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

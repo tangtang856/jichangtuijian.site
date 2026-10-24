@@ -1,0 +1,77 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-surface-900 text-slate-300 mt-20 border-t border-slate-800">
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Brand & Mission -->
+      <div class="space-y-4 md:col-span-1">
+        <div class="flex items-center space-x-2">
+          <div class="w-7 h-7 rounded bg-brand-500 text-white flex items-center justify-center font-bold text-sm">
+            ⚡
+          </div>
+          <span class="text-white font-bold text-lg tracking-tight">机场推荐指南</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          专注于中文科学上网机场节点评测、性价比梯子排行榜、客户端教程与网络安全知识普及。坚持客观严谨，拒绝虚构数据与虚假测试。
+        </p>
+        <div class="text-xs text-slate-500">
+          官方正式域名：<span class="text-slate-300 font-mono">jichangtuijian.site</span>
+        </div>
+      </div>
+
+      <!-- Section Navigation -->
+      <div>
+        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">内容专题</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/recommend/" class="hover:text-white transition-colors">机场推荐总览</a></li>
+          <li><a href="/recommend/budget/" class="hover:text-white transition-colors">高性价比/便宜机场</a></li>
+          <li><a href="/recommend/premium/" class="hover:text-white transition-colors">高端IPLC专线推荐</a></li>
+          <li><a href="/recommend/ai/" class="hover:text-white transition-colors">ChatGPT/Claude AI节点</a></li>
+          <li><a href="/recommend/streaming/" class="hover:text-white transition-colors">4K流媒体解锁专区</a></li>
+          <li><a href="/ranking/overall/" class="hover:text-white transition-colors">综合实力排行榜</a></li>
+        </ul>
+      </div>
+
+      <!-- Guides & Compare -->
+      <div>
+        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">教程与工具</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/compare/" class="hover:text-white transition-colors">机场参数横向对比工具</a></li>
+          <li><a href="/guides/windows/" class="hover:text-white transition-colors">Windows 客户端配置教程</a></li>
+          <li><a href="/guides/android/" class="hover:text-white transition-colors">Android 客户端配置教程</a></li>
+          <li><a href="/guides/ios/" class="hover:text-white transition-colors">iOS 小火箭/Loon 教程</a></li>
+          <li><a href="/guides/macos/" class="hover:text-white transition-colors">macOS Clash/Sing-box 教程</a></li>
+          <li><a href="/glossary/" class="hover:text-white transition-colors">网络知识与术语百科</a></li>
+        </ul>
+      </div>
+
+      <!-- Trust, Legal & Bing Webmaster -->
+      <div>
+        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">网站准则与声明</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/about/" class="hover:text-white transition-colors">关于本站</a></li>
+          <li><a href="/editorial-policy/" class="hover:text-white transition-colors">独立编辑政策与评测依据</a></li>
+          <li><a href="/disclaimer/" class="hover:text-white transition-colors">免责声明与合规提醒</a></li>
+          <li><a href="/privacy-policy/" class="hover:text-white transition-colors">隐私保护政策</a></li>
+          <li><a href="/contact/" class="hover:text-white transition-colors">联系方式与反馈通道</a></li>
+          <li><a href="/sitemap-index.xml" class="hover:text-white transition-colors text-brand-400">XML 网站地图 (Sitemap)</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Editorial disclosure bar -->
+    <div class="mt-10 pt-6 border-t border-slate-800 text-xs text-slate-400 leading-relaxed">
+      <p class="mb-2">
+        <strong class="text-slate-300">透明度披露：</strong>本站包含部分机场服务商的推广邀请链接（Affiliate Links）。当您通过本站链接注册或订购服务时，我们可能获得少量佣金维持服务器运营与自动化监控节点支出，但这绝不会影响我们在排行榜与评测文章中的客观事实判定。所有评测数据均公开测试方法与数据来源。
+      </p>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between text-slate-500 pt-4 border-t border-slate-800/60">
+        <p>© {currentYear} jichangtuijian.site 版权所有. 专注于中文科学上网与节点评测.</p>
+        <p class="mt-2 sm:mt-0 font-mono text-[11px]">Powered by Astro · Hosted on Cloudflare Pages</p>
+      </div>
+    </div>
+  </div>
+</footer>

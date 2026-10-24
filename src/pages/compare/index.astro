@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { airports } from '../../data/airports';
+
+const title = '多品牌机场在线横向参数对比工具 - 价格/流量/线路直观比对 | 机场推荐网';
+const description = '机场多维度横向在线参数比对工具。支持自由选择2至4家机场，实时比对起步价格、每GB流量单价、节点覆盖地区、流媒体及ChatGPT解锁能力与优缺点。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场对比工具' }
+];
+
+// 预先准备用于前端脚本的 JSON 数据
+const airportsJson = JSON.stringify(airports);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/compare/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Comparison Tool</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">机场多维度横向参数对比工具</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        选购机场不必靠猜。点击下方选择 2 至 4 家机场加入对比池，系统将自动从统一数据库读取官方套餐、每 GB 流量折算成本、解锁支持与链路类型进行横向并列排查。
+      </p>
+    </div>
+
+    <!-- Candidate Selector Box -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 mb-8 shadow-xs">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <label class="text-sm font-bold text-slate-900">
+          选择要比对的机场品牌（支持 2 ~ 4 家）：
+        </label>
+        <span id="compare-count" class="text-xs text-brand-600 font-medium">已选择 2 家</span>
+      </div>
+
+      <div class="flex flex-wrap gap-2.5" id="selector-tags">
+        {airports.map((airport, index) => (
+          <button
+            type="button"
+            data-id={airport.id}
+            class={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+              index < 2
+                ? 'bg-brand-600 text-white border-brand-600 shadow-xs is-active'
+                : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-brand-400 hover:bg-white'
+            }`}
+          >
+            {airport.name}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Dynamic Comparison Table Container -->
+    <div id="compare-table-wrapper" class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse" id="compare-table">
+          <!-- Dynamically populated or SSR fallback -->
+        </table>
+      </div>
+    </div>
+
+    <!-- Empty State Warning (hidden by default) -->
+    <div id="empty-state" class="hidden bg-white rounded-xl border border-dashed border-slate-300 p-12 text-center my-6">
+      <div class="text-3xl mb-2">⚖️</div>
+      <h2 class="text-base font-bold text-slate-800">对比池目前为空</h2>
+      <p class="text-xs text-slate-500 mt-1">请在上方至少点击勾选 2 家机场进行参数并列对比。</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ airportsData: airports }}>
+  const allAirports = airportsData;
+  let selectedIds = ['tag-internet', 'flyingbird']; // Default 2 airports
+
+  const wrapper = document.getElementById('compare-table-wrapper');
+  const emptyState = document.getElementById('empty-state');
+  const countBadge = document.getElementById('compare-count');
+  const selectorTags = document.getElementById('selector-tags');
+  const table = document.getElementById('compare-table');
+
+  function renderTable() {
+    if (selectedIds.length === 0) {
+      wrapper.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+      countBadge.textContent = '已选择 0 家（请至少勾选 2 家）';
+      return;
+    }
+
+    wrapper.classList.remove('hidden');
+    emptyState.classList.add('hidden');
+    countBadge.textContent = `已选择 ${selectedIds.length} 家（最多可选 4 家）`;
+
+    const selectedAirports = allAirports.filter(a => selectedIds.includes(a.id));
+
+    const rows = [
+      {
+        label: '机场名称与标签',
+        render: a => '<div class="font-bold text-slate-900 text-sm"><a href="/airport/' + a.slug + '/" class="text-brand-600 hover:underline">' + a.name + '</a></div><div class="text-[11px] text-slate-500">' + (a.badge || '') + '</div>'
+      },
+      {
+        label: '线路物理类型',
+        render: a => `<span class="font-medium text-slate-800">${a.lineType}</span>`
+      },
+      {
+        label: '最低月起步价',
+        render: a => `<span class="font-mono font-bold text-emerald-600 text-sm">¥${a.startingPrice} 起</span>`
+      },
+      {
+        label: '标准起步套餐',
+        render: a => {
+          const p = a.plans[0];
+          return `<span class="font-mono">${p.trafficGB} GB / ¥${p.price} (${p.period === 'quarter' ? '季' : '月'})</span>`;
+        }
+      },
+      {
+        label: '每 GB 折算单价',
+        render: a => {
+          const p = a.plans.find(x => x.period === 'month') || a.plans[0];
+          const cost = (p.price / p.trafficGB).toFixed(3);
+          return `<span class="font-mono font-bold text-emerald-700">¥${cost} / GB</span>`;
+        }
+      },
+      {
+        label: '入口线路',
+        render: a => `<span class="text-slate-600">${a.entryBgp}</span>`
+      },
+      {
+        label: '覆盖地区数量',
+        render: a => `<span class="font-semibold text-slate-700">${a.regions.length} 个主要地区 (${a.regions.slice(0, 4).join('、')}等)</span>`
+      },
+      {
+        label: '协议支持',
+        render: a => a.protocols.map(p => `<span class="inline-block bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded text-[10px] mr-1 font-mono">${p}</span>`).join('')
+      },
+      {
+        label: '设备限制',
+        render: a => `<span class="text-slate-600">${a.deviceLimit || '尚未核实'}</span>`
+      },
+      {
+        label: 'AI 工具解锁',
+        render: a => `<div class="text-[11px] text-slate-700">${(a.aiSupport || []).join('、') || '基础网页可用'}</div>`
+      },
+      {
+        label: '4K 流媒体解锁',
+        render: a => `<div class="text-[11px] text-slate-700">${(a.streamingSupport || []).join('、') || '主流基础解锁'}</div>`
+      },
+      {
+        label: '核心优点',
+        render: a => `<ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">${a.advantages.map(adv => `<li>${adv}</li>`).join('')}</ul>`
+      },
+      {
+        label: '潜在缺点 / 门槛',
+        render: a => `<ul class="list-disc list-inside space-y-1 text-amber-800 text-[11px]">${a.disadvantages.map(dis => `<li>${dis}</li>`).join('')}</ul>`
+      },
+      {
+        label: '操作与评测',
+        render: a => '<div class="flex gap-2"><a href="/review/' + a.slug + '/" class="px-2.5 py-1 rounded bg-brand-50 text-brand-700 font-semibold border border-brand-200 hover:bg-brand-100">评测报告</a><a href="/airport/' + a.slug + '/" class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-medium hover:bg-slate-200">参数档案</a></div>'
+      }
+    ];
+
+    let html = `<thead><tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold">
+      <th class="py-3 px-4 w-36">比较维度</th>`;
+    
+    selectedAirports.forEach(a => {
+      html += `<th class="py-3 px-4 min-w-[220px]">
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-slate-900">${a.name}</span>
+          <button data-remove="${a.id}" class="text-slate-400 hover:text-rose-600 text-xs px-1">✕</button>
+        </div>
+      </th>`;
+    });
+    html += `</tr></thead><tbody class="divide-y divide-slate-100">`;
+
+    rows.forEach(r => {
+      html += `<tr class="hover:bg-slate-50/60 transition-colors">
+        <td class="py-3 px-4 font-bold text-slate-700 bg-slate-50/30 w-36">${r.label}</td>`;
+      selectedAirports.forEach(a => {
+        html += `<td class="py-3 px-4 align-top">${r.render(a)}</td>`;
+      });
+      html += `</tr>`;
+    });
+
+    html += `</tbody>`;
+    table.innerHTML = html;
+
+    // Attach remove handlers
+    table.querySelectorAll('button[data-remove]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idToRemove = btn.getAttribute('data-remove');
+        selectedIds = selectedIds.filter(id => id !== idToRemove);
+        updateButtons();
+        renderTable();
+      });
+    });
+  }
+
+  function updateButtons() {
+    selectorTags.querySelectorAll('button[data-id]').forEach(btn => {
+      const id = btn.getAttribute('data-id');
+      if (selectedIds.includes(id)) {
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border bg-brand-600 text-white border-brand-600 shadow-xs is-active';
+      } else {
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200 hover:border-brand-400 hover:bg-white';
+      }
+    });
+  }
+
+  selectorTags.querySelectorAll('button[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      if (selectedIds.includes(id)) {
+        selectedIds = selectedIds.filter(x => x !== id);
+      } else {
+        if (selectedIds.length >= 4) {
+          alert('最多同时支持横向比对 4 家机场');
+          return;
+        }
+        selectedIds.push(id);
+      }
+      updateButtons();
+      renderTable();
+    });
+  });
+
+  // Check URL query parameters (e.g. ?a=tag-internet)
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramAirport = urlParams.get('a');
+  if (paramAirport && allAirports.some(a => a.id === paramAirport)) {
+    if (!selectedIds.includes(paramAirport)) {
+      selectedIds.push(paramAirport);
+    }
+  }
+
+  updateButtons();
+  renderTable();
+</script>

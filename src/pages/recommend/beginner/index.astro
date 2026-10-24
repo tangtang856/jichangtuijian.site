@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { airports } from '../../../data/airports';
+
+const title = '新手友好型机场推荐与零门槛上手指南 (2026最新) | 机场推荐网';
+const description = '为刚接触科学上网的新手精选操作最简单的机场推荐。支持一键导入、提供自研免配置客户端、详尽保姆级图文教程与实时售后支持，避免繁琐手动配置。';
+
+const beginnerAirports = airports.filter(a => a.id === 'flyingbird' || a.id === 'westworld' || a.id === 'kuaigou');
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐', url: '/recommend/' },
+  { name: '新手入门推荐' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/recommend/beginner/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Beginner Friendly</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">新手友好型机场推荐与零门槛上手指南</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        许多第一次接触翻墙的新人往往被“规则分流”、“TUN虚拟网卡”、“TLS证书混淆”等专业术语劝退。对于初学者来说，最重要的是<strong>流程简单、一键导入订阅、有完备的中文指引</strong>，并且出问题时能快速联系上客服。
+      </p>
+    </div>
+
+    <!-- 3-Step Quick Start -->
+    <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-6 mb-10">
+      <h2 class="text-base font-bold text-amber-950 mb-3">
+        🚀 新手 3 步快速科学上网极简流
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-amber-900">
+        <div class="bg-white/80 p-4 rounded-lg border border-amber-100">
+          <div class="font-bold text-slate-900 text-sm mb-1">第 1 步：选购月付套餐</div>
+          挑选下方支持月付（15-20元）的新手友好机场，注册并完成订购。
+        </div>
+        <div class="bg-white/80 p-4 rounded-lg border border-amber-100">
+          <div class="font-bold text-slate-900 text-sm mb-1">第 2 步：下载对应客户端</div>
+          Windows/Mac 推荐 Clash Verge；安卓安装 Clash Verge Android；苹果手机安装小火箭。
+        </div>
+        <div class="bg-white/80 p-4 rounded-lg border border-amber-100">
+          <div class="font-bold text-slate-900 text-sm mb-1">第 3 步：一键导入与开启</div>
+          在机场后台点击“一键导入”，客户端自动加载节点列表，开启“系统代理”即可无障碍访问。
+        </div>
+      </div>
+    </div>
+
+    <!-- Beginner Recommended Airports -->
+    <div class="space-y-6 mb-12">
+      {beginnerAirports.map((airport) => (
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 hover:shadow-sm transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-xs font-bold">
+                  新手友好推荐
+                </span>
+                <span class="text-xs text-slate-500">{airport.lineType}</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mt-1">
+                <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">{airport.tagline}</p>
+            </div>
+            <div class="text-right sm:border-l sm:border-slate-100 sm:pl-6 shrink-0">
+              <div class="text-xs text-slate-500">新手入门起步</div>
+              <div class="text-2xl font-bold text-emerald-600 font-mono">¥{airport.startingPrice} <span class="text-xs text-slate-500">元/月起</span></div>
+            </div>
+          </div>
+
+          <div class="my-4 text-xs text-slate-600">
+            <span class="font-semibold text-slate-800">为何适合新手：</span>
+            <ul class="list-disc list-inside mt-1 space-y-1">
+              {airport.advantages.slice(0, 3).map(adv => <li>{adv}</li>)}
+            </ul>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 text-xs border-t border-slate-100">
+            <span class="text-slate-500">支持协议：{airport.protocols.join(' / ')}</span>
+            <div class="flex gap-3">
+              <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">查看资费详情 →</a>
+              <a href={`/review/${airport.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 underline">评测与使用体验 →</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Tutorial Links -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      <h2>针对新手的全套保姆级图文教程</h2>
+      <p>如果在客户端下载和配置过程中遇到疑问，请查阅对应系统的详细图文指引：</p>
+      <ul>
+        <li><a href="/guides/windows/">Windows 平台 Clash Verge Rev / Sing-box 安装与使用教程</a></li>
+        <li><a href="/guides/android/">Android 手机翻墙软件安装与节点配置完整指引</a></li>
+        <li><a href="/guides/ios/">iOS 苹果手机 Shadowrocket（小火箭）安装与订阅导入指南</a></li>
+        <li><a href="/guides/macos/">macOS 苹果电脑科学上网客户端配置教程</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

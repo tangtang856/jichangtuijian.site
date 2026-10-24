@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /draft/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://jichangtuijian.site/sitemap-index.xml

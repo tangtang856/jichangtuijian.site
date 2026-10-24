@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAirportsSortedByOverall } from '../../data/airports';
+
+const title = '2026年度中国机场排行榜中心 - 综合实力、性价比与稳定性多维度榜单 | 机场推荐网';
+const description = '2026年度中文科学上网多维度机场排行榜中心。公开透明的加权评分体系，基于全天候丢包监控、晚高峰速率实测、性价比单价与客服工单响应，严选最强梯子服务商。';
+
+const rankedAirports = getAirportsSortedByOverall();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场排行榜' }
+];
+
+const rankingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: '2026综合实力机场排行榜',
+  description: description,
+  itemListElement: rankedAirports.map((airport, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: airport.name,
+    description: airport.tagline,
+    url: `https://jichangtuijian.site/airport/${airport.slug}/`
+  }))
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/ranking/"
+  breadcrumbs={breadcrumbs}
+  schema={rankingSchema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Verified Leaderboard</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">2026 年度机场多维度排行榜中心</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        本排行榜中心由评测实验室维护，所有上榜品牌均具备 2 年以上连续稳定运营历史。我们摒弃主观臆断与虚假跑分，根据客观可核验指标进行量化综合加权。
+      </p>
+    </div>
+
+    <!-- Sub Ranking Category Switcher -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-sm">
+      <a href="/ranking/overall/" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">综合榜</a>
+      <a href="/ranking/value/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">性价比榜 (按每GB单价)</a>
+      <a href="/ranking/budget/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">平价便宜榜 (20元以内)</a>
+      <a href="/ranking/stable/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">高稳定性榜 (专线专区)</a>
+    </div>
+
+    <!-- Quick Conclusions Box -->
+    <div class="bg-brand-50/60 border border-brand-200 rounded-xl p-6 mb-10 text-xs text-brand-950">
+      <h2 class="text-base font-bold text-brand-900 mb-2">⚡ 2026 排行榜快速结论</h2>
+      <ul class="list-disc list-inside space-y-1 text-slate-700">
+        <li><strong>综合实力第一梯队：</strong>TAG Internet 与 AmyTelecom 凭借物理内网 IEPL/IPLC 专线与极低丢包率稳居前列，适合高要求的商务与重度科研。</li>
+        <li><strong>性价比标杆：</strong>FlyingBird（飞鸟云）月付 15 元起步的全专线架构，以及 KuaiGou（快狗云）低至 0.05 元/GB 的大带宽中继，性价比表现最为抢眼。</li>
+        <li><strong>新手与轻度首选：</strong>WestWorld（西部世界）提供开箱即用的一键客户端，NiceCloud（耐斯云）提供百兆低门槛套餐，适合预算敏感新手。</li>
+      </ul>
+    </div>
+
+    <!-- Transparent Methodology Box -->
+    <div class="bg-slate-100/70 border border-slate-200 rounded-xl p-5 mb-10 text-xs text-slate-600">
+      <div class="font-bold text-slate-800 text-sm mb-1">公开透明：综合评分权重计算公式</div>
+      <p class="leading-relaxed">
+        <strong>综合总分 (100%) = 稳定性得分 × 40% + 晚高峰速率得分 × 30% + 性价比单价得分 × 20% + 客服与工单响应 × 10%</strong><br />
+        稳定性依据 30 天 24 小时探针丢包率与在线率计算；晚高峰速率基于 20:00-23:00 4K 视频突发码率测算；未核实或存在异常波动的数据直接剔除。
+      </p>
+    </div>
+
+    <!-- Main Comparison Table -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-12 shadow-xs">
+      <div class="p-5 border-b border-slate-200 bg-slate-50/60 flex justify-between items-center">
+        <h2 class="font-bold text-slate-900 text-base">综合排行榜比对一览表</h2>
+        <span class="text-xs text-slate-500 font-mono">最后核验更新：2026-03-24</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase font-semibold">
+              <th class="py-3 px-4">排名</th>
+              <th class="py-3 px-4">品牌</th>
+              <th class="py-3 px-4">线路规格</th>
+              <th class="py-3 px-4">起步套餐</th>
+              <th class="py-3 px-4">稳定性分</th>
+              <th class="py-3 px-4">晚高峰分</th>
+              <th class="py-3 px-4">性价比分</th>
+              <th class="py-3 px-4 text-center">综合总评</th>
+              <th class="py-3 px-4 text-right">评测报告</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {rankedAirports.map((airport, idx) => (
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3.5 px-4 font-bold text-sm font-mono text-slate-900">
+                  <span class={`inline-block w-6 h-6 rounded text-center leading-6 ${
+                    idx === 0 ? 'bg-amber-100 text-amber-900 font-bold' :
+                    idx === 1 ? 'bg-slate-200 text-slate-800 font-bold' :
+                    idx === 2 ? 'bg-amber-50 text-amber-900' : 'text-slate-500'
+                  }`}>
+                    {idx + 1}
+                  </span>
+                </td>
+                <td class="py-3.5 px-4 font-bold text-slate-900 text-sm">
+                  <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+                  <div class="text-[11px] text-slate-500 font-normal">{airport.badge}</div>
+                </td>
+                <td class="py-3.5 px-4 text-slate-700">{airport.lineType}</td>
+                <td class="py-3.5 px-4 font-mono font-medium text-emerald-600">¥{airport.startingPrice} 起</td>
+                <td class="py-3.5 px-4 font-mono text-slate-700">{airport.metrics.stabilityScore}</td>
+                <td class="py-3.5 px-4 font-mono text-slate-700">{airport.metrics.peakPerformanceScore}</td>
+                <td class="py-3.5 px-4 font-mono text-slate-700">{airport.metrics.valueScore}</td>
+                <td class="py-3.5 px-4 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded-full font-bold bg-blue-100 text-brand-800 font-mono text-xs">
+                    {airport.metrics.overallScore.toFixed(1)}
+                  </span>
+                </td>
+                <td class="py-3.5 px-4 text-right space-x-2">
+                  <a href={`/review/${airport.slug}/`} class="text-brand-600 hover:text-brand-800 font-semibold underline">
+                    深度评测
+                  </a>
+                  <a href={`/airport/${airport.slug}/`} class="text-slate-600 hover:text-slate-900">
+                    档案
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- In-depth Airport Profile Cards -->
+    <div class="space-y-8 mb-12">
+      <h2 class="text-2xl font-bold text-slate-900">上榜品牌深度剖析与档案</h2>
+      {rankedAirports.map((airport, idx) => (
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+            <div>
+              <div class="text-xs font-bold text-brand-600 uppercase font-mono">Rank #{idx + 1}</div>
+              <h3 class="text-xl font-bold text-slate-900">
+                <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+              </h3>
+            </div>
+            <div class="text-xs text-slate-500">
+              数据核验：<span class="text-slate-800 font-medium">{airport.lastVerified}</span> · 状态：
+              <span class="text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded">
+                {airport.testStatus === 'tested' ? '编辑部实测' : '官方核验数据'}
+              </span>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 my-4 leading-relaxed">
+            {airport.description}
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-4">
+            <div class="bg-emerald-50/60 p-3 rounded-lg border border-emerald-100">
+              <span class="font-bold text-emerald-900">核心优势点：</span>
+              <ul class="list-disc list-inside text-emerald-800 mt-1 space-y-0.5">
+                {airport.advantages.map(adv => <li>{adv}</li>)}
+              </ul>
+            </div>
+            <div class="bg-amber-50/60 p-3 rounded-lg border border-amber-100">
+              <span class="font-bold text-amber-900">不足与注意事项：</span>
+              <ul class="list-disc list-inside text-amber-800 mt-1 space-y-0.5">
+                {airport.disadvantages.map(dis => <li>{dis}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-3 border-t border-slate-100 text-xs gap-3">
+            <div class="text-slate-600">
+              <strong>适合人群：</strong>{airport.suitableFor.join('、')}
+            </div>
+            <div class="flex gap-4 shrink-0">
+              <a href={`/compare/?a=${airport.id}`} class="text-slate-600 hover:text-brand-600 font-medium">加入比对 +</a>
+              <a href={`/airport/${airport.slug}/`} class="text-slate-700 hover:text-brand-600 font-medium">查看完整套餐 →</a>
+              <a href={`/review/${airport.slug}/`} class="text-brand-600 font-bold hover:text-brand-800 underline">阅读详细评测 →</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</BaseLayout>

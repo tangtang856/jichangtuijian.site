@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '博客文章', url: '/blog/' },
+  { name: post.data.title }
+];
+
+const postSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishDate,
+  dateModified: post.data.modifyDate || post.data.publishDate,
+  author: {
+    '@type': 'Organization',
+    name: post.data.author
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '机场推荐评测实验室',
+    url: 'https://jichangtuijian.site'
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://jichangtuijian.site/blog/${post.slug}/`
+  }
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | 机场推荐网`}
+  description={post.data.description}
+  canonical={`https://jichangtuijian.site/blog/${post.slug}/`}
+  type="article"
+  publishDate={post.data.publishDate}
+  modifyDate={post.data.modifyDate}
+  breadcrumbs={breadcrumbs}
+  schema={postSchema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Main Article (3 cols) -->
+      <article class="lg:col-span-3 bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+        
+        <header class="border-b border-slate-100 pb-6 mb-8">
+          <div class="flex items-center gap-2 mb-3 text-xs">
+            <span class="px-2.5 py-0.5 rounded bg-brand-50 text-brand-700 font-semibold border border-brand-200">
+              {post.data.category}
+            </span>
+            <span class="text-slate-400">·</span>
+            <time class="text-slate-500 font-mono">发布时间：{post.data.publishDate}</time>
+            {post.data.modifyDate && (
+              <>
+                <span class="text-slate-400">·</span>
+                <span class="text-emerald-700 font-mono">更新时间：{post.data.modifyDate}</span>
+              </>
+            )}
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            {post.data.title}
+          </h1>
+
+          <p class="text-xs sm:text-sm text-slate-500 mt-4 leading-relaxed bg-slate-50 p-4 rounded-lg border-l-4 border-brand-500">
+            <strong>摘要导读：</strong>{post.data.description}
+          </p>
+        </header>
+
+        <div class="prose-content max-w-article mx-auto">
+          <Content />
+        </div>
+
+        <footer class="mt-12 pt-6 border-t border-slate-200 text-xs">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-slate-500">文章标签：</span>
+              {post.data.tags.map(t => (
+                <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded">#{t}</span>
+              ))}
+            </div>
+            <div class="text-slate-500">
+              作者：<span class="font-medium text-slate-800">{post.data.author}</span>
+            </div>
+          </div>
+        </footer>
+
+      </article>
+
+      <!-- Sidebar (1 col) -->
+      <aside class="space-y-6">
+        
+        <!-- Ranking Box -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs text-xs">
+          <h3 class="font-bold text-slate-900 text-sm mb-3">🔥 核心榜单直达</h3>
+          <ul class="space-y-2.5">
+            <li><a href="/ranking/overall/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 2026 综合实力排行榜</a></li>
+            <li><a href="/ranking/value/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 高性价比梯子排行榜</a></li>
+            <li><a href="/recommend/premium/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 高端 IPLC 专线精选</a></li>
+            <li><a href="/recommend/budget/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 低预算平价机场优选</a></li>
+          </ul>
+        </div>
+
+        <!-- Guides Box -->
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs text-xs">
+          <h3 class="font-bold text-slate-900 text-sm mb-3">🛠️ 客户端配置指南</h3>
+          <ul class="space-y-2.5">
+            <li><a href="/guides/windows/" class="text-brand-600 hover:underline">Windows 配置教程</a></li>
+            <li><a href="/guides/android/" class="text-brand-600 hover:underline">Android 手机教程</a></li>
+            <li><a href="/guides/ios/" class="text-brand-600 hover:underline">iOS 小火箭教程</a></li>
+            <li><a href="/guides/macos/" class="text-brand-600 hover:underline">macOS 代理教程</a></li>
+          </ul>
+        </div>
+
+        <!-- Comparison Tool -->
+        <div class="bg-gradient-to-br from-slate-900 to-brand-900 text-white rounded-xl p-5 shadow-xs text-xs space-y-2">
+          <div class="font-bold text-sm">机场多维度比对</div>
+          <p class="text-slate-300">支持 2 ~ 4 家机场同时横向对比价格、节点与流媒体解锁能力。</p>
+          <a href="/compare/" class="inline-block mt-2 font-bold text-brand-300 hover:text-white underline">
+            打开对比工具 →
+          </a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</BaseLayout>

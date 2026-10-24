@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('glossary');
+  return terms.map((term) => ({
+    params: { slug: term.slug },
+    props: { term },
+  }));
+}
+
+export interface Props {
+  term: CollectionEntry<'glossary'>;
+}
+
+const { term } = Astro.props;
+const { Content } = await term.render();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '知识百科', url: '/glossary/' },
+  { name: term.data.term }
+];
+
+const termSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  name: term.data.term,
+  description: term.data.description,
+  inDefinedTermSet: 'https://jichangtuijian.site/glossary/'
+};
+---
+
+<BaseLayout
+  title={`${term.data.title} | 机场推荐网百科`}
+  description={term.data.description}
+  canonical={`https://jichangtuijian.site/glossary/${term.slug}/`}
+  breadcrumbs={breadcrumbs}
+  schema={termSchema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+      
+      <header class="border-b border-slate-100 pb-6 mb-8">
+        <div class="flex items-center gap-2 mb-2 text-xs">
+          <span class="px-2 py-0.5 rounded bg-brand-50 text-brand-700 font-bold border border-brand-200">
+            {term.data.category}
+          </span>
+          <span class="text-slate-400">·</span>
+          <time class="text-slate-500 font-mono">发布时间：{term.data.publishDate}</time>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          {term.data.title}
+        </h1>
+
+        <p class="text-xs sm:text-sm text-slate-500 mt-3 leading-relaxed bg-slate-50 p-4 rounded-lg border-l-4 border-brand-500">
+          <strong>名词概述：</strong>{term.data.description}
+        </p>
+      </header>
+
+      <div class="prose-content">
+        <Content />
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-slate-200 flex justify-between items-center text-xs">
+        <a href="/glossary/" class="text-slate-600 hover:text-brand-600 font-medium">← 返回百科词条列表</a>
+        <a href="/recommend/" class="text-brand-600 font-semibold hover:underline">浏览推荐机场专区 →</a>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

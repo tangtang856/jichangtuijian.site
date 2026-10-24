@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '关于本站与评测实验室使命 | 机场推荐网';
+const description = '了解机场推荐指南 (jichangtuijian.site) 的创办初衷、团队评测准则与网站使命。我们坚持客观真实、拒绝买榜刷分，为中文网民提供可信赖的科学上网指引。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '关于我们' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/about/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs prose-content">
+      
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">关于本站 (About Us)</h1>
+      <p class="text-sm text-slate-500 -mt-2">正式官方主域名：<code>https://jichangtuijian.site</code></p>
+
+      <h2>我们的创办初衷</h2>
+      <p>
+        在当今中文网络世界中，“翻墙机场”和“科学上网梯子”已经成为外贸从业人员、科研学术工作者、跨境开发者以及日常流媒体爱好者的刚需基础设施。
+      </p>
+      <p>
+        然而，由于行业缺乏公开透明的标准，搜索引擎与社交媒体上充斥着大量虚假的评测站：
+      </p>
+      <ul>
+        <li>为了追求高额佣金，向新手推荐毫无保障的“99 元终身套餐”，几周后商家卷款跑路；</li>
+        <li>拿白天闲时的千兆截图忽悠用户，隐瞒晚高峰 40% 的严重丢包率；</li>
+        <li>把普通的公网直连中转吹嘘为“高端全 IPLC 物理专线”，误导消费者。</li>
+      </ul>
+      <p>
+        <strong>机场推荐指南（jichangtuijian.site）</strong> 由数位长期关注跨境网络通信、分布式代理协议与网络安全的独立技术爱好者共同建立。我们的唯一目标是：<strong>用可核验的技术数据取代虚假推销，为中文用户提供一个真正专业、客观、严谨的资讯与决策参考门户。</strong>
+      </p>
+
+      <h2>我们的核心原则</h2>
+      <ol>
+        <li><strong>真实客观，拒绝付费刷榜：</strong> 排行榜评分由全天候探针丢包率、晚高峰实测与每 GB 真实单价加权计算产生，任何商业赞助均不能干涉排行榜的排序顺序。</li>
+        <li><strong>明确核验状态：</strong> 在所有机场档案与评测中，我们严格标注哪些属于“官方公开资费”，哪些属于“编辑部探针实测”，未经验证的数据明确标注为“尚未核实”。</li>
+        <li><strong>提倡月付安全观：</strong> 我们始终建议所有初次接触机场的用户坚持“月付优先”，帮助大家把试错成本控制在最低范围。</li>
+      </ol>
+
+      <h2>站点技术架构与透明度</h2>
+      <p>
+        本站基于 <strong>Astro 静态网页生成（SSG）</strong> 架构构建，依托全球高速边缘网络分发，全站不包含任何商业弹窗广告与追踪脚本，保障极致的浏览速度与用户隐私。
+      </p>
+
+      <h2>了解更多准则</h2>
+      <ul>
+        <li><a href="/editorial-policy/">查阅独立编辑政策与评测依据</a></li>
+        <li><a href="/disclaimer/">查阅免责声明与法律合规提示</a></li>
+        <li><a href="/contact/">与我们取得联系或反馈错误</a></li>
+      </ul>
+
+    </div>
+  </div>
+</BaseLayout>

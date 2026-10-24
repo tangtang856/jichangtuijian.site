@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { airports, getAirportsSortedByValue } from '../../../data/airports';
+
+const title = '高性价比机场推荐与便宜节点购买指南 - 低预算翻墙优选 (2026最新)';
+const description = '2026精选高性价比机场与便宜梯子节点推荐。测算每GB单价，评测10-20元月付平价节点，解析低预算翻墙避坑指南与防跑路实用技巧。';
+
+const valueAirports = getAirportsSortedByValue();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐', url: '/recommend/' },
+  { name: '性价比机场推荐' }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '高性价比机场推荐与便宜翻墙节点指南',
+  description: description,
+  author: {
+    '@type': 'Organization',
+    name: '机场推荐评测实验室'
+  },
+  datePublished: '2026-01-15',
+  dateModified: '2026-03-24'
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/recommend/budget/"
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Value & Budget Guide</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">高性价比机场推荐与便宜翻墙节点指南</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        “性价比”并不等于盲目追求几块钱一年的超低劣质节点。真正的性价比，是在保证基础连通率、不频繁断流和支持月付的前提下，提供尽可能高的带宽与充足的流量。本文整理了实测可靠的平价高性价比机场，并提供科学的单价测算方法。
+      </p>
+    </div>
+
+    <!-- Quick Formula Box -->
+    <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-6 mb-10">
+      <h2 class="text-base font-bold text-emerald-950 flex items-center gap-2">
+        <span>💡</span> 科学测算：如何计算机场的“真实性价比”？
+      </h2>
+      <p class="text-xs text-emerald-900 mt-2 leading-relaxed">
+        <strong>每 GB 真实成本 = 套餐实际月费 ÷ (月可用流量配额 ÷ 常用节点倍率)</strong><br />
+        警惕陷阱：部分低价机场虽然月付仅 5 元，但主力节点普遍采用 3.0 或 5.0 倍率，折算后实际可用流量大幅缩水；或者宣称百吉带宽但晚高峰丢包率超过 40%。建议优选每 GB 单价在 <strong>0.05 元 ~ 0.15 元</strong> 之间且无暗藏倍率的良心品牌。
+      </p>
+    </div>
+
+    <!-- List of High Value Airports -->
+    <div class="space-y-6 mb-12">
+      {valueAirports.map((airport, index) => {
+        const monthlyPlan = airport.plans.find(p => p.period === 'month') || airport.plans[0];
+        const costPerGb = monthlyPlan ? (monthlyPlan.price / monthlyPlan.trafficGB).toFixed(3) : '0.00';
+        return (
+          <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 hover:shadow-sm transition-shadow">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xs font-bold font-mono">
+                    性价比 Top {index + 1}
+                  </span>
+                  <span class="text-xs text-slate-500 font-medium">{airport.lineType}</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mt-1">
+                  <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">{airport.tagline}</p>
+              </div>
+
+              <div class="text-right sm:border-l sm:border-slate-100 sm:pl-6 shrink-0">
+                <div class="text-xs text-slate-500">每 GB 综合成本</div>
+                <div class="text-2xl font-black text-emerald-600 font-mono">¥{costPerGb}<span class="text-xs font-normal text-slate-500">/GB</span></div>
+                <div class="text-xs text-slate-600">起步 ¥{airport.startingPrice} 元</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 text-xs">
+              <div class="space-y-1 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <span class="font-semibold text-slate-700">推荐优势：</span>
+                <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                  {airport.advantages.slice(0, 3).map(adv => <li>{adv}</li>)}
+                </ul>
+              </div>
+              <div class="space-y-1 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <span class="font-semibold text-slate-700">注意事项：</span>
+                <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                  {airport.disadvantages.slice(0, 2).map(dis => <li>{dis}</li>)}
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 text-xs">
+              <div class="text-slate-500">
+                适合：<span class="text-slate-800 font-medium">{airport.suitableFor.join(' / ')}</span>
+              </div>
+              <div class="flex gap-3">
+                <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">查看套餐详情 →</a>
+                <a href={`/review/${airport.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 underline">独立评测报告 →</a>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Educational section on avoiding budget traps -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      <h2>低预算选购平价机场的 4 大黄金原则</h2>
+      <ol>
+        <li><strong>首选月付周期：</strong>切勿轻信所谓的“99 元终身套餐”或超长 3 年付优惠。许多低质跑路机场正是通过超长周期套餐快速集资，随后关站跑路。坚持月付或最多季付，试错成本永远可控。</li>
+        <li><strong>确认是否包含常用节点：</strong>香港、日本、新加坡和美国是最常用的 4 个核心出口。低价套餐如果只提供延迟高达 400ms 的冷门小国家直连，日常体验会大打折扣。</li>
+        <li><strong>关注晚高峰连通率而非空闲测速：</strong>白天测速千兆跑满并不稀奇，真正的考验在每天 20:00 - 23:00。选择具备 BGP 智能入口的中继机场，能够有效缓解国际出口波动。</li>
+        <li><strong>备用节点机制：</strong>日常主力使用性价比机场，但建议在手机中常备一个一次性购买的不限时按量计费套餐，一旦主力网络遇突发故障可随时无缝应急。</li>
+      </ol>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = '苹果手机iOS翻墙教程 - Shadowrocket小火箭与Loon配置 (2026最新) | 机场推荐网';
+const description = 'iOS苹果手机科学上网配置教程。手把手教你获取外区美区Apple ID、在App Store下载Shadowrocket小火箭或Loon、扫码一键导入机场订阅及分流规则配置。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '教程中心', url: '/guides/' },
+  { name: 'iOS 教程' }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'iOS平台科学上网客户端使用与节点导入教程',
+  description: description,
+  datePublished: '2026-01-15',
+  dateModified: '2026-03-24'
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/guides/ios/"
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">iOS Guide</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">iOS平台科学上网客户端使用与节点导入教程</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        在苹果 iPhone / iPad 上，由于中国区 App Store 下架了网络代理工具，你需要登录境外地区（如美区、日区、港区）的 Apple ID 来下载专用的网络扩展应用。首选为功能强大、性价比极高的 <strong>Shadowrocket（俗称“小火箭”）</strong>，进阶用户可选用 <strong>Loon</strong> 或 <strong>Surge</strong>。
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      
+      <h2>前置步骤：如何在 App Store 下载小火箭？</h2>
+      <p>
+        Shadowrocket 在美区 App Store 售价为 2.99 美元。获取途径主要有以下两种：
+      </p>
+      <ol>
+        <li><strong>自行注册美区 Apple ID（推荐）：</strong>在苹果官方网页端免费注册美区账号，通过购买美区 Apple 礼品卡充值后在 App Store 自行购买。此方法最安全独立。</li>
+        <li><strong>使用合租或机场提供的公共账号：</strong>很多优质机场（如 <a href="/airport/flyingbird/">FlyingBird 飞鸟云</a> 或 <a href="/airport/tag-internet/">TAG Internet</a>）会在用户后台免费提供已购小火箭的公共 Apple ID 供会员临时登录下载。</li>
+      </ol>
+      <blockquote>
+        <strong>安全警告：</strong>在登录任何第三方 Apple ID 时，<strong>切勿在 iPhone 系统“设置”中登录 iCloud</strong>！务必只在 <strong>App Store 商店应用内部</strong>登录，下载完成后立即退回自己的私人账号。
+      </blockquote>
+
+      <h2>核心步骤：导入机场订阅到 Shadowrocket</h2>
+      <ol>
+        <li>打开 Shadowrocket 应用。</li>
+        <li><strong>方法 A（扫码秒导）：</strong>点击右上角扫描图标，扫描机场控制台生成的“Shadowrocket 专属二维码”，应用会自动识别并拉取全部节点列表。</li>
+        <li><strong>方法 B（链接添加）：</strong>点击右上角“+”号，类型选择 <strong>“Subscribe（订阅）”</strong>，在 URL 中粘贴机场订阅链接，备注填入机场名称后点击右上角“完成”。</li>
+        <li>在节点列表中，轻点选中任意一个低延迟节点（前面出现黄色或橙色圆点标记）。</li>
+        <li>将全局路由设置为 <strong>“配置（Config）”</strong>（确保仅境外受限网址走代理，国内流量直连）。</li>
+        <li>打开顶部的连接主开关，初次连接系统会弹出“添加 VPN 配置”授权，输入锁屏密码同意即可。</li>
+      </ol>
+
+      <h2>进阶使用：自动更新订阅与分流规则</h2>
+      <ul>
+        <li><strong>开启按需连接：</strong>在小火箭“设置”中开启“按需连接”，手机锁屏或切换 WiFi/蜂窝数据时系统会自动维护网络隧道，无需反复手动点击开关。</li>
+        <li><strong>订阅自动更新：</strong>进入设置 → 订阅，开启“打开时更新”，每次启动小火箭时都会自动向机场服务器同步最新的可用节点 IP。</li>
+      </ul>
+
+      <h2>相关推荐</h2>
+      <ul>
+        <li><a href="/recommend/beginner/">新手小白省心机场推荐：后台自带外区账号与保姆级小火箭指引</a></li>
+        <li><a href="/recommend/streaming/">奈飞/YouTube 4K 流媒体专线节点推荐</a></li>
+      </ul>
+
+    </div>
+  </div>
+</BaseLayout>

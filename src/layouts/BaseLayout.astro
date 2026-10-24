@@ -1,0 +1,61 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs, { type BreadcrumbItem } from '../components/Breadcrumbs.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  publishDate?: string;
+  modifyDate?: string;
+  noindex?: boolean;
+  schema?: Record<string, any> | Array<Record<string, any>>;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  type = 'website',
+  publishDate,
+  modifyDate,
+  noindex = false,
+  schema,
+  breadcrumbs,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      type={type}
+      publishDate={publishDate}
+      modifyDate={modifyDate}
+      noindex={noindex}
+      schema={schema}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+    <Header />
+    
+    <main class="flex-grow">
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      )}
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

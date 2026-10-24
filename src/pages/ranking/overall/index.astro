@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAirportsSortedByOverall } from '../../../data/airports';
+
+const title = '2026综合实力机场排行榜 - 优质VPN机场与节点实测 | 机场推荐网';
+const description = '2026综合实力机场排行榜。评测团队公开测试标准与量化加权分，严选优质VPN机场节点，涵盖TAG Internet、AmyTelecom、飞鸟云等品牌深度实测。';
+
+const rankedAirports = getAirportsSortedByOverall();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场排行榜', url: '/ranking/' },
+  { name: '综合实力榜' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/ranking/overall/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Overall Top Rankings</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">2026 综合实力机场排行榜（已核实品牌）</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        综合排行榜综合考量服务商的物理专线带宽成本、长期网络稳定性、客户服务以及真实用户口碑。评分标准公开，无付费买榜与虚假刷分。
+      </p>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-sm">
+      <a href="/ranking/overall/" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">综合实力榜</a>
+      <a href="/ranking/value/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">性价比榜 (按每GB单价)</a>
+      <a href="/ranking/budget/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">平价便宜榜 (20元以内)</a>
+      <a href="/ranking/stable/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">高稳定性榜 (专线专区)</a>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-12">
+      <div class="p-5 border-b border-slate-200 bg-slate-50/60">
+        <h2 class="font-bold text-slate-900">按综合实力加权排序</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold">
+              <th class="py-3 px-4">排名</th>
+              <th class="py-3 px-4">品牌</th>
+              <th class="py-3 px-4">线路类型</th>
+              <th class="py-3 px-4">起步价格</th>
+              <th class="py-3 px-4 text-center">综合评分</th>
+              <th class="py-3 px-4">适合人群</th>
+              <th class="py-3 px-4 text-right">操作</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {rankedAirports.map((airport, idx) => (
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="py-3 px-4 font-mono font-bold text-sm">
+                  #{idx + 1}
+                </td>
+                <td class="py-3 px-4 font-bold text-slate-900">
+                  <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+                </td>
+                <td class="py-3 px-4 text-slate-700">{airport.lineType}</td>
+                <td class="py-3 px-4 font-mono font-semibold text-emerald-600">¥{airport.startingPrice} 起</td>
+                <td class="py-3 px-4 text-center">
+                  <span class="inline-block px-2.5 py-0.5 rounded-full font-bold bg-blue-100 text-brand-800 font-mono text-xs">
+                    {airport.metrics.overallScore.toFixed(1)}
+                  </span>
+                </td>
+                <td class="py-3 px-4 text-slate-600 max-w-xs truncate">{airport.suitableFor[0]}</td>
+                <td class="py-3 px-4 text-right space-x-2">
+                  <a href={`/review/${airport.slug}/`} class="text-brand-600 font-semibold underline">评测</a>
+                  <a href={`/airport/${airport.slug}/`} class="text-slate-600">详情</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

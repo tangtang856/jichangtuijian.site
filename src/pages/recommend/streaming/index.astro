@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { airports } from '../../../data/airports';
+
+const title = '奈飞Netflix/Disney+/YouTube 4K流媒体解锁机场推荐 (2026最新) | 机场推荐网';
+const description = '2026各大流媒体（Netflix 奈飞跨区、Disney+、YouTube Premium、HBO Max）专用解锁机场节点推荐。实测4K/8K视频秒开带宽，杜绝看剧频繁卡顿转圈。';
+
+const streamingAirports = airports.filter(a => a.streamingSupport && a.streamingSupport.length > 2);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐', url: '/recommend/' },
+  { name: '流媒体解锁推荐' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/recommend/streaming/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">4K Streaming Unblock</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">4K 流媒体解锁机场推荐与分流评测</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        观看境外流媒体核心有两个门槛：一是<strong>版权地区解锁</strong>（如奈飞 Netflix 非自制剧集、Disney+、BBC iPlayer 等严格封禁数据中心 IP）；二是<strong>大带宽与吞吐稳定性</strong>，确保 4K/8K 超高清码率下拖动进度条不缓冲、不降画质。
+      </p>
+    </div>
+
+    <!-- Streaming Test Checklist -->
+    <div class="bg-rose-50/60 border border-rose-200 rounded-xl p-6 mb-10 text-xs text-rose-950">
+      <h2 class="text-base font-bold text-rose-950 mb-2">
+        📺 流媒体机场选购实测 3 大要点
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+        <div class="bg-white/80 p-3 rounded-lg border border-rose-100">
+          <strong class="block text-slate-900 mb-1">原生解锁 vs DNS 劫持解锁</strong>
+          原生 IP 解锁稳定性远高于通过 DNS 代理重定向的软解，避免平台突然大面积失效黑屏。
+        </div>
+        <div class="bg-white/80 p-3 rounded-lg border border-rose-100">
+          <strong class="block text-slate-900 mb-1">单线程突发带宽 &gt; 50Mbps</strong>
+          4K HDR / Dolby Vision 视频通常需要 30-50Mbps 持续码率，晚高峰单线程带宽不足会导致频繁降清。
+        </div>
+        <div class="bg-white/80 p-3 rounded-lg border border-rose-100">
+          <strong class="block text-slate-900 mb-1">多国家热门区覆盖</strong>
+          重点包含香港（中文字幕库丰富）、日本（动画新番）、新加坡与美区（剧集库存最大）。
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommended Streaming Airports -->
+    <div class="space-y-6 mb-12">
+      {streamingAirports.map((airport) => (
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 hover:shadow-sm transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 text-xs font-bold">
+                  4K 流媒体特调节点
+                </span>
+                <span class="text-xs text-slate-500">{airport.lineType}</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mt-1">
+                <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">{airport.tagline}</p>
+            </div>
+            <div class="text-right sm:border-l sm:border-slate-100 sm:pl-6 shrink-0">
+              <div class="text-xs text-slate-500">起步价格</div>
+              <div class="text-2xl font-bold text-rose-600 font-mono">¥{airport.startingPrice} <span class="text-xs text-slate-500">起</span></div>
+            </div>
+          </div>
+
+          <div class="my-4 text-xs">
+            <span class="font-semibold text-slate-700">流媒体平台支持情况：</span>
+            <div class="flex flex-wrap gap-2 mt-1.5">
+              {airport.streamingSupport?.map(st => (
+                <span class="bg-rose-50 text-rose-700 px-2.5 py-1 rounded font-medium border border-rose-100">
+                  🎬 {st}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 text-xs border-t border-slate-100">
+            <span class="text-slate-500">地区节点：{airport.regions.slice(0, 5).join('、')}</span>
+            <div class="flex gap-3">
+              <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">套餐与带宽详情 →</a>
+              <a href={`/review/${airport.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 underline">4K测速评测报告 →</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Related Guide Link -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      <h2>流媒体使用避坑指南</h2>
+      <p>想要了解更多流媒体解锁原理解析与常见报错排查，请参阅：</p>
+      <ul>
+        <li><a href="/blog/stream-unlocking-guide-netflix-disney/">奈飞 Netflix / Disney+ 跨区解锁原理与 DNS 原生 IP 选购实测</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

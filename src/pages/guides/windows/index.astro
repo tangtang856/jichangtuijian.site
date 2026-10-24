@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'Windows系统Clash Verge与Sing-box使用教程与节点导入 (2026最新) | 机场推荐网';
+const description = 'Windows平台科学上网保姆级配置教程。手把手教你安装Clash Verge Rev与Sing-box客户端、导入机场节点订阅链接、开启TUN虚拟网卡及设置开机自启。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '教程中心', url: '/guides/' },
+  { name: 'Windows 教程' }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Windows平台客户端配置与节点导入保姆级教程',
+  description: description,
+  datePublished: '2026-01-10',
+  dateModified: '2026-03-24'
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/guides/windows/"
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Windows Guide</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Windows平台客户端配置与节点导入保姆级教程</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        在 Windows 10/11 系统中，目前最稳定、活跃且受社区广泛推荐的图形客户端为 <strong>Clash Verge Rev</strong>（基于开源 Clash Meta/Mihomo 内核）与 <strong>Sing-box GUI</strong>。以下以 Clash Verge Rev 为例，演示从下载到正常上网的完整流程。
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      
+      <h2>准备工作：获取节点订阅</h2>
+      <p>
+        在配置客户端前，你必须已经拥有一个可用的机场服务。登录你的机场用户控制台，找到 <strong>“一键订阅”</strong> 或 <strong>“复制 Clash 订阅链接”</strong>，复制该 URL 备用。（如果你还没有合适的机场，可以先参考我们的 <a href="/recommend/budget/">高性价比机场推荐</a> 或 <a href="/ranking/overall/">2026 综合实力排行榜</a>）。
+      </p>
+
+      <h2>步骤一：下载与安装客户端</h2>
+      <ol>
+        <li>访问 Clash Verge Rev 官方 GitHub Releases 发布页（推荐通过官方开源仓库下载，避免百度搜索带有流氓插件的钓鱼站）。</li>
+        <li>选择适合你电脑架构的安装包（64 位 Windows 用户通常下载 <code>Clash.Verge_x.x.x_x64-setup.exe</code>）。</li>
+        <li>双击运行安装包，按照向导完成安装并启动软件。初次启动若弹出 Windows 防火墙网络访问提示，请全部勾选并点击“允许访问”。</li>
+      </ol>
+
+      <h2>步骤二：导入机场订阅链接</h2>
+      <ol>
+        <li>在 Clash Verge Rev 左侧菜单栏中，点击 <strong>“订阅（Profiles）”</strong> 标签页。</li>
+        <li>在顶部的输入框中粘贴刚刚从机场后台复制的订阅 URL。</li>
+        <li>点击右侧的 <strong>“导入（Import）”</strong> 按钮。软件将自动从云端拉取最新的节点列表。</li>
+        <li>导入成功后，鼠标右键点击该配置卡片，选择 <strong>“设为激活（Activate）”</strong>。</li>
+      </ol>
+
+      <h2>步骤三：选择节点与开启系统代理</h2>
+      <ol>
+        <li>点击左侧的 <strong>“代理（Proxies）”</strong> 标签页。</li>
+        <li>顶部模式选择 <strong>“规则（Rule）”</strong>（强烈建议使用规则模式，防止国内微信、网易云等应用浪费海外节点流量）。</li>
+        <li>在 <code>PROXY</code> 或 <code>节点选择</code> 分组中，点击延迟测速按钮（通常是一个闪电或波浪图标），挑选一个延迟低且状态正常的节点（如香港、日本或新加坡节点）。</li>
+        <li>点击左侧 <strong>“设置（Settings）”</strong>，将 <strong>“系统代理（System Proxy）”</strong> 的开关置为开启状态。</li>
+        <li>打开浏览器，访问 <code>google.com</code> 或 <code>youtube.com</code>，若能顺畅打开即代表配置成功！</li>
+      </ol>
+
+      <h2>进阶优化：开启 TUN 模式接管全局流量</h2>
+      <p>
+        很多游戏客户端、Git 命令行或特定桌面应用不走浏览器的 HTTP 代理协议。此时推荐开启 TUN 模式：
+      </p>
+      <ul>
+        <li>在“设置”中找到 <strong>“Tun 模式（Tun Mode）”</strong>。</li>
+        <li>点击开启后，系统可能会提示安装虚拟网卡服务（Service Mode），点击授权允许安装即可。开启后，电脑上所有网络数据都将由内核进行智能分流。</li>
+      </ul>
+
+      <h2>常见故障排除 FAQ</h2>
+      <blockquote>
+        <strong>问：导入订阅时提示“Network Error”或下载失败？</strong><br />
+        答：部分宽带网络对未经代理的订阅域名存在 DNS 污染。解决方法：在手机上挂热点重试，或者在浏览器中直接打开订阅链接下载 YAML 配置文件，随后在客户端中选择“本地文件导入”。
+      </blockquote>
+      <blockquote>
+        <strong>问：网页打不开，但微信能正常发消息？</strong><br />
+        答：通常是因为节点延迟过高或已失效。请进入“代理”页面重新测速，切换为另一个绿色低延迟节点。
+      </blockquote>
+
+    </div>
+  </div>
+</BaseLayout>

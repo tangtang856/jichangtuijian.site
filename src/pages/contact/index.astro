@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = '联系方式与错误反馈通道 | 机场推荐网';
+const description = '联系机场推荐指南 (jichangtuijian.site) 评测实验室。提供资料纠错、评测建议、商务咨询与合规反馈通道。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '联系我们' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/contact/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs prose-content">
+      
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">联系方式与反馈</h1>
+      <p class="text-sm text-slate-500 -mt-2">我们欢迎所有客观的技术探讨、数据纠错与体验反馈。</p>
+
+      <h2>常规联系方式</h2>
+      <ul>
+        <li><strong>电子邮箱：</strong> <code>contact@jichangtuijian.site</code>（通常在 1-2 个工作日内回复）</li>
+        <li><strong>GitHub 开源反馈：</strong> <a href="https://github.com/tangtang856/jichangtuijian.site" target="_blank" rel="noopener noreferrer">github.com/tangtang856/jichangtuijian.site</a>（可在 Issues 中提交文档排版与失效链接反馈）</li>
+      </ul>
+
+      <h2>服务商数据核验与更新须知</h2>
+      <p>
+        如果你是机场服务商的运维管理人员，发现本站展示的官方资费、节点协议或测试状态存在滞后或信息偏差：
+      </p>
+      <ul>
+        <li>请使用官方域名企业邮箱发送邮件至 <code>contact@jichangtuijian.site</code>。</li>
+        <li>邮件中请附带官网公示链接、变更证明以及最新的公开套餐文档。</li>
+        <li>编辑部将在核对无误后的 48 小时内更新前台档案。</li>
+      </ul>
+
+      <h2>关于商业合作与收录声明</h2>
+      <p>
+        为了保障广大中文读者的利益与网站信誉，我们执行极其严格的收录审核：
+      </p>
+      <ul>
+        <li>新上线运营未满 1 年、且未经验证的新品牌，本站一律不予收录。</li>
+        <li>存在虚假宣传“终身免费”、“永久 99 元”、或在社区有多次恶意失联跑路争议的品牌，永久列入黑名单。</li>
+        <li>任何付费买榜或要求虚构评分的合作请求将被直接拒收。</li>
+      </ul>
+
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,29 @@
+Keyword,Intent,Target URL,Page Type,Priority,Title,H1
+机场推荐,Transactional/Informational,https://jichangtuijian.site/,Homepage,High,2026精选中文机场推荐与梯子节点测评指南 | 科学上网资讯门户,2026 专业机场推荐与高速梯子节点测评
+性价比机场,Commercial,https://jichangtuijian.site/recommend/budget/,Category,High,高性价比机场推荐与便宜节点购买指南 - 低预算翻墙优选,高性价比机场推荐与便宜翻墙节点指南
+梯子推荐,Commercial/Informational,https://jichangtuijian.site/recommend/,Category,High,稳定好用的梯子推荐与翻墙软件节点选购指南,全场景翻墙梯子推荐与网络节点选购指南
+机场节点,Informational/Commercial,https://jichangtuijian.site/recommend/stable/,Category,High,稳定高速机场节点推荐 - IPLC专线与BGP中继节点评测,稳定高速机场节点推荐与线路解析
+vpn,Informational,https://jichangtuijian.site/blog/vpn-vs-airport-proxy-comparison/,Article,High,VPN与机场节点有什么区别？原理对比与使用场景选择,VPN与机场代理节点全方位对比与选择指南
+vpn机场,Commercial/Informational,https://jichangtuijian.site/ranking/overall/,Ranking,High,2026综合实力机场排行榜 - 优质VPN机场与节点实测,2026 综合实力机场排行榜（已核实品牌）
+vpn节点,Technical/Informational,https://jichangtuijian.site/guides/,Guide,Medium,科学上网节点客户端配置指南 - Windows/Android/iOS/macOS,全平台翻墙客户端与节点配置详细教程
+vpn推荐,Commercial,https://jichangtuijian.site/ranking/value/,Ranking,High,高性价比梯子与VPN机场排行榜 - 每GB单价测算与选购建议,高性价比梯子与VPN机场排行榜
+高端专线机场,Commercial,https://jichangtuijian.site/recommend/premium/,Category,Medium,高端IPLC专线机场推荐 - 晚高峰不卡顿/高SLA稳定保障,高端IPLC专线机场推荐
+新手入门机场,Informational/Commercial,https://jichangtuijian.site/recommend/beginner/,Category,Medium,新手友好型机场推荐 - 一键导入与保姆级配置服务,新手友好型机场推荐与零门槛上手指南
+AI服务机场推荐,Commercial/Informational,https://jichangtuijian.site/recommend/ai/,Category,Medium,ChatGPT/Claude/Gemini AI专属机场节点推荐与原生IP分流,ChatGPT与Claude专属AI机场节点推荐
+流媒体解锁机场,Commercial/Informational,https://jichangtuijian.site/recommend/streaming/,Category,Medium,奈飞Netflix/Disney+/YouTube 4K流媒体解锁机场推荐,4K流媒体解锁机场推荐与分流评测
+低预算便宜机场排行,Commercial,https://jichangtuijian.site/ranking/budget/,Ranking,Medium,平价便宜机场排行榜 - 10元以下月付与轻度翻墙精选,低预算平价机场排行榜
+稳定性机场排行榜,Commercial,https://jichangtuijian.site/ranking/stable/,Ranking,Medium,2026最稳定机场排行榜 - 晚高峰抗封锁与SLA专线评测,最稳定机场排行榜（专线与企业级中继）
+机场横向对比工具,Tool,https://jichangtuijian.site/compare/,Tool,High,多品牌机场在线横向参数对比工具 - 价格/流量/线路直观比对,机场多维度横向参数对比工具
+Windows翻墙教程,Guide,https://jichangtuijian.site/guides/windows/,Guide,High,Windows系统Clash Verge与Sing-box使用教程与节点导入,Windows平台客户端配置与节点导入保姆级教程
+Android翻墙教程,Guide,https://jichangtuijian.site/guides/android/,Guide,High,安卓手机翻墙教程 - Clash/v2rayNG/Sing-box客户端配置,Android平台翻墙软件配置与节点使用教程
+iOS翻墙教程,Guide,https://jichangtuijian.site/guides/ios/,Guide,High,苹果手机iOS翻墙教程 - Shadowrocket小火箭与Loon配置,iOS平台科学上网客户端使用与节点导入教程
+macOS翻墙教程,Guide,https://jichangtuijian.site/guides/macos/,Guide,High,Mac电脑科学上网配置指南 - Clash Verge与Sing-box Mac版教程,macOS平台翻墙客户端安装与节点配置教程
+翻墙协议对比,Technical,https://jichangtuijian.site/blog/proxy-protocols-ss-trojan-vless-hysteria2/,Article,Medium,Shadowsocks/Trojan/VLESS/Hysteria2协议深度对比与选型建议,主流代理协议深度对比：SS、Trojan、VLESS与Hysteria 2
+IPLC与BGP线路解析,Technical,https://jichangtuijian.site/blog/iplc-iepl-bgp-transit-explained/,Article,Medium,IPLC专线、IEPL与BGP中继区别科普 - 机场线路选购指南,IPLC专线、IEPL与BGP中继节点全解析
+AI分流报错排查,Technical,https://jichangtuijian.site/blog/how-to-fix-chatgpt-claude-ip-blocked/,Article,Medium,访问ChatGPT/Claude提示IP封禁？机场分流规则与原生IP排查,ChatGPT与Claude提示访问受限的排查与分流解决方案
+4K流媒体解锁指南,Technical,https://jichangtuijian.site/blog/stream-unlocking-guide-netflix-disney/,Article,Medium,奈飞Netflix/Disney+ 4K跨区解锁与DNS解锁检测方法,流媒体跨区解锁原理与DNS/原生IP选购指南
+IPLC专线术语,Glossary,https://jichangtuijian.site/glossary/iplc-iepl/,Glossary,Low,什么是IPLC专线与IEPL专线？网络定义与优缺点,百科：IPLC与IEPL专线网络
+BGP中继线路术语,Glossary,https://jichangtuijian.site/glossary/bgp-transit/,Glossary,Low,什么是BGP中继线路？机场中转节点原理详解,百科：BGP中继网络与入口优化
+规则分流术语,Glossary,https://jichangtuijian.site/glossary/rule-based-routing/,Glossary,Low,什么是规则分流与TUN模式？国内免流与国外加速原理,百科：规则分流与虚拟网卡TUN模式
+协议混淆伪装术语,Glossary,https://jichangtuijian.site/glossary/tls-reality-obfs/,Glossary,Low,什么是TLS伪装与VLESS Reality协议？抗封锁原理解析,百科：TLS混淆与Reality无证书伪装
+倍率流量术语,Glossary,https://jichangtuijian.site/glossary/traffic-multiplier/,Glossary,Low,机场节点倍率是什么意思？流量计费折算规则与避坑,百科：机场节点流量倍率与扣费机制

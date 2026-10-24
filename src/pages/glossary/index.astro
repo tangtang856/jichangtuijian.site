@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const title = '网络知识与翻墙术语百科大全 | 机场推荐网';
+const description = '科学上网、网络代理与机场专业术语知识百科。科普IPLC专线、BGP中转、规则分流、TUN模式、TLS混淆与流量倍率机制，扫清一切技术盲区。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '知识百科' }
+];
+
+const allTerms = await getCollection('glossary');
+const sortedTerms = allTerms.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/glossary/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-10">
+      <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">Glossary</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">网络知识与翻墙术语百科</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        告别行业黑话与虚假营销概念。我们整理了关于网络代理、加密协议、物理线路与客户端分流的核心专有名词，带你彻底理解背后的技术机制。
+      </p>
+    </div>
+
+    <!-- Terms Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      {sortedTerms.map((term) => (
+        <a
+          href={`/glossary/${term.slug}/`}
+          class="bg-white p-6 rounded-xl border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all group flex flex-col justify-between"
+        >
+          <div>
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">
+                {term.data.category}
+              </span>
+              <span class="text-slate-400 font-mono text-[11px]">{term.data.publishDate}</span>
+            </div>
+
+            <h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+              {term.data.term}
+            </h2>
+
+            <p class="text-xs text-slate-500 mt-2 line-clamp-3 leading-relaxed">
+              {term.data.description}
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-brand-600">
+            <span>阅读完整词条定义</span>
+            <span>→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

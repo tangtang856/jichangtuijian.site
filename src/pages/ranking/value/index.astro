@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAirportsSortedByValue } from '../../../data/airports';
+
+const title = '高性价比梯子与VPN机场排行榜 - 每GB单价测算与选购建议 (2026最新)';
+const description = '2026高性价比梯子与VPN机场排行榜。全网首创每GB实际可用流量成本精确计算，剔除虚高倍率与虚假宣传，帮助用户以最低成本选购最值翻墙节点。';
+
+const valueAirports = getAirportsSortedByValue();
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场排行榜', url: '/ranking/' },
+  { name: '高性价比排行榜' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/ranking/value/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Unit Cost Rankings</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">高性价比梯子与VPN机场排行榜</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        很多用户选购梯子只看“月付只要几块钱”，却忽略了套餐只给 10GB 流量或者主力节点高达 3 倍率。真正科学的性价比评判，是<strong>计算每 1GB 实际可用流量的折合单价</strong>。
+      </p>
+    </div>
+
+    <!-- Sub Navigation -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-slate-200 text-sm">
+      <a href="/ranking/overall/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">综合实力榜</a>
+      <a href="/ranking/value/" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">性价比榜 (按每GB单价)</a>
+      <a href="/ranking/budget/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">平价便宜榜 (20元以内)</a>
+      <a href="/ranking/stable/" class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium">高稳定性榜 (专线专区)</a>
+    </div>
+
+    <!-- Calculation Rules -->
+    <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-5 mb-8 text-xs text-emerald-950">
+      <div class="font-bold text-sm mb-1">📐 性价比测算规则说明</div>
+      <ul class="list-disc list-inside space-y-1">
+        <li>严格基于<strong>月付常规基础套餐</strong>进行标准化计算，不混淆年付促销折扣与不限时一次性计费。</li>
+        <li>以主流 1.0 倍率标准节点为基准，实际可用流量 = 套餐标称流量 ÷ 平均节点倍率。</li>
+        <li>未核实套餐与非公开资费不参与自动排序。</li>
+      </ul>
+    </div>
+
+    <!-- Value Ranking Table -->
+    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden mb-12 shadow-xs">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase font-semibold">
+              <th class="py-3 px-4">性价比排名</th>
+              <th class="py-3 px-4">品牌</th>
+              <th class="py-3 px-4">月套餐价格</th>
+              <th class="py-3 px-4">月流量配额</th>
+              <th class="py-3 px-4 text-emerald-700 font-bold">每 GB 真实单价</th>
+              <th class="py-3 px-4">线路规格</th>
+              <th class="py-3 px-4 text-right">评测</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {valueAirports.map((airport, idx) => {
+              const plan = airport.plans.find(p => p.period === 'month') || airport.plans[0];
+              const costPerGb = plan ? (plan.price / plan.trafficGB).toFixed(3) : '0.00';
+              return (
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="py-3.5 px-4 font-mono font-bold text-sm">
+                    <span class={`inline-block w-6 h-6 rounded text-center leading-6 ${
+                      idx === 0 ? 'bg-emerald-100 text-emerald-900 font-bold' :
+                      idx === 1 ? 'bg-emerald-50 text-emerald-800 font-bold' : 'text-slate-600'
+                    }`}>
+                      #{idx + 1}
+                    </span>
+                  </td>
+                  <td class="py-3.5 px-4 font-bold text-slate-900">
+                    <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+                  </td>
+                  <td class="py-3.5 px-4 font-mono font-medium">¥{plan.price} / {plan.period === 'quarter' ? '季' : '月'}</td>
+                  <td class="py-3.5 px-4 font-mono">{plan.trafficGB} GB</td>
+                  <td class="py-3.5 px-4 font-mono font-bold text-emerald-600 text-sm">
+                    ¥{costPerGb} <span class="text-[11px] font-normal text-slate-500">/GB</span>
+                  </td>
+                  <td class="py-3.5 px-4 text-slate-600">{airport.lineType}</td>
+                  <td class="py-3.5 px-4 text-right">
+                    <a href={`/review/${airport.slug}/`} class="text-brand-600 font-medium hover:underline">
+                      查看评测 →
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

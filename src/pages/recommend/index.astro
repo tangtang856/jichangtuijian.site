@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { airports } from '../../data/airports';
+
+const title = '全场景翻墙梯子推荐与网络节点选购指南 (2026最新) | 机场推荐网';
+const description = '根据预算、线路类型、使用场景分类精选的机场节点推荐。包含性价比平价梯子、高端IPLC专线、新手友好型一键连接及ChatGPT与4K流媒体专用节点评测。';
+
+const categories = [
+  {
+    title: '高性价比 / 低预算机场',
+    slug: 'budget',
+    icon: '💰',
+    description: '月付 10 - 20 元平价首选，大流量配额与低每 GB 单价，适合学生党与轻度科学上网。',
+    link: '/recommend/budget/'
+  },
+  {
+    title: '高端 IPLC / IEPL 专线',
+    slug: 'premium',
+    icon: '🚀',
+    description: '全内网专线不过公网墙，晚高峰 0 丢包超低延迟，跨境远程办公与跨国会议首选。',
+    link: '/recommend/premium/'
+  },
+  {
+    title: '新手入门友好型',
+    slug: 'beginner',
+    icon: '🌱',
+    description: '零门槛傻瓜一键导入，跨平台专属客户端与保姆级图文教程，小白省心上手。',
+    link: '/recommend/beginner/'
+  },
+  {
+    title: '稳定性与抗封锁优先',
+    slug: 'stable',
+    icon: '⚓',
+    description: '多入口 BGP 智能容灾与高防冗余，历经敏感期洗礼，坚挺在线拒绝频繁失联。',
+    link: '/recommend/stable/'
+  },
+  {
+    title: 'AI 专属 / 原生住宅 IP',
+    slug: 'ai',
+    icon: '🤖',
+    description: '原生干净落地 IP，完美解锁 ChatGPT 4o、Claude 3.5 Sonnet 与 Gemini，告别风控拦截。',
+    link: '/recommend/ai/'
+  },
+  {
+    title: '4K 流媒体极速解锁',
+    slug: 'streaming',
+    icon: '📺',
+    description: '专线大带宽秒开 4K/8K 视频，原生跨区解锁 Netflix 奈飞、Disney+ 及 YouTube Premium。',
+    link: '/recommend/streaming/'
+  }
+];
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐专题' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/recommend/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-10">
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">全场景翻墙梯子推荐与网络节点选购指南</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        不同用户的网络使用需求千差万别。有人需要便宜海量流量刷视频，有人需要严苛的晚高峰低延迟办公，有人则专门为了访问 ChatGPT 和流媒体。我们按核心使用场景将机场节点细分分类，帮助你快速找到最契合的解决方案。
+      </p>
+    </div>
+
+    <!-- Category Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      {categories.map((cat) => (
+        <a
+          href={cat.link}
+          class="bg-white p-6 rounded-xl border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all group flex flex-col justify-between"
+        >
+          <div>
+            <div class="text-3xl mb-3">{cat.icon}</div>
+            <h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
+              {cat.title}
+            </h2>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              {cat.description}
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-brand-600">
+            <span>浏览专题与节点列表</span>
+            <span>→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- All Verified Airports Full Overview Table -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8">
+      <h2 class="text-xl font-bold text-slate-900 mb-2">已收录与核实机场全览</h2>
+      <p class="text-xs text-slate-500 mb-6">点击任意品牌查看详细参数档案与独立评测报告</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {airports.map((airport) => (
+          <div class="p-5 rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-white hover:border-brand-300 hover:shadow-xs transition-all">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">{airport.lineType}</span>
+              <span class="text-xs font-mono font-bold text-emerald-600">¥{airport.startingPrice} 起</span>
+            </div>
+            <h3 class="font-bold text-slate-900">
+              <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+            </h3>
+            <p class="text-xs text-slate-500 mt-1 line-clamp-2">{airport.tagline}</p>
+            <div class="mt-4 flex gap-3 text-xs">
+              <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">参数档案 →</a>
+              <a href={`/review/${airport.slug}/`} class="font-medium text-brand-600 hover:text-brand-700 underline">深度评测 →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const title = 'Mac电脑科学上网配置指南 - Clash Verge与Sing-box Mac版教程 (2026最新) | 机场推荐网';
+const description = 'macOS苹果电脑科学上网详细配置教程。涵盖M系列芯片及Intel芯片Mac下Clash Verge Rev安装、系统代理权限授权、TUN虚拟网卡以及终端命令行Terminal代理配置。';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '教程中心', url: '/guides/' },
+  { name: 'macOS 教程' }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'macOS平台翻墙客户端安装与节点配置教程',
+  description: description,
+  datePublished: '2026-01-18',
+  dateModified: '2026-03-24'
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/guides/macos/"
+  breadcrumbs={breadcrumbs}
+  schema={schema}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">macOS Guide</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">macOS平台翻墙客户端安装与节点配置教程</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        在苹果 Mac 电脑（无论是 Apple Silicon M1/M2/M3/M4 芯片还是 Intel 处理器）上，目前综合体验最好的开源翻墙工具是 <strong>Clash Verge Rev (macOS 版)</strong>。它界面优雅，原生支持 macOS 深色模式与全局快捷键。
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      
+      <h2>步骤一：下载与安装应用</h2>
+      <ol>
+        <li>访问 Clash Verge Rev 官方开源仓库，根据你的 Mac 芯片类型下载对应的安装包：
+          <ul>
+            <li><strong>M1 / M2 / M3 / M4 芯片：</strong>下载 <code>Clash.Verge_x.x.x_aarch64.dmg</code>。</li>
+            <li><strong>Intel 处理器机型：</strong>下载 <code>Clash.Verge_x.x.x_x64.dmg</code>。</li>
+          </ul>
+        </li>
+        <li>双击打开 DMG 镜像文件，将 <code>Clash Verge</code> 图标拖入 <code>Applications（应用程序）</code> 文件夹。</li>
+        <li>首次启动若提示“无法打开，因为无法验证开发者”，请进入 Mac 系统设置 → <strong>“隐私与安全性”</strong>，滑到底部点击 <strong>“仍要打开”</strong> 即可。</li>
+      </ol>
+
+      <h2>步骤二：导入订阅与启动</h2>
+      <ol>
+        <li>在左侧点击 <strong>“订阅（Profiles）”</strong> 标签。</li>
+        <li>在顶部输入框粘贴你的机场 Clash 订阅链接，点击 <strong>“导入（Import）”</strong>。</li>
+        <li>右键点击载入的配置卡片，选择 <strong>“设为激活（Activate）”</strong>。</li>
+        <li>点击左侧 <strong>“设置（Settings）”</strong>，开启 <strong>“系统代理（System Proxy）”</strong>。</li>
+        <li>在 <strong>“代理（Proxies）”</strong> 页面中选择 <strong>“规则（Rule）”</strong> 模式，并挑选低延迟香港或日本节点。</li>
+      </ol>
+
+      <h2>Mac 开发者必备：终端 Terminal 命令行代理配置</h2>
+      <p>
+        由于 macOS 系统代理默认只针对 Safari、Chrome 等图形浏览器生效，程序员在终端使用 <code>git clone</code> 或 <code>npm install</code> 时经常超时。只需在终端配置文件中加入快捷指令：
+      </p>
+      <pre><code># 打开 zsh 配置文件
+nano ~/.zshrc
+
+# 在末尾添加以下别名快捷命令（假设客户端默认端口为 7897）
+alias setproxy="export http_proxy=http://127.0.0.1:7897; export https_proxy=http://127.0.0.1:7897; echo 'Proxy on'"
+alias unsetproxy="unset http_proxy; unset https_proxy; echo 'Proxy off'"
+
+# 保存并生效配置
+source ~/.zshrc</code></pre>
+      <p>
+        此后，只需在终端输入 <code>setproxy</code>，命令行即可秒速走代理加速代码拉取；输入 <code>unsetproxy</code> 即可立即取消。
+      </p>
+
+      <h2>推荐搭配</h2>
+      <ul>
+        <li><a href="/recommend/premium/">适合 Mac 办公与开发的高端 IPLC 专线机场精选</a></li>
+        <li><a href="/glossary/bgp-transit/">百科：BGP 中继多线入口与低延迟网络解析</a></li>
+      </ul>
+
+    </div>
+  </div>
+</BaseLayout>

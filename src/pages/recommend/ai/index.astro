@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { airports } from '../../../data/airports';
+
+const title = 'ChatGPT/Claude/Gemini AI专属机场节点推荐与原生IP分流 (2026最新) | 机场推荐网';
+const description = '2026针对ChatGPT 4o、Claude 3.5 Sonnet、Google Gemini及Midjourney的专属翻墙机场节点推荐。提供原生住宅IP解锁、防IP封锁分流规则与实测指南。';
+
+const aiAirports = airports.filter(a => a.aiSupport && a.aiSupport.length > 2);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐', url: '/recommend/' },
+  { name: 'AI专属节点推荐' }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://jichangtuijian.site/recommend/ai/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mb-8">
+      <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">AI Acceleration Nodes</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">ChatGPT 与 Claude 专属 AI 机场节点推荐</h1>
+      <p class="text-base text-slate-600 mt-3 leading-relaxed">
+        访问 OpenAI (ChatGPT Plus) 和 Anthropic (Claude 3.5 Sonnet) 时，经常遇到 “Access Denied (1020)”、“Oops, an error occurred” 或 Claude 账号被封？这是由于 AI 平台对数据中心机房 IP（Hosting/Data Center）实施了极其严苛的风控策略。
+      </p>
+    </div>
+
+    <!-- AI Unlocking Guide Box -->
+    <div class="bg-indigo-50/70 border border-indigo-200 rounded-xl p-6 mb-10 text-xs text-indigo-950">
+      <h2 class="text-base font-bold text-indigo-950 mb-2">
+        🤖 解锁 ChatGPT / Claude 的关键要素
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+        <div class="bg-white/80 p-3 rounded-lg border border-indigo-100">
+          <strong class="block text-slate-900 mb-1">原生 ISP / 住宅 IP 落地</strong>
+          机房托管 IP 极易被 Cloudflare 与 Arkose Labs 识别拦截，需选择具备当地家宽（Residential IP）轮换的机场。
+        </div>
+        <div class="bg-white/80 p-3 rounded-lg border border-indigo-100">
+          <strong class="block text-slate-900 mb-1">精细化规则分流</strong>
+          通过 Clash/Sing-box 规则，让 openai.com 与 anthropic.com 域名走指定的高信誉美区或英国节点，不影响其它网站速度。
+        </div>
+        <div class="bg-white/80 p-3 rounded-lg border border-indigo-100">
+          <strong class="block text-slate-900 mb-1">WebRTC 与 DNS 防泄漏</strong>
+          确保本地浏览器未通过 WebRTC 协议泄漏中国大陆真实内网与外网公网 IP。
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommended AI Airports -->
+    <div class="space-y-6 mb-12">
+      {aiAirports.map((airport) => (
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 hover:shadow-sm transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 text-xs font-bold">
+                  AI 高信誉节点
+                </span>
+                <span class="text-xs text-slate-500">{airport.lineType}</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mt-1">
+                <a href={`/airport/${airport.slug}/`} class="hover:text-brand-600">{airport.name}</a>
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">{airport.tagline}</p>
+            </div>
+            <div class="text-right sm:border-l sm:border-slate-100 sm:pl-6 shrink-0">
+              <div class="text-xs text-slate-500">起步价格</div>
+              <div class="text-2xl font-bold text-indigo-600 font-mono">¥{airport.startingPrice} <span class="text-xs text-slate-500">起</span></div>
+            </div>
+          </div>
+
+          <div class="my-4 text-xs">
+            <span class="font-semibold text-slate-700">已核实支持的 AI 工具服务：</span>
+            <div class="flex flex-wrap gap-2 mt-1.5">
+              {airport.aiSupport?.map(ai => (
+                <span class="bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-medium border border-indigo-100">
+                  ✓ {ai}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 text-xs border-t border-slate-100">
+            <span class="text-slate-500">已核验日期：{airport.lastVerified}</span>
+            <div class="flex gap-3">
+              <a href={`/airport/${airport.slug}/`} class="font-medium text-slate-700 hover:text-brand-600">查看节点配置 →</a>
+              <a href={`/review/${airport.slug}/`} class="font-semibold text-brand-600 hover:text-brand-800 underline">AI连通性深度评测 →</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Related Tutorial Link -->
+    <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 prose-content max-w-none">
+      <h2>遇到 AI 访问报错？排查指南</h2>
+      <p>如果你在访问 ChatGPT 或 Claude 时仍然提示地理位置不支持，请阅读我们的深度排查教程：</p>
+      <ul>
+        <li><a href="/blog/how-to-fix-chatgpt-claude-ip-blocked/">访问 ChatGPT / Claude 提示 IP 封禁与地理限制？分流规则与原生 IP 排查全流程</a></li>
+        <li><a href="/glossary/rule-based-routing/">百科：分流规则（Rule-based Routing）是如何实现 AI 流量精准转发的？</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
