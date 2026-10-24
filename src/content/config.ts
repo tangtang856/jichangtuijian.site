@@ -19,7 +19,7 @@ const guidesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    platform: z.enum(['Windows', 'Android', 'iOS', 'macOS', 'General']),
+    platform: z.enum(['Windows', 'Android', 'iOS', 'macOS', 'Router', 'Linux', 'General']),
     publishDate: z.string(),
     modifyDate: z.string().optional(),
     clientApps: z.array(z.string()).default([]),

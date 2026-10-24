@@ -38,6 +38,7 @@ console.log('\n2. 正在检查文章与百科中的占位符与未替换变量 (
 const contentDirs = [
   path.resolve('src/content/blog'),
   path.resolve('src/content/glossary'),
+  path.resolve('src/content/guides'),
 ];
 
 let totalDocs = 0;
