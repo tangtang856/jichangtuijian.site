@@ -4,17 +4,50 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
-  return guides.map((guide) => ({
-    params: { slug: guide.slug },
-    props: { guide },
-  }));
+  const sortedGuides = guides.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+  return sortedGuides.map((guide, index) => {
+    // Previous tutorial is newer (index - 1), Next tutorial is older (index + 1)
+    const prevGuide = index > 0 ? sortedGuides[index - 1] : null;
+    const nextGuide = index < sortedGuides.length - 1 ? sortedGuides[index + 1] : null;
+
+    // Related guides: same platform
+    const relatedGuides = sortedGuides
+      .filter((g) => g.slug !== guide.slug && g.data.platform === guide.data.platform)
+      .slice(0, 3);
+
+    return {
+      params: { slug: guide.slug },
+      props: {
+        guide,
+        prevGuide: prevGuide ? { slug: prevGuide.slug, title: prevGuide.data.title, platform: prevGuide.data.platform } : null,
+        nextGuide: nextGuide ? { slug: nextGuide.slug, title: nextGuide.data.title, platform: nextGuide.data.platform } : null,
+        relatedGuides: relatedGuides.map(r => ({
+          slug: r.slug,
+          title: r.data.title,
+          platform: r.data.platform,
+          description: r.data.description,
+          difficulty: r.data.difficulty || '入门必读'
+        }))
+      },
+    };
+  });
 }
 
 export interface Props {
   guide: CollectionEntry<'guides'>;
+  prevGuide: { slug: string; title: string; platform: string } | null;
+  nextGuide: { slug: string; title: string; platform: string } | null;
+  relatedGuides: Array<{
+    slug: string;
+    title: string;
+    platform: string;
+    description: string;
+    difficulty: string;
+  }>;
 }
 
-const { guide } = Astro.props;
+const { guide, prevGuide, nextGuide, relatedGuides } = Astro.props;
 const { Content } = await guide.render();
 
 const breadcrumbs = [
@@ -56,87 +89,204 @@ const guideSchema = {
   breadcrumbs={breadcrumbs}
   schema={guideSchema}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       
-      <!-- Main Guide Article -->
-      <article class="lg:col-span-3 bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs">
-        
-        <header class="border-b border-slate-100 pb-6 mb-8">
-          <div class="flex flex-wrap items-center gap-2 mb-3 text-xs">
-            <span class="px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
-              {guide.data.platform} 平台
-            </span>
-            <span class="text-slate-400">·</span>
-            <time class="text-slate-500 font-mono">发布时间：{guide.data.publishDate}</time>
-            {guide.data.modifyDate && (
-              <>
-                <span class="text-slate-400">·</span>
-                <span class="text-brand-600 font-mono">更新时间：{guide.data.modifyDate}</span>
-              </>
+      <!-- Main Guide Article (8 cols on lg) -->
+      <article class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-sm flex flex-col justify-between">
+        <div>
+          <!-- Header info -->
+          <header class="border-b border-slate-100 pb-6 mb-8">
+            <div class="flex flex-wrap items-center gap-2 mb-3 text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-cyan-50 text-cyan-800 font-bold border border-cyan-200">
+                {guide.data.platform} 平台指南
+              </span>
+              <span class="text-slate-400">·</span>
+              <span class="font-mono text-slate-500">难度：{guide.data.difficulty || '入门必读'}</span>
+              <span class="text-slate-400">·</span>
+              <time class="text-slate-500 font-mono">发布时间：{guide.data.publishDate}</time>
+              {guide.data.modifyDate && (
+                <>
+                  <span class="text-slate-400">·</span>
+                  <span class="text-blue-600 font-mono font-medium">更新时间：{guide.data.modifyDate}</span>
+                </>
+              )}
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              {guide.data.title}
+            </h1>
+
+            <div class="text-xs sm:text-sm text-slate-600 mt-5 leading-relaxed bg-slate-50 p-4 rounded-xl border-l-4 border-cyan-500">
+              <strong class="text-slate-800">教程导读：</strong>{guide.data.description}
+            </div>
+
+            {guide.data.clientApps.length > 0 && (
+              <div class="mt-4 flex flex-wrap items-center gap-1.5 text-xs">
+                <span class="text-slate-500 font-medium">适用核心客户端：</span>
+                {guide.data.clientApps.map((app) => (
+                  <span class="bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md font-mono text-[11px]">
+                    {app}
+                  </span>
+                ))}
+              </div>
             )}
+          </header>
+
+          <!-- Guide Content Body -->
+          <div class="prose-content max-w-article mx-auto">
+            <Content />
           </div>
 
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            {guide.data.title}
-          </h1>
-
-          <p class="text-xs sm:text-sm text-slate-600 mt-4 leading-relaxed bg-slate-50 p-4 rounded-lg border-l-4 border-emerald-500">
-            <strong>教程摘要：</strong>{guide.data.description}
-          </p>
-
-          {guide.data.clientApps.length > 0 && (
-            <div class="mt-4 flex flex-wrap items-center gap-1.5 text-xs">
-              <span class="text-slate-500 font-medium">适用客户端：</span>
-              {guide.data.clientApps.map((app) => (
-                <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">
-                  {app}
-                </span>
-              ))}
+          <!-- Footer Metadata -->
+          <footer class="mt-12 pt-6 border-t border-slate-200 text-xs flex flex-wrap items-center justify-between gap-4">
+            <div class="text-slate-500">
+              教程编写维护：<span class="font-medium text-slate-800">机场评测实验室技术组</span>
             </div>
-          )}
-        </header>
-
-        <div class="prose-content max-w-article mx-auto">
-          <Content />
+            <div class="flex items-center gap-3">
+              <a href="/guides/" class="text-blue-600 font-semibold hover:underline">← 返回教程中心目录</a>
+              <span class="text-slate-300">|</span>
+              <a href="/recommend/" class="text-emerald-700 font-semibold hover:underline">浏览精选机场专区 →</a>
+            </div>
+          </footer>
         </div>
 
-        <footer class="mt-12 pt-6 border-t border-slate-200 text-xs flex flex-wrap items-center justify-between gap-4">
-          <div class="text-slate-500">
-            教程维护：<span class="font-medium text-slate-800">机场评测实验室技术组</span>
+        <!-- ==================== PREVIOUS / NEXT TUTORIAL NAVIGATION ==================== -->
+        <nav aria-label="教程翻页导航" class="mt-10 pt-6 border-t border-slate-200">
+          <div class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-3">
+            TUTORIAL NAVIGATION // 教程翻页指引
           </div>
-          <div class="flex gap-3">
-            <a href="/guides/" class="text-brand-600 hover:underline">← 返回教程中心目录</a>
-            <a href="/recommend/" class="text-emerald-700 font-semibold hover:underline">浏览推荐机场专区 →</a>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Previous Guide -->
+            {prevGuide ? (
+              <a
+                href={`/guides/${prevGuide.slug}/`}
+                class="group p-4 rounded-xl border border-slate-200 hover:border-cyan-500 bg-slate-50/50 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <span class="text-[11px] text-cyan-600 font-bold flex items-center gap-1 mb-1">
+                    <span>←</span> 上一篇教程 ({prevGuide.platform})
+                  </span>
+                  <div class="text-sm font-bold text-slate-900 group-hover:text-cyan-600 transition-colors line-clamp-2 leading-snug">
+                    {prevGuide.title}
+                  </div>
+                </div>
+                <span class="text-[11px] text-slate-400 mt-3 group-hover:text-cyan-500 transition-colors">点击查看配置步骤</span>
+              </a>
+            ) : (
+              <div class="p-4 rounded-xl border border-dashed border-slate-200 bg-slate-50/30 text-slate-400 text-xs flex items-center justify-center">
+                已经是第一篇教程了
+              </div>
+            )}
+
+            <!-- Next Guide -->
+            {nextGuide ? (
+              <a
+                href={`/guides/${nextGuide.slug}/`}
+                class="group p-4 rounded-xl border border-slate-200 hover:border-cyan-500 bg-slate-50/50 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between text-right"
+              >
+                <div>
+                  <span class="text-[11px] text-cyan-600 font-bold flex items-center justify-end gap-1 mb-1">
+                    下一篇教程 ({nextGuide.platform}) <span>→</span>
+                  </span>
+                  <div class="text-sm font-bold text-slate-900 group-hover:text-cyan-600 transition-colors line-clamp-2 leading-snug">
+                    {nextGuide.title}
+                  </div>
+                </div>
+                <span class="text-[11px] text-slate-400 mt-3 group-hover:text-cyan-500 transition-colors">点击查看配置步骤</span>
+              </a>
+            ) : (
+              <div class="p-4 rounded-xl border border-dashed border-slate-200 bg-slate-50/30 text-slate-400 text-xs flex items-center justify-center">
+                已经读完最后一篇教程了
+              </div>
+            )}
           </div>
-        </footer>
+        </nav>
+
+        <!-- ==================== RELATED SAME-PLATFORM GUIDES ==================== -->
+        {relatedGuides.length > 0 && (
+          <section class="mt-10 pt-6 border-t border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span>⚡</span>
+                <span>同平台相关配置与进阶技巧</span>
+              </h3>
+              <a href="/guides/" class="text-xs text-blue-600 hover:text-blue-700 font-medium">
+                查看全部 30 篇教程 →
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {relatedGuides.map(rel => (
+                <a
+                  href={`/guides/${rel.slug}/`}
+                  class="p-3.5 rounded-xl border border-slate-200/80 hover:border-cyan-500 hover:shadow-2xs transition-all bg-slate-50/30 hover:bg-white flex flex-col justify-between group"
+                >
+                  <div class="space-y-1.5">
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-50 text-cyan-700 font-medium font-mono">
+                      {rel.difficulty}
+                    </span>
+                    <h4 class="text-xs font-bold text-slate-900 group-hover:text-cyan-600 transition-colors line-clamp-2 leading-snug">
+                      {rel.title}
+                    </h4>
+                  </div>
+                  <span class="text-[10px] text-slate-400 mt-2">阅读指南 →</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
       </article>
 
-      <!-- Sidebar -->
-      <aside class="space-y-6">
+      <!-- Sidebar (4 cols on lg) -->
+      <aside class="lg:col-span-4 space-y-6">
         
         <!-- Platform Navigation -->
-        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs text-xs">
-          <h3 class="font-bold text-slate-900 text-sm mb-3">📱 平台专属指引</h3>
-          <ul class="space-y-2">
-            <li><a href="/guides/windows/" class="text-slate-700 hover:text-brand-600 font-medium block">→ Windows 配置专区</a></li>
-            <li><a href="/guides/android/" class="text-slate-700 hover:text-brand-600 font-medium block">→ Android 安卓配置专区</a></li>
-            <li><a href="/guides/ios/" class="text-slate-700 hover:text-brand-600 font-medium block">→ iOS 小火箭/圈叉专区</a></li>
-            <li><a href="/guides/macos/" class="text-slate-700 hover:text-brand-600 font-medium block">→ macOS 苹果电脑专区</a></li>
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs text-xs">
+          <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+              <span>📱</span> 平台专属配置专区
+            </h3>
+            <span class="text-[10px] text-slate-400 font-mono">快速直达</span>
+          </div>
+          <ul class="space-y-2.5">
+            <li><a href="/guides/windows/" class="text-slate-700 hover:text-blue-600 font-medium block">💻 Windows 客户端指引</a></li>
+            <li><a href="/guides/android/" class="text-slate-700 hover:text-blue-600 font-medium block">📱 Android 安卓配置指引</a></li>
+            <li><a href="/guides/ios/" class="text-slate-700 hover:text-blue-600 font-medium block">🍎 iOS 小火箭 / Loon 教程</a></li>
+            <li><a href="/guides/macos/" class="text-slate-700 hover:text-blue-600 font-medium block">🖥️ macOS 苹果电脑专区</a></li>
           </ul>
         </div>
 
-        <!-- Quick Airport Pick -->
-        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs text-xs">
-          <h3 class="font-bold text-slate-900 text-sm mb-3">⚡ 优质节点直达</h3>
-          <p class="text-slate-500 mb-3">配置客户端前，需先备好稳定可靠的节点订阅：</p>
+        <!-- Node & Airport Recommendation -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs text-xs">
+          <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+              <span>⚡</span> 订阅与节点服务商
+            </h3>
+            <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded">已核验</span>
+          </div>
+          <p class="text-slate-500 mb-3 text-[11px] leading-relaxed">
+            配置客户端需要导入稳定可靠的节点订阅链接：
+          </p>
           <ul class="space-y-2 font-medium">
-            <li><a href="/recommend/budget/" class="text-emerald-700 hover:underline">→ 高性价比便宜机场精选</a></li>
-            <li><a href="/recommend/premium/" class="text-brand-600 hover:underline">→ 晚高峰 IPLC 专线推荐</a></li>
+            <li><a href="/recommend/budget/" class="text-emerald-700 hover:underline">→ 高性价比便宜机场推荐 (¥10起)</a></li>
+            <li><a href="/recommend/premium/" class="text-blue-600 hover:underline">→ 晚高峰 IPLC 专线榜单 (0丢包)</a></li>
             <li><a href="/ranking/overall/" class="text-slate-800 hover:underline">→ 2026 综合实力排行榜</a></li>
-            <li><a href="/compare/" class="text-indigo-600 hover:underline">→ 多款机场在线参数对比</a></li>
+            <li><a href="/compare/" class="text-indigo-600 hover:underline">→ 27 款机场参数横向比对</a></li>
           </ul>
+        </div>
+
+        <!-- Knowledge Anchor -->
+        <div class="rounded-2xl bg-slate-900 text-white p-5 shadow-sm text-xs space-y-2 border border-slate-800">
+          <div class="font-bold text-sm text-cyan-400">遇到连接不上或断流？</div>
+          <p class="text-slate-300 leading-relaxed text-[11px]">
+            查看我们整理的常见网络排错百科，涵盖 TUN 虚拟网卡冲突、系统时间误差与 DNS 防污染设置。
+          </p>
+          <a href="/glossary/" class="inline-block mt-1 text-xs text-cyan-300 font-bold hover:underline">
+            查阅知识百科与排错 →
+          </a>
         </div>
 
       </aside>

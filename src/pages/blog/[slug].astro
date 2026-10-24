@@ -4,17 +4,50 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const sortedPosts = posts.sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+  return sortedPosts.map((post, index) => {
+    // Previous article is newer (index - 1), Next article is older (index + 1)
+    const prevPost = index > 0 ? sortedPosts[index - 1] : null;
+    const nextPost = index < sortedPosts.length - 1 ? sortedPosts[index + 1] : null;
+
+    // Related posts: same category or fallback to adjacent posts
+    const relatedPosts = sortedPosts
+      .filter((p) => p.slug !== post.slug && (p.data.category === post.data.category || p.data.tags.some(t => post.data.tags.includes(t))))
+      .slice(0, 3);
+
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+        prevPost: prevPost ? { slug: prevPost.slug, title: prevPost.data.title, category: prevPost.data.category } : null,
+        nextPost: nextPost ? { slug: nextPost.slug, title: nextPost.data.title, category: nextPost.data.category } : null,
+        relatedPosts: relatedPosts.map(r => ({
+          slug: r.slug,
+          title: r.data.title,
+          category: r.data.category,
+          publishDate: r.data.publishDate,
+          description: r.data.description
+        }))
+      },
+    };
+  });
 }
 
 export interface Props {
   post: CollectionEntry<'blog'>;
+  prevPost: { slug: string; title: string; category: string } | null;
+  nextPost: { slug: string; title: string; category: string } | null;
+  relatedPosts: Array<{
+    slug: string;
+    title: string;
+    category: string;
+    publishDate: string;
+    description: string;
+  }>;
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost, relatedPosts } = Astro.props;
 const { Content } = await post.render();
 
 const breadcrumbs = [
@@ -56,87 +89,222 @@ const postSchema = {
   breadcrumbs={breadcrumbs}
   schema={postSchema}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       
-      <!-- Main Article (3 cols) -->
-      <article class="lg:col-span-3 bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs">
-        
-        <header class="border-b border-slate-100 pb-6 mb-8">
-          <div class="flex items-center gap-2 mb-3 text-xs">
-            <span class="px-2.5 py-0.5 rounded bg-brand-50 text-brand-700 font-semibold border border-brand-200">
-              {post.data.category}
-            </span>
-            <span class="text-slate-400">·</span>
-            <time class="text-slate-500 font-mono">发布时间：{post.data.publishDate}</time>
-            {post.data.modifyDate && (
-              <>
-                <span class="text-slate-400">·</span>
-                <span class="text-emerald-700 font-mono">更新时间：{post.data.modifyDate}</span>
-              </>
-            )}
+      <!-- Main Article (8 cols on lg) -->
+      <article class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-sm flex flex-col justify-between">
+        <div>
+          <!-- Article Header -->
+          <header class="border-b border-slate-100 pb-6 mb-8">
+            <div class="flex flex-wrap items-center gap-2 mb-3 text-xs">
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-semibold border border-blue-200">
+                {post.data.category}
+              </span>
+              <span class="text-slate-400">·</span>
+              <time class="text-slate-500 font-mono">发布时间：{post.data.publishDate}</time>
+              {post.data.modifyDate && (
+                <>
+                  <span class="text-slate-400">·</span>
+                  <span class="text-emerald-700 font-mono font-medium">更新时间：{post.data.modifyDate}</span>
+                </>
+              )}
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              {post.data.title}
+            </h1>
+
+            <div class="text-xs sm:text-sm text-slate-600 mt-5 leading-relaxed bg-slate-50 p-4 rounded-xl border-l-4 border-blue-600">
+              <strong class="text-slate-800">核心导读：</strong>{post.data.description}
+            </div>
+          </header>
+
+          <!-- Article Content Body -->
+          <div class="prose-content max-w-article mx-auto">
+            <Content />
           </div>
 
-          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            {post.data.title}
-          </h1>
-
-          <p class="text-xs sm:text-sm text-slate-500 mt-4 leading-relaxed bg-slate-50 p-4 rounded-lg border-l-4 border-brand-500">
-            <strong>摘要导读：</strong>{post.data.description}
-          </p>
-        </header>
-
-        <div class="prose-content max-w-article mx-auto">
-          <Content />
+          <!-- Tags & Author Metadata -->
+          <footer class="mt-12 pt-6 border-t border-slate-200 text-xs">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-slate-500 font-semibold">主题标签：</span>
+                {post.data.tags.map(t => (
+                  <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-[11px] font-mono">#{t}</span>
+                ))}
+              </div>
+              <div class="text-slate-500">
+                撰写审校：<span class="font-medium text-slate-800">{post.data.author}</span>
+              </div>
+            </div>
+          </footer>
         </div>
 
-        <footer class="mt-12 pt-6 border-t border-slate-200 text-xs">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="text-slate-500">文章标签：</span>
-              {post.data.tags.map(t => (
-                <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded">#{t}</span>
+        <!-- ==================== PREVIOUS / NEXT ARTICLE NAVIGATION ==================== -->
+        <nav aria-label="文章翻页导航" class="mt-10 pt-6 border-t border-slate-200">
+          <div class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-3">
+            ARTICLE NAVIGATION // 顺序阅读导航
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Previous Article Card -->
+            {prevPost ? (
+              <a
+                href={`/blog/${prevPost.slug}/`}
+                class="group p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-slate-50/50 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <span class="text-[11px] text-blue-600 font-bold flex items-center gap-1 mb-1">
+                    <span>←</span> 上一篇 ({prevPost.category})
+                  </span>
+                  <div class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                    {prevPost.title}
+                  </div>
+                </div>
+                <span class="text-[11px] text-slate-400 mt-3 group-hover:text-blue-500 transition-colors">点击跳转阅读</span>
+              </a>
+            ) : (
+              <div class="p-4 rounded-xl border border-dashed border-slate-200 bg-slate-50/30 text-slate-400 text-xs flex items-center justify-center">
+                已经是最新的一篇文章了
+              </div>
+            )}
+
+            <!-- Next Article Card -->
+            {nextPost ? (
+              <a
+                href={`/blog/${nextPost.slug}/`}
+                class="group p-4 rounded-xl border border-slate-200 hover:border-blue-400 bg-slate-50/50 hover:bg-white hover:shadow-sm transition-all flex flex-col justify-between text-right"
+              >
+                <div>
+                  <span class="text-[11px] text-blue-600 font-bold flex items-center justify-end gap-1 mb-1">
+                    下一篇 ({nextPost.category}) <span>→</span>
+                  </span>
+                  <div class="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                    {nextPost.title}
+                  </div>
+                </div>
+                <span class="text-[11px] text-slate-400 mt-3 group-hover:text-blue-500 transition-colors">点击跳转阅读</span>
+              </a>
+            ) : (
+              <div class="p-4 rounded-xl border border-dashed border-slate-200 bg-slate-50/30 text-slate-400 text-xs flex items-center justify-center">
+                已经读到最后一篇文章了
+              </div>
+            )}
+          </div>
+        </nav>
+
+        <!-- ==================== RELATED ARTICLES RECS ==================== -->
+        {relatedPosts.length > 0 && (
+          <section class="mt-10 pt-6 border-t border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span>💡</span>
+                <span>相关延伸阅读推荐</span>
+              </h3>
+              <a href="/blog/" class="text-xs text-blue-600 hover:text-blue-700 font-medium">
+                查看全部 200+ 篇 →
+              </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {relatedPosts.map(rel => (
+                <a
+                  href={`/blog/${rel.slug}/`}
+                  class="p-3.5 rounded-xl border border-slate-200/80 hover:border-blue-400 hover:shadow-2xs transition-all bg-slate-50/30 hover:bg-white flex flex-col justify-between group"
+                >
+                  <div class="space-y-1.5">
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-medium">
+                      {rel.category}
+                    </span>
+                    <h4 class="text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                      {rel.title}
+                    </h4>
+                  </div>
+                  <span class="text-[10px] text-slate-400 mt-2 font-mono">{rel.publishDate}</span>
+                </a>
               ))}
             </div>
-            <div class="text-slate-500">
-              作者：<span class="font-medium text-slate-800">{post.data.author}</span>
-            </div>
-          </div>
-        </footer>
+          </section>
+        )}
 
       </article>
 
-      <!-- Sidebar (1 col) -->
-      <aside class="space-y-6">
+      <!-- Sidebar (4 cols on lg) -->
+      <aside class="lg:col-span-4 space-y-6">
         
-        <!-- Ranking Box -->
-        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs text-xs">
-          <h3 class="font-bold text-slate-900 text-sm mb-3">🔥 核心榜单直达</h3>
+        <!-- Quick Ranking Anchor -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs text-xs">
+          <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+              <span>🏆</span> 核心梯子榜单直达
+            </h3>
+            <span class="text-[10px] text-emerald-600 font-mono font-bold bg-emerald-50 px-2 py-0.5 rounded">2026最新</span>
+          </div>
           <ul class="space-y-2.5">
-            <li><a href="/ranking/overall/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 2026 综合实力排行榜</a></li>
-            <li><a href="/ranking/value/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 高性价比梯子排行榜</a></li>
-            <li><a href="/recommend/premium/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 高端 IPLC 专线精选</a></li>
-            <li><a href="/recommend/budget/" class="text-slate-700 hover:text-brand-600 font-medium block">→ 低预算平价机场优选</a></li>
+            <li>
+              <a href="/ranking/overall/" class="text-slate-700 hover:text-blue-600 font-medium flex items-center justify-between">
+                <span>2026 综合实力排行榜</span>
+                <span class="text-slate-400">→</span>
+              </a>
+            </li>
+            <li>
+              <a href="/ranking/value/" class="text-slate-700 hover:text-blue-600 font-medium flex items-center justify-between">
+                <span>高性价比每GB单价榜</span>
+                <span class="text-slate-400">→</span>
+              </a>
+            </li>
+            <li>
+              <a href="/recommend/premium/" class="text-slate-700 hover:text-blue-600 font-medium flex items-center justify-between">
+                <span>高端 IPLC/IEPL 专线精选</span>
+                <span class="text-slate-400">→</span>
+              </a>
+            </li>
+            <li>
+              <a href="/recommend/budget/" class="text-slate-700 hover:text-blue-600 font-medium flex items-center justify-between">
+                <span>低预算便宜平价机场优选</span>
+                <span class="text-slate-400">→</span>
+              </a>
+            </li>
+            <li>
+              <a href="/recommend/ai/" class="text-slate-700 hover:text-blue-600 font-medium flex items-center justify-between">
+                <span>ChatGPT / Claude 纯净专区</span>
+                <span class="text-slate-400">→</span>
+              </a>
+            </li>
           </ul>
         </div>
 
-        <!-- Guides Box -->
-        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs text-xs">
-          <h3 class="font-bold text-slate-900 text-sm mb-3">🛠️ 客户端配置指南</h3>
-          <ul class="space-y-2.5">
-            <li><a href="/guides/windows/" class="text-brand-600 hover:underline">Windows 配置教程</a></li>
-            <li><a href="/guides/android/" class="text-brand-600 hover:underline">Android 手机教程</a></li>
-            <li><a href="/guides/ios/" class="text-brand-600 hover:underline">iOS 小火箭教程</a></li>
-            <li><a href="/guides/macos/" class="text-brand-600 hover:underline">macOS 代理教程</a></li>
+        <!-- Guides Center -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs text-xs">
+          <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+              <span>🛠️</span> 客户端保姆级配置
+            </h3>
+            <a href="/guides/" class="text-[11px] text-blue-600 hover:underline">全部30篇</a>
+          </div>
+          <ul class="space-y-2">
+            <li><a href="/guides/windows/" class="text-slate-700 hover:text-blue-600 font-medium block">💻 Windows Clash Verge / Sing-box</a></li>
+            <li><a href="/guides/android/" class="text-slate-700 hover:text-blue-600 font-medium block">📱 Android v2rayNG / Clash Meta</a></li>
+            <li><a href="/guides/ios/" class="text-slate-700 hover:text-blue-600 font-medium block">🍎 iOS 小火箭 Shadowrocket / Loon</a></li>
+            <li><a href="/guides/macos/" class="text-slate-700 hover:text-blue-600 font-medium block">🖥️ macOS 终端代理与 Surge 网关</a></li>
           </ul>
         </div>
 
-        <!-- Comparison Tool -->
-        <div class="bg-gradient-to-br from-slate-900 to-brand-900 text-white rounded-xl p-5 shadow-xs text-xs space-y-2">
-          <div class="font-bold text-sm">机场多维度比对</div>
-          <p class="text-slate-300">支持 2 ~ 4 家机场同时横向对比价格、节点与流媒体解锁能力。</p>
-          <a href="/compare/" class="inline-block mt-2 font-bold text-brand-300 hover:text-white underline">
-            打开对比工具 →
+        <!-- Matrix Comparator Tool Card -->
+        <div class="rounded-2xl bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-5 shadow-sm text-xs space-y-3 border border-slate-800">
+          <div class="flex items-center gap-2 text-cyan-400 font-mono text-[11px] font-bold">
+            <span>⚖️ MATRIX COMPARATOR</span>
+          </div>
+          <h4 class="font-bold text-sm text-white">不知道选哪家？在线并列比对</h4>
+          <p class="text-slate-300 leading-relaxed text-[11px]">
+            自由勾选 2~4 家机场服务商，系统自动提取线路拓扑、单价测算与流媒体支持进行逐行比对。
+          </p>
+          <a
+            href="/compare/"
+            class="inline-block w-full text-center py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors text-xs"
+          >
+            打开 27 款机场参数对比仪 →
           </a>
         </div>
 
