@@ -2,8 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAirportsSortedByOverall } from '../../data/airports';
 
-const title = '2026年度中国机场排行榜中心 - 综合实力、性价比与稳定性多维度榜单 | 机场推荐网';
-const description = '2026年度中文科学上网多维度机场排行榜中心。公开透明的加权评分体系，基于全天候丢包监控、晚高峰速率实测、性价比单价与客服工单响应，严选最强梯子服务商。';
+const title = '2026年度机场排行榜与梯子推荐总榜 - 性价比机场与VPN推荐测速排行 | 机场推荐网';
+const description = '2026年度中文科学上网多维度机场排行榜与梯子推荐中心。公开透明的加权评分体系，基于全天候丢包监控、晚高峰速率实测、性价比机场单价与客服工单响应，严选最强稳定VPN机场节点。';
+const keywords = '机场推荐, 梯子推荐, 性价比机场, 机场节点, vpn, vpn机场, vpn节点, vpn推荐';
 
 const rankedAirports = getAirportsSortedByOverall();
 
@@ -30,6 +31,7 @@ const rankingSchema = {
 <BaseLayout
   title={title}
   description={description}
+  keywords={keywords}
   canonical="https://jichangtuijian.site/ranking/"
   breadcrumbs={breadcrumbs}
   schema={rankingSchema}

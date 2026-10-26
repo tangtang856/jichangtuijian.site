@@ -2,8 +2,9 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getAirportsSortedByOverall } from '../../../data/airports';
 
-const title = '2026综合实力机场排行榜 - 优质VPN机场与节点实测 | 机场推荐网';
-const description = '2026综合实力机场排行榜。评测团队公开测试标准与量化加权分，严选优质VPN机场节点，涵盖TAG Internet、AmyTelecom、飞鸟云等品牌深度实测。';
+const title = '2026综合实力机场排行榜 - 权威梯子推荐、性价比机场与VPN推荐总榜 | 机场推荐网';
+const description = '2026综合实力机场排行榜与梯子推荐总榜。公开量化加权评分标准，严选全网27家优质稳定VPN机场节点，涵盖暮光网络、飞猫云、微风网络等主流品牌晚高峰深度实测。';
+const keywords = '机场推荐, 梯子推荐, 性价比机场, 机场节点, vpn, vpn机场, vpn节点, vpn推荐';
 
 const rankedAirports = getAirportsSortedByOverall();
 
@@ -17,6 +18,7 @@ const breadcrumbs = [
 <BaseLayout
   title={title}
   description={description}
+  keywords={keywords}
   canonical="https://jichangtuijian.site/ranking/overall/"
   breadcrumbs={breadcrumbs}
 >

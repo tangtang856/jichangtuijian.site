@@ -233,15 +233,30 @@ const brandTdkMap: Record<string, {
 const airportsPath = path.resolve('src/data/airports.ts');
 let content = fs.readFileSync(airportsPath, 'utf-8');
 
+const coreKeywords = ['机场推荐', '机场节点', '性价比机场', '梯子推荐', 'vpn', 'vpn机场', 'vpn节点', 'vpn推荐'];
+
 // 将数据更新进 airports
 let updatedCount = 0;
 const updatedAirports = airports.map(a => {
   const tdkData = brandTdkMap[a.slug];
   if (tdkData) {
     updatedCount++;
+    // Ensure all 8 core keywords are present in brand keywords
+    const kwSet = new Set(tdkData.keywords.split(',').map(s => s.trim()));
+    coreKeywords.forEach(k => kwSet.add(k));
+    const mergedKeywords = Array.from(kwSet).join(', ');
+
+    const rKwSet = new Set(tdkData.reviewKeywords.split(',').map(s => s.trim()));
+    coreKeywords.forEach(k => rKwSet.add(k));
+    const mergedReviewKeywords = Array.from(rKwSet).join(', ');
+
     return {
       ...a,
-      tdk: tdkData
+      tdk: {
+        ...tdkData,
+        keywords: mergedKeywords,
+        reviewKeywords: mergedReviewKeywords
+      }
     };
   }
   return a;

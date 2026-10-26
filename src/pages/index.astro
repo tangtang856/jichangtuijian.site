@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { airports, getAirportsSortedByOverall, getAirportsSortedByValue } from '../data/airports';
 
-const title = '2026精选中文机场推荐与梯子节点测评指南 | 科学上网资讯门户';
-const description = '2026专业中文机场推荐与高性价比梯子节点评测平台。精选稳定IPLC专线、高速BGP中继与平价VPN机场节点，提供Windows/Android/iOS/Mac保姆级配置教程、流媒体及ChatGPT解锁评测。';
+const title = '2026专业机场推荐与性价比机场梯子推荐网 - 稳定机场节点与VPN推荐评测指南';
+const description = '2026专业中文机场推荐与高性价比机场评测平台。精选稳定IPLC专线、高速BGP中继与优质VPN机场节点，提供客观权威的梯子推荐与VPN推荐、全平台客户端教程、流媒体及ChatGPT解锁评测。';
+const keywords = '机场推荐, 机场节点, 性价比机场, 梯子推荐, vpn, vpn机场, vpn节点, vpn推荐';
 
 const topRankedAirports = getAirportsSortedByOverall();
 const valueAirports = getAirportsSortedByValue();
@@ -59,6 +60,7 @@ const homeSchema = {
 <BaseLayout
   title={title}
   description={description}
+  keywords={keywords}
   canonical="https://jichangtuijian.site/"
   schema={homeSchema}
 >
@@ -86,12 +88,12 @@ const homeSchema = {
 
           <!-- Main H1 with Gradient Accent -->
           <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
-            2026 专业<span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">机场推荐</span>与高速<span class="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">梯子节点</span>测评指南
+            2026 专业<span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">机场推荐</span>与<span class="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">性价比机场</span>梯子推荐评测平台
           </h1>
 
           <!-- Keyword-rich Natural Intro Paragraph -->
           <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
-            严选全网真实可靠的<strong>性价比机场</strong>、稳定低延迟的 <strong>IPLC 专线梯子推荐</strong>以及高品质 <strong>VPN 机场节点</strong>。拒绝商业刷单与虚构跑分，坚持以实测数据和月付安全为先导，为中国大陆用户提供流媒体解锁、ChatGPT/Claude AI 工具加速与全平台客户端配置解决方案。
+            严选全网真实可靠的<strong>性价比机场</strong>、稳定低延迟的 <strong>IPLC 专线梯子推荐</strong>以及高品质 <strong>VPN 机场节点</strong>。拒绝商业刷单与虚构跑分，坚持以实测数据和月付安全为先导，为中国大陆用户提供客观权威的 <strong>VPN 推荐</strong>、<strong>VPN 节点</strong>测评、流媒体解锁、ChatGPT/Claude AI 工具加速与全平台客户端配置解决方案。
           </p>
 
           <!-- Core Action Cluster -->
@@ -117,15 +119,23 @@ const homeSchema = {
           </div>
 
           <!-- Natural Bing Keyword Anchors Strip -->
-          <div class="pt-2 flex items-center gap-3 text-xs text-slate-500 flex-wrap">
+          <div class="pt-2 flex items-center gap-2.5 text-xs text-slate-500 flex-wrap">
             <span class="font-medium text-slate-700">热门检索通道:</span>
             <a href="/recommend/" class="hover:text-blue-600 underline underline-offset-2">机场推荐</a>
+            <span>•</span>
+            <a href="/compare/" class="hover:text-blue-600 underline underline-offset-2">机场节点</a>
             <span>•</span>
             <a href="/recommend/budget/" class="hover:text-blue-600 underline underline-offset-2">性价比机场</a>
             <span>•</span>
             <a href="/ranking/overall/" class="hover:text-blue-600 underline underline-offset-2">梯子推荐</a>
             <span>•</span>
-            <a href="/glossary/" class="hover:text-blue-600 underline underline-offset-2">vpn节点区别</a>
+            <a href="/glossary/" class="hover:text-blue-600 underline underline-offset-2">VPN与节点科普</a>
+            <span>•</span>
+            <a href="/recommend/" class="hover:text-blue-600 underline underline-offset-2">VPN机场</a>
+            <span>•</span>
+            <a href="/recommend/premium/" class="hover:text-blue-600 underline underline-offset-2">VPN节点</a>
+            <span>•</span>
+            <a href="/ranking/" class="hover:text-blue-600 underline underline-offset-2">VPN推荐</a>
           </div>
         </div>
 

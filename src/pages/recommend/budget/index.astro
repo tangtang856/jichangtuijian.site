@@ -2,8 +2,9 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { airports, getAirportsSortedByValue } from '../../../data/airports';
 
-const title = '高性价比机场推荐与便宜节点购买指南 - 低预算翻墙优选 (2026最新)';
-const description = '2026精选高性价比机场与便宜梯子节点推荐。测算每GB单价，评测10-20元月付平价节点，解析低预算翻墙避坑指南与防跑路实用技巧。';
+const title = '2026高性价比机场推荐与平价梯子推荐 - 便宜好用的机场节点与VPN推荐评测 | 机场推荐网';
+const description = '2026最新高性价比机场与便宜梯子推荐指南。精选¥10-20元月付平价优质机场节点、测算每GB真实单价，提供平价VPN机场与VPN节点避坑指南与防跑路原则。';
+const keywords = '性价比机场, 机场推荐, 机场节点, 梯子推荐, vpn, vpn机场, vpn节点, vpn推荐, 便宜机场';
 
 const valueAirports = getAirportsSortedByValue();
 
@@ -30,6 +31,7 @@ const schema = {
 <BaseLayout
   title={title}
   description={description}
+  keywords={keywords}
   canonical="https://jichangtuijian.site/recommend/budget/"
   breadcrumbs={breadcrumbs}
   schema={schema}
