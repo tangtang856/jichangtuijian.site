@@ -25,8 +25,9 @@ export interface Props {
 
 const { airport, prevAirport, nextAirport } = Astro.props;
 
-const title = `${airport.name}深度评测报告(2026最新) - 晚高峰测速、稳定性与流媒体解锁实测 | 机场推荐网`;
-const description = `2026年最新${airport.name}独立评测报告。实测${airport.lineType}晚高峰丢包率与4K视频加载表现，深度分析价格套餐、ChatGPT/Claude AI支持与购买注意事项。`;
+const title = airport.tdk?.reviewTitle || `${airport.name}深度评测报告(2026最新) - 晚高峰测速、稳定性与流媒体解锁实测 | 机场推荐网`;
+const description = airport.tdk?.reviewDescription || `2026年最新${airport.name}独立评测报告。实测${airport.lineType}晚高峰丢包率与4K视频加载表现，深度分析价格套餐、ChatGPT/Claude AI支持与购买注意事项。`;
+const keywords = airport.tdk?.reviewKeywords || `${airport.name}评测, ${airport.name}怎么样, ${airport.name}测速, ${airport.name}跑路了吗, ${airport.name}优惠码, 机场推荐, 梯子推荐, vpn评测`;
 
 const breadcrumbs = [
   { name: '首页', url: '/' },
@@ -60,6 +61,7 @@ const reviewSchema = {
 <BaseLayout
   title={title}
   description={description}
+  keywords={keywords}
   canonical={`https://jichangtuijian.site/review/${airport.slug}/`}
   breadcrumbs={breadcrumbs}
   schema={reviewSchema}

@@ -62,6 +62,15 @@ export interface Airport {
   streamingAnalysis?: string;
   aiUnblockAnalysis?: string;
   faqs?: Array<{ q: string; a: string }>;
+
+  tdk?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    reviewTitle?: string;
+    reviewDescription?: string;
+    reviewKeywords?: string;
+  };
 }
 
 export const airports: Airport[] = [
