@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = '联系方式与错误反馈通道 | 机场推荐网';
-const description = '联系机场推荐指南 (jichangtuijian.site) 评测实验室。提供资料纠错、评测建议、商务咨询与合规反馈通道。';
+const title = '官方联系方式与商务合作通道 | 机场推荐指南';
+const description = '联系机场推荐指南 (jichangtuijian.site) 评测实验室。官方 Telegram: @xintangtang，官方邮箱: xintangtang888@gmail.com。提供机场节点收录评测、商务合作、数据纠错与合规咨询。';
 
 const breadcrumbs = [
   { name: '首页', url: '/' },
-  { name: '联系我们' }
+  { name: '联络我们' }
 ];
 ---
 
@@ -16,38 +16,214 @@ const breadcrumbs = [
   canonical="https://jichangtuijian.site/contact/"
   breadcrumbs={breadcrumbs}
 >
-  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="max-w-3xl mx-auto bg-white rounded-xl border border-slate-200 p-6 sm:p-10 shadow-xs prose-content">
-      
-      <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">联系方式与反馈</h1>
-      <p class="text-sm text-slate-500 -mt-2">我们欢迎所有客观的技术探讨、数据纠错与体验反馈。</p>
+  <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <div class="max-w-4xl mx-auto space-y-8">
 
-      <h2>常规联系方式</h2>
-      <ul>
-        <li><strong>电子邮箱：</strong> <code>contact@jichangtuijian.site</code>（通常在 1-2 个工作日内回复）</li>
-        <li><strong>GitHub 开源反馈：</strong> <a href="https://github.com/tangtang856/jichangtuijian.site" target="_blank" rel="noopener noreferrer">github.com/tangtang856/jichangtuijian.site</a>（可在 Issues 中提交文档排版与失效链接反馈）</li>
-      </ul>
+      <!-- Header Section -->
+      <div class="text-center space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200/60 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          官方直连通道 · 工作日 2 小时内快速响应
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          联络我们与商务合作
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          我们欢迎客观的技术探讨、机场测速节点收录、商业广告合作与读者体验纠错反馈。请通过以下认证渠道与我们取得联系。
+        </p>
+      </div>
 
-      <h2>服务商数据核验与更新须知</h2>
-      <p>
-        如果你是机场服务商的运维管理人员，发现本站展示的官方资费、节点协议或测试状态存在滞后或信息偏差：
-      </p>
-      <ul>
-        <li>请使用官方域名企业邮箱发送邮件至 <code>contact@jichangtuijian.site</code>。</li>
-        <li>邮件中请附带官网公示链接、变更证明以及最新的公开套餐文档。</li>
-        <li>编辑部将在核对无误后的 48 小时内更新前台档案。</li>
-      </ul>
+      <!-- Main Contact Channel Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Telegram Card -->
+        <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-sky-200/80 p-6 shadow-sm hover:shadow-md transition-all space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-[#229ED9] text-white flex items-center justify-center shadow-sm">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-base font-bold text-slate-900">Telegram 官方号</h2>
+                <p class="text-xs text-sky-700 font-medium">首选即时沟通通道 · 实时在线</p>
+              </div>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200/60 font-semibold">
+              极速秒回
+            </span>
+          </div>
 
-      <h2>关于商业合作与收录声明</h2>
-      <p>
-        为了保障广大中文读者的利益与网站信誉，我们执行极其严格的收录审核：
-      </p>
-      <ul>
-        <li>新上线运营未满 1 年、且未经验证的新品牌，本站一律不予收录。</li>
-        <li>存在虚假宣传“终身免费”、“永久 99 元”、或在社区有多次恶意失联跑路争议的品牌，永久列入黑名单。</li>
-        <li>任何付费买榜或要求虚构评分的合作请求将被直接拒收。</li>
-      </ul>
+          <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/80 flex items-center justify-between">
+            <span class="font-mono font-bold text-slate-900 text-sm">@xintangtang</span>
+            <button
+              type="button"
+              data-copy="@xintangtang"
+              class="copy-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors shadow-2xs"
+            >
+              <span class="copy-text">一键复制</span>
+            </button>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p>• <strong>适用范围：</strong>商务合作速谈、紧急测速收录咨询、技术方案沟通。</p>
+            <p>• <strong>服务时间：</strong>周一至周日 09:00 - 23:00 (UTC+8)。</p>
+          </div>
+
+          <a
+            href="https://t.me/xintangtang"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1b8ec5] text-white font-semibold text-sm shadow-xs transition-colors"
+          >
+            <span>直接发起 Telegram 会话</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Gmail Card -->
+        <div class="bg-white/95 backdrop-blur-md rounded-2xl border border-red-200/80 p-6 shadow-sm hover:shadow-md transition-all space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center shadow-sm">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-base font-bold text-slate-900">Gmail 官方正式邮箱</h2>
+                <p class="text-xs text-red-700 font-medium">正式商业提案 · 详细工单反馈</p>
+              </div>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-red-50 text-red-700 border border-red-200/60 font-semibold">
+              24h 内必复
+            </span>
+          </div>
+
+          <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/80 flex items-center justify-between">
+            <span class="font-mono font-bold text-slate-900 text-xs sm:text-sm truncate mr-2">xintangtang888@gmail.com</span>
+            <button
+              type="button"
+              data-copy="xintangtang888@gmail.com"
+              class="copy-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors shadow-2xs shrink-0"
+            >
+              <span class="copy-text">一键复制</span>
+            </button>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p>• <strong>适用范围：</strong>品牌入驻详审资料发送、官方资费核验、法律合规反馈。</p>
+            <p>• <strong>工单时效：</strong>工作日 2-4 小时内建档，24 小时内邮件答复。</p>
+          </div>
+
+          <a
+            href="mailto:xintangtang888@gmail.com?subject=【机场推荐网商务合作/评测收录咨询】"
+            class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm shadow-xs transition-colors"
+          >
+            <span>发送邮件给官方客服</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Security & Anti-Scam Notice -->
+      <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-5 sm:p-6 text-xs text-amber-900 space-y-2">
+        <div class="flex items-center gap-2 font-bold text-sm text-amber-950">
+          <span>🛡️</span>
+          <span>防伪与安全郑重警示</span>
+        </div>
+        <p class="leading-relaxed">
+          本站唯一指定认证 Telegram 为 <strong class="text-sky-800 font-mono">@xintangtang</strong>，唯一官方邮箱为 <strong class="text-red-800 font-mono">xintangtang888@gmail.com</strong>。
+        </p>
+        <p class="leading-relaxed text-amber-800">
+          我们绝不会主动发起私聊向任何用户或服务商索要网站后台权限、钱包助记词、或要求进行任何数字加密货币转账。任何自称本站编辑要求私下交易的均为冒充诈骗，请务必仔细核对 Telegram 用户名（无多余标点或相似字母混淆）。
+        </p>
+      </div>
+
+      <!-- Guidelines Content Card -->
+      <div class="bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/80 p-6 sm:p-10 shadow-xs prose-content space-y-6">
+        
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">服务商数据核验与更新须知</h2>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">
+            如果你是机场服务商的运维管理人员，发现本站展示的官方资费、节点协议或测试状态存在滞后或信息偏差：
+          </p>
+          <ul class="text-sm text-slate-600 space-y-1.5 mt-2 list-disc list-inside">
+            <li>请使用官方域名企业邮箱或认证 TG 发送信息至 <code>xintangtang888@gmail.com</code> / <code>@xintangtang</code>。</li>
+            <li>信息中请附带官网最新公告链接、变更证明以及最新的公开套餐文档。</li>
+            <li>编辑部将在核对无误后的 48 小时内更新全站前台档案与对比参数。</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">关于商业合作与收录声明</h2>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">
+            为了保障广大中文读者的利益与网站客观信誉，我们执行极其严格的收录审核：
+          </p>
+          <ul class="text-sm text-slate-600 space-y-1.5 mt-2 list-disc list-inside">
+            <li>新上线运营未满 1 年、且未经验证的新品牌，本站一律不予收录。</li>
+            <li>存在虚假宣传“终身免费”、“永久 99 元”、或在社区有多次恶意失联跑路争议的品牌，永久列入黑名单。</li>
+            <li>任何付费买榜或要求虚构评分的合作请求将被直接拒收，所有评分基于客观测试链路。</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3">开源代码与文档纠错</h2>
+          <p class="text-sm text-slate-600 leading-relaxed mt-3">
+            本站前端架构与评测知识库源码托管于 GitHub：
+            <a href="https://github.com/tangtang856/jichangtuijian.site" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-mono">
+              github.com/tangtang856/jichangtuijian.site
+            </a>。
+            开发者与读者可在 Issues 中提交文档排版与失效链接反馈。
+          </p>
+        </div>
+
+      </div>
 
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  // Universal Copy Buttons
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const textToCopy = btn.getAttribute('data-copy');
+      if (!textToCopy) return;
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(textToCopy);
+        } else {
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
+
+        const label = btn.querySelector('.copy-text');
+        const originalText = label ? label.textContent : btn.textContent;
+        if (label) label.textContent = '已复制 ✓';
+        btn.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-300');
+
+        setTimeout(() => {
+          if (label) label.textContent = originalText;
+          btn.classList.remove('bg-emerald-50', 'text-emerald-700', 'border-emerald-300');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    });
+  });
+</script>

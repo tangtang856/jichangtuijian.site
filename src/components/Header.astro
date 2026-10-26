@@ -87,6 +87,139 @@ const currentPath = Astro.url.pathname;
 
       <!-- Right Action Tools -->
       <div class="hidden sm:flex items-center space-x-2.5">
+        <!-- Contact Us Popover Component -->
+        <div class="relative" id="contact-menu-wrapper">
+          <button
+            type="button"
+            id="contact-menu-btn"
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-xs hover:shadow transition-all group focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+          >
+            <svg class="w-3.5 h-3.5 text-white/90 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            <span>联络我们</span>
+            <span class="inline-flex items-center justify-center w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <svg id="contact-chevron" class="w-3 h-3 text-white/80 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <!-- Contact Popover Card (Desktop) -->
+          <div
+            id="contact-popover"
+            class="hidden absolute right-0 top-full mt-2 w-80 sm:w-88 rounded-2xl bg-white/95 backdrop-blur-2xl border border-slate-200/90 shadow-2xl p-4 sm:p-5 z-50 text-slate-800 transition-all duration-200 animate-in fade-in slide-in-from-top-2"
+          >
+            <!-- Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-bold text-slate-900">官方商务与客服通道</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 font-medium">
+                工作日极速响应 &lt; 2h
+              </span>
+            </div>
+
+            <p class="text-[11px] text-slate-500 mt-2 mb-3 leading-relaxed">
+              欢迎机场服务商申请测速收录、商务赞助合作、以及广大读者提供节点测速与数据纠错反馈。
+            </p>
+
+            <!-- Channel 1: Telegram -->
+            <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-3 mb-2.5 transition-all hover:border-sky-200 hover:bg-sky-50">
+              <div class="flex items-center justify-between mb-1.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#229ED9] text-white flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold text-slate-900 block leading-tight">Telegram 官方号</span>
+                    <span class="text-[10px] text-sky-700 font-mono">@xintangtang</span>
+                  </div>
+                </div>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 font-medium">首选 · 秒级直连</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <a
+                  href="https://t.me/xintangtang"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-semibold py-1.5 px-3 rounded-lg bg-[#229ED9] hover:bg-[#1b8ec5] text-white shadow-xs transition-colors"
+                >
+                  <span>打开 Telegram</span>
+                  <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+                <button
+                  type="button"
+                  data-copy="@xintangtang"
+                  class="copy-btn inline-flex items-center justify-center gap-1 text-xs font-medium py-1.5 px-2.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all shrink-0"
+                  title="复制 Telegram ID"
+                >
+                  <span class="copy-text">复制 ID</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Channel 2: Gmail -->
+            <div class="bg-red-50/50 border border-red-100 rounded-xl p-3 mb-3 transition-all hover:border-red-200 hover:bg-red-50/80">
+              <div class="flex items-center justify-between mb-1.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-lg bg-red-600 text-white flex items-center justify-center shrink-0">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold text-slate-900 block leading-tight">官方商务工单邮箱</span>
+                    <span class="text-[10px] text-red-700 font-mono break-all">xintangtang888@gmail.com</span>
+                  </div>
+                </div>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-red-100 text-red-800 font-medium">正式工单</span>
+              </div>
+              <div class="flex items-center gap-2 mt-2">
+                <a
+                  href="mailto:xintangtang888@gmail.com?subject=【机场推荐网商务合作/评测收录咨询】"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-semibold py-1.5 px-3 rounded-lg bg-red-600 hover:bg-red-700 text-white shadow-xs transition-colors"
+                >
+                  <span>发送邮件</span>
+                  <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </a>
+                <button
+                  type="button"
+                  data-copy="xintangtang888@gmail.com"
+                  class="copy-btn inline-flex items-center justify-center gap-1 text-xs font-medium py-1.5 px-2.5 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all shrink-0"
+                  title="复制电子邮箱"
+                >
+                  <span class="copy-text">复制邮箱</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Anti-scam & Legal -->
+            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 text-[10px] text-slate-500 leading-normal space-y-1">
+              <div class="flex items-start gap-1 text-slate-700 font-semibold">
+                <span>🛡️</span>
+                <span>防伪警示：唯一认证 TG: <code class="text-sky-700 bg-sky-50 px-1 rounded">@xintangtang</code></span>
+              </div>
+              <p>官方邮箱仅为 <code class="text-red-700 bg-red-50 px-1 rounded">xintangtang888@gmail.com</code>。我们绝不会主动私聊索要任何密码、助记词或要求转账。</p>
+            </div>
+
+            <div class="mt-2.5 pt-2 border-t border-slate-100 text-center">
+              <a href="/contact/" class="text-[11px] text-blue-600 hover:text-blue-800 font-medium inline-flex items-center gap-1">
+                <span>查看完整评测准则与免责说明</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <a
           href="/compare/"
           class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-xs"
@@ -138,15 +271,176 @@ const currentPath = Astro.url.pathname;
         ⚖️ 27 款机场实时参数对比仪
       </a>
     </div>
+
+    <!-- Mobile Contact Quick Access Section -->
+    <div class="pt-3 border-t border-slate-100 mt-3 space-y-2">
+      <div class="flex items-center justify-between text-xs font-bold text-slate-800 px-1">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          官方客服与商务通道
+        </span>
+        <span class="text-[10px] text-emerald-600 font-normal">工作日 &lt; 2h 响应</span>
+      </div>
+
+      <!-- Telegram Button -->
+      <div class="flex items-center gap-2.5 bg-sky-50/80 border border-sky-100 p-2.5 rounded-xl">
+        <div class="w-7 h-7 rounded-lg bg-[#229ED9] text-white flex items-center justify-center shrink-0">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <span class="text-xs font-bold text-slate-800 block">Telegram 官方号</span>
+          <span class="text-[10px] text-sky-700 font-mono">@xintangtang</span>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <a
+            href="https://t.me/xintangtang"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-2.5 py-1 text-xs font-semibold bg-[#229ED9] text-white rounded-lg shadow-xs"
+          >
+            打开
+          </a>
+          <button
+            type="button"
+            data-copy="@xintangtang"
+            class="copy-btn px-2 py-1 text-xs font-medium bg-white border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50"
+          >
+            <span class="copy-text">复制</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Gmail Button -->
+      <div class="flex items-center gap-2.5 bg-red-50/60 border border-red-100 p-2.5 rounded-xl">
+        <div class="w-7 h-7 rounded-lg bg-red-600 text-white flex items-center justify-center shrink-0">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <span class="text-xs font-bold text-slate-800 block truncate">官方正式邮箱</span>
+          <span class="text-[10px] text-red-700 font-mono truncate block">xintangtang888@gmail.com</span>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <a
+            href="mailto:xintangtang888@gmail.com?subject=【机场推荐网商务合作/评测收录咨询】"
+            class="px-2.5 py-1 text-xs font-semibold bg-red-600 text-white rounded-lg shadow-xs"
+          >
+            发信
+          </a>
+          <button
+            type="button"
+            data-copy="xintangtang888@gmail.com"
+            class="copy-btn px-2 py-1 text-xs font-medium bg-white border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50"
+          >
+            <span class="copy-text">复制</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+  // Mobile Menu Toggle
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
   }
+
+  // Desktop Contact Popover Toggle
+  const contactWrapper = document.getElementById('contact-menu-wrapper');
+  const contactBtn = document.getElementById('contact-menu-btn');
+  const contactPopover = document.getElementById('contact-popover');
+  const contactChevron = document.getElementById('contact-chevron');
+
+  function toggleContactPopover(force?: boolean) {
+    if (!contactPopover) return;
+    const isHidden = contactPopover.classList.contains('hidden');
+    const shouldShow = force !== undefined ? force : isHidden;
+
+    if (shouldShow) {
+      contactPopover.classList.remove('hidden');
+      contactBtn?.setAttribute('aria-expanded', 'true');
+      contactChevron?.classList.add('rotate-180');
+    } else {
+      contactPopover.classList.add('hidden');
+      contactBtn?.setAttribute('aria-expanded', 'false');
+      contactChevron?.classList.remove('rotate-180');
+    }
+  }
+
+  if (contactBtn) {
+    contactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleContactPopover();
+    });
+  }
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (contactWrapper && !contactWrapper.contains(e.target as Node)) {
+      toggleContactPopover(false);
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      toggleContactPopover(false);
+    }
+  });
+
+  // Universal Copy-to-Clipboard Functionality
+  function setupCopyButtons() {
+    const copyButtons = document.querySelectorAll<HTMLButtonElement>('.copy-btn[data-copy]');
+    copyButtons.forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const textToCopy = btn.getAttribute('data-copy');
+        if (!textToCopy) return;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            // Fallback for older browsers/contexts
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+          }
+
+          const label = btn.querySelector('.copy-text');
+          const originalText = label ? label.textContent : btn.textContent;
+          if (label) {
+            label.textContent = '已复制 ✓';
+          }
+          btn.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-300');
+
+          setTimeout(() => {
+            if (label) {
+              label.textContent = originalText;
+            }
+            btn.classList.remove('bg-emerald-50', 'text-emerald-700', 'border-emerald-300');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+        }
+      });
+    });
+  }
+
+  // Initialize copy handlers on load
+  setupCopyButtons();
 </script>
