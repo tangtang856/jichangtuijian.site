@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "indexnow": "tsx scripts/indexnow.ts",
+    "indexnow:all": "tsx scripts/indexnow.ts --all",
     "audit:seo": "tsx scripts/audit-seo.ts",
     "audit:links": "tsx scripts/check-links.ts",
     "audit:content": "tsx scripts/validate-content.ts",

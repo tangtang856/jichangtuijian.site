@@ -83,46 +83,49 @@ async function main() {
   if (urlArgIndex !== -1 && args[urlArgIndex + 1]) {
     urlsToSubmit = [args[urlArgIndex + 1]];
   } else if (args.includes('--all')) {
-    // 提交全站核心正式 URL（仅在重大全站架构重构时允许手动指定）
-    console.warn('[IndexNow] 提示：您正在使用 --all 参数。搜索引擎不建议频繁无差别提交全部 URL。');
-    urlsToSubmit = [
-      `https://${HOST}/`,
-      `https://${HOST}/recommend/`,
-      `https://${HOST}/recommend/budget/`,
-      `https://${HOST}/recommend/premium/`,
-      `https://${HOST}/recommend/beginner/`,
-      `https://${HOST}/recommend/stable/`,
-      `https://${HOST}/recommend/ai/`,
-      `https://${HOST}/recommend/streaming/`,
-      `https://${HOST}/ranking/`,
-      `https://${HOST}/ranking/overall/`,
-      `https://${HOST}/ranking/value/`,
-      `https://${HOST}/ranking/budget/`,
-      `https://${HOST}/ranking/stable/`,
-      `https://${HOST}/compare/`,
-      `https://${HOST}/guides/`,
-      `https://${HOST}/guides/windows/`,
-      `https://${HOST}/guides/android/`,
-      `https://${HOST}/guides/ios/`,
-      `https://${HOST}/guides/macos/`,
-      `https://${HOST}/blog/`,
-      `https://${HOST}/blog/vpn-vs-airport-proxy-comparison/`,
-      `https://${HOST}/blog/proxy-protocols-ss-trojan-vless-hysteria2/`,
-      `https://${HOST}/blog/iplc-iepl-bgp-transit-explained/`,
-      `https://${HOST}/blog/how-to-fix-chatgpt-claude-ip-blocked/`,
-      `https://${HOST}/blog/stream-unlocking-guide-netflix-disney/`,
-      `https://${HOST}/glossary/`,
-      `https://${HOST}/glossary/iplc-iepl/`,
-      `https://${HOST}/glossary/bgp-transit/`,
-      `https://${HOST}/glossary/rule-based-routing/`,
-      `https://${HOST}/glossary/tls-reality-obfs/`,
-      `https://${HOST}/glossary/traffic-multiplier/`,
-      `https://${HOST}/about/`,
-      `https://${HOST}/contact/`,
-      `https://${HOST}/editorial-policy/`,
-      `https://${HOST}/privacy-policy/`,
-      `https://${HOST}/disclaimer/`,
-    ];
+    // 提交全站已构建的正式 URL（扫描 dist 目录）
+    console.log('[IndexNow] 正在扫描 dist 目录获取全量生产页面 URL...');
+    const distDir = path.resolve('dist');
+    function getHtmlFiles(dir: string): string[] {
+      let res: string[] = [];
+      const list = fs.readdirSync(dir);
+      for (const item of list) {
+        const full = path.join(dir, item);
+        const stat = fs.statSync(full);
+        if (stat.isDirectory()) {
+          res = res.concat(getHtmlFiles(full));
+        } else if (item.endsWith('.html')) {
+          res.push(full);
+        }
+      }
+      return res;
+    }
+
+    if (fs.existsSync(distDir)) {
+      const files = getHtmlFiles(distDir);
+      urlsToSubmit = files
+        .map((f) => {
+          let rel = path.relative(distDir, f).replace(/\\/g, '/');
+          if (rel === 'index.html') return `https://${HOST}/`;
+          if (rel.endsWith('/index.html')) return `https://${HOST}/${rel.replace(/\/index\.html$/, '')}/`;
+          if (rel.endsWith('index.html')) return `https://${HOST}/${rel.replace(/index\.html$/, '')}`;
+          return `https://${HOST}/${rel}`;
+        })
+        .filter((u) => !u.includes('404.html'));
+      console.log(`[IndexNow] 成功提取全站 ${urlsToSubmit.length} 个生产页面 URL！`);
+    } else {
+      console.warn('[IndexNow] 未检测到 dist/ 目录，使用核心页面兜底提交。');
+      urlsToSubmit = [
+        `https://${HOST}/`,
+        `https://${HOST}/recommend/`,
+        `https://${HOST}/recommend/budget/`,
+        `https://${HOST}/recommend/premium/`,
+        `https://${HOST}/recommend/vpn/`,
+        `https://${HOST}/ranking/`,
+        `https://${HOST}/ranking/overall/`,
+        `https://${HOST}/compare/`,
+      ];
+    }
   } else {
     // 默认模式：提交最近有更新或新发布的重点核心页面
     console.log('[IndexNow] 未指定 --url，执行默认差异化提交（最新更新文章与专题）...');

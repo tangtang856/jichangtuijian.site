@@ -37,24 +37,38 @@ const faqItems = [
   }
 ];
 
-const homeSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: title,
-  description: description,
-  url: 'https://jichangtuijian.site/',
-  mainEntity: {
-    '@type': 'ItemList',
-    name: '2026精选机场推荐榜单',
-    itemListElement: topRankedAirports.map((airport, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: airport.name,
-      description: airport.tagline,
-      url: `https://jichangtuijian.site/airport/${airport.slug}/`
+const homeSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description: description,
+    url: 'https://jichangtuijian.site/',
+    mainEntity: {
+      '@type': 'ItemList',
+      name: '2026精选机场推荐榜单',
+      itemListElement: topRankedAirports.map((airport, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: airport.name,
+        description: airport.tagline,
+        url: `https://jichangtuijian.site/airport/${airport.slug}/`
+      }))
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a
+      }
     }))
   }
-};
+];
 ---
 
 <BaseLayout
@@ -329,6 +343,60 @@ const homeSchema = {
         </div>
       </a>
 
+    </div>
+  </section>
+
+  <!-- ==================== SECTION: BING DIRECT ANSWER CAPSULE (Featured Snippets Optimization) ==================== -->
+  <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 mt-14" aria-label="核心选购快速结论">
+    <div class="rounded-3xl bg-white/90 backdrop-blur-xl border border-slate-200/90 p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 mb-5 border-b border-slate-200/80 gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-sm">💡</span>
+          <div>
+            <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">2026 机场推荐与梯子选购决策速查表（Bing 核心结论）</h2>
+            <p class="text-xs text-slate-500 mt-0.5">直接回答搜索意图，拒绝繁琐套路，帮助您 10 秒选出最适合的科学上网服务</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>最新核验：2026 年实时有效</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-slate-600">
+        <!-- Item 1 -->
+        <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/60 space-y-2">
+          <div class="font-bold text-slate-900 text-sm flex items-center gap-1.5 text-blue-600">
+            <span>01.</span>
+            <span>性价比机场怎么挑？</span>
+          </div>
+          <p class="leading-relaxed">
+            认准真实单价：<strong>月费 ÷ 实际流量配额</strong>。优选单价在 <strong>¥0.05 ~ ¥0.15/GB</strong>、无恶意倍率陷阱的品牌（如飞V、微风网络、飞猫云）。切勿购买无名小作坊的永久低价年付。
+          </p>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/60 space-y-2">
+          <div class="font-bold text-slate-900 text-sm flex items-center gap-1.5 text-indigo-600">
+            <span>02.</span>
+            <span>晚高峰卡顿断流怎么防？</span>
+          </div>
+          <p class="leading-relaxed">
+            关键看线路类型：优先选择 <strong>IPLC / IEPL 内网专线</strong>（如暮光网络、隐形人）。专线不经过公网 GFW 审查骨干网，晚高峰 20:00~23:30 依然保持 0 丢包与 4K 秒开。
+          </p>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/60 space-y-2">
+          <div class="font-bold text-slate-900 text-sm flex items-center gap-1.5 text-emerald-600">
+            <span>03.</span>
+            <span>ChatGPT / 跨境电商怎么选？</span>
+          </div>
+          <p class="leading-relaxed">
+            关键看 IP 纯净度：选择配备 <strong>双 ISP 原生住宅 IP</strong> 的节点（如无忧、微风网络）。避免公共机房万人骑脏 IP，防止 OpenAI 封号与 Cloudflare 频繁人机验证。
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
