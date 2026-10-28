@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "postbuild": "tsx scripts/postbuild.ts",
     "preview": "astro preview",
     "astro": "astro",
     "indexnow": "tsx scripts/indexnow.ts",
